@@ -1,9 +1,12 @@
 # KEP项目
 
-## 使用到的包
+## 项目使用到的第三方包
+
+**Meteor版本 1.2.1**
 
 ```
-Meteor 1.2.1
+kadira:flow-router
+kadira:blaze-layout
 
-
+alanning:roles
 ```
