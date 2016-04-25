@@ -1,7 +1,9 @@
 // 客户信息
+
+```
 Customers = new Mongo.Collection('Customers');
 // Customer 结构:
-struct = {
+customer = {
   name: '',
   host: '',
   createdAt: '',
@@ -19,8 +21,11 @@ struct = {
     base: ''
   }
 }
+```
 
 // 公司注册业务
+
+```
 CompanyRegist = new Mongo.Collection('CompanyRegist');
 struct = {
   name: '',
@@ -33,12 +38,16 @@ struct = {
     email: '',
   },
   remark: '',
-  status: 0, // "0 - 准备中", "1 - 受理中", "2 - 已完成", "-1 - 废弃"
+  status: 0, // "0 - 准备中", "1 - 受理中", "2 - 已完成"
   payed: true, // 是否付费 有/无
   tasks: [], // 任务
 }
 
+```
+
 // 任务信息
+
+```
 Tasks = new Mongo.Collection('Tasks');
 // Task 结构
 struct = {
@@ -47,13 +56,12 @@ struct = {
   host: 'cc', // 负责人
   createdAt: '',
   updateTime: '',
-  status: 0, // "0 - 处理中, 1 - 已完成， -1 - 废弃"
   remind: { // 通知
     email: [  // 邮件通知
       {
         type: 'email',
         to: '',
-        template: '', // 发送邮件模板
+        template: '',
         data: {
 
         },
@@ -64,48 +72,41 @@ struct = {
       {
         type: 'sms',  // 短信通知
         to: '',
-        template: '', // 发送短信邮件
+        template: '',
         data: {
 
-        },
-        other: '',
+        }
       }
     ]
   },
-  steps: [
+  step: [
     {
       name: '',
       updateTime: '',
-      finished: false, //
-      dataStruct: '_id', // 待录入数据的结构
-      data: {}
+      status: '',
+      data: {
+
+      }
     }
   ]
 }
 
+```
 
 
 // 公司信息
+
+```
 CompanyInfo = new Mongo.Collection('CompanyInfo');
 struct = {
+
 }
 
-
-
-// 生成文档
-DocGenerated = new Mongo.Collection('DocGenerated');
-struct = {
-  url: '',
-  createdBy: '',
-  createdAt: '',
-  uuid: '',
-  templateId: '',
-  label: '',
-}
-
-
+```
 
 // 通知
+
+```
 Notice = new Mongo.Collection('Notice');
 struct = {
   type: '', // system - 系统通知 / customer - 客户管理通知
@@ -116,17 +117,11 @@ struct = {
   content: "",
 }
 
-LogSys = new Mongo.Collection('LogSys');
-struct = {
-  type: 'customer', // <sys / customer>
-  createdAt: '',
-  operator: '', // 操作人员 id
-  opt: '', // 操作类型 暂定: < customer_add customer_del customer_change / task_add task_del task_change>
-  optObj: '',
-  msg: '',
-}
+```
 
 // 用户meteor包管理创建
+
+```
 struct = {
   username: '',
   email: '',
@@ -135,6 +130,9 @@ struct = {
   },
   roles: [''],
 }
+
+```
+
 
 
 
