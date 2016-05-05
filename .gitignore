@@ -1,2 +1,3 @@
 .meteor/local
 dist/
+packages/npm-container

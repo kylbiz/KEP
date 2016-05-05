@@ -1,17 +1,21 @@
+/*
+ * 子任务管理项目的接口
+ **/
+
 Meteor.methods({
   'createTask': function () {
     // args 正确性
     // 账号权限
-    // 创建客户
+    // 创建
   },
   'updateTask': function () {
     // args 正确性
     // 账号权限
-    // 更新客户
+    // 更新
   },
   'deleteTask': function () {
     // args 正确性
     // 账号权限
-    // 删除客户
+    // 删除
   }
 });

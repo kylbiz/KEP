@@ -12,3 +12,15 @@ SMSSend.companyRegist.remind = function () {
     });
   });
 }
+
+
+// 公司状态更新发送短信
+SMSSend.companyStatusChange = function (taskId, info) {
+    var taskInfo = Tasks.findOne({_id: taskId}, {fields: {host: 1, customerId: 1, serviceId: 1}});
+    if (!taskInfo) {
+      log("companyStatusChange fail", taskId);
+      return;
+    }
+
+
+}

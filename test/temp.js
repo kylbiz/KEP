@@ -14,3 +14,46 @@
 // }
 
 // log.debug("hello", "dsd");
+
+log("test/temp.js start");
+
+function momentjsUse() {
+  var oldt = new Date('2016-04-22');
+  var nowt = new Date();
+  var interval = moment().subtract(5, 'days');
+  log( 'monent', oldt, nowt, interval.toString());
+}
+
+var Test = new Mongo.Collection('test');
+function upsertUse() {
+  var ret = Test.upsert({num: 2}, {$set: {abc: 'a'}});
+  console.log("upsertUse", ret);
+}
+// upsertUse();
+
+
+
+function observeChangesUse() {
+  var Test = new Mongo.Collection('observeChangesUse');
+
+  Test.find({}).observe({
+    changed: function (newDoc, oldDoc) {
+      console.log("changed", newDoc, oldDoc);
+    },
+  });
+}
+// observeChangesUse();
+
+
+
+
+
+
+log("test/temp.js end");
+
+
+
+
+
+
+

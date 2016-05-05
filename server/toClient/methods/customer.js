@@ -1,3 +1,7 @@
+/*
+ * 客户管理相关的接口
+**/
+
 Meteor.methods({
   'createCustomer': function () {
     // args 正确性
