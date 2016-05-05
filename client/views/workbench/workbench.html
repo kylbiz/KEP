@@ -1,3 +1,295 @@
 <template name="workbench">
-  <p>工作台</p>
+	<!-- 主要内容 -->
+	<div class="container">
+        <div class="row">
+            <div id="content" class="col-lg-12">
+                {{> breadcrumb_workbench }}
+                <!-- ORDERS -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- {{> containsTheDataTable }} -->
+                        {{> reactiveDataTable}}
+                    </div>
+                </div>
+                <!-- /ORDERS -->
+            </div>
+            <!-- /CONTENT-->
+        </div>
+    </div>
 </template>
+
+<!-- 内部导航栏 -->
+<template name="breadcrumb_workbench">
+	<div class="container">
+		<div class="row" style="margin-bottom: 30px;"> 
+			<div class="col-md-4 content-title">
+				<p>工作台</p>
+			</div>
+			<div class="col-md-4">	
+				<button type="button" class="btn btn-primary" style="width: 90px">核名</button>
+				<button type="button" class="btn btn-primary" style="width: 90px">工商登记</button>
+			</div>
+			<div class="col-md-4">
+				<div class="form-inline pull-right">
+					<input type="text" class="form-control" placeholder="">
+					<button class="btn btn-default" type="submit">搜索</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- datatable reactive -->
+<template name="reactiveDataTable">
+	    <!-- {{>Template.dynamic template=workbench_table}} -->
+	    <!-- 核名 -->
+	    {{> workbench_checkname}}
+	    <!-- 工商登记 -->
+		{{>workbench_ICBCregister}}
+	    <!-- progress control 办理进度控制 模态框 -->
+	    <div class="modal fade" id="progress_control" tabindex="-1" role="dialog" aria-labelledby="progress_control_title">
+	    	{{>workbench_progress_control}}
+	    </div>
+	    <!-- config 设置模态框 -->
+	    <div class="modal fade" id="config" tabindex="-1" role="dialog" aria-labelledby="config_title">
+	    	{{>workbench_config}}
+	    </div>
+</template>
+
+<!-- 核名表 -->
+<template name="workbench_checkname">
+    <table id="workbench_checkname_table" class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th rowspan="2" style="line-height: 50px;font-size: 16px">客户名称</th>
+                <th colspan="6" style="text-align: center;background-color: beige;">办理进度</th>
+                <th rowspan="2" style="line-height: 50px;font-size: 16px">耗时/天</th>
+                <th rowspan="2" style="line-height: 50px;font-size: 16px">业务员</th>
+                <th rowspan="2" style="line-height: 50px;font-size: 16px">操作</th>
+            </tr>
+            <tr>
+            	<th>文件准备</th>
+            	<th>客户确认</th>
+            	<th>提交工商</th>
+            	<th>核名通过</th>
+            	<th>申请地址</th>
+            	<th>公章准备</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="line-height:83px;font-size: 15px;">开业啦</td>
+                <td><div class="circle circle-green"></div>1天</td>
+                <td><div class="circle circle-red"></div>2天</td>
+                <td><div class="circle circle-gray"></div></td>
+                <td><div class="circle circle-gray"></div></td>
+                <td><div class="circle circle-gray"></div></td>
+                <td><div class="circle circle-gray"></div></td>
+                <td style="line-height:83px;font-size: 15px;">2</td>
+                <td style="line-height:83px;font-size: 15px;">cc</td>
+                <td>
+                	<div style="margin-bottom: 9px">
+		                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#progress_control">办理进度控制</button>
+                	</div>
+            	       <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
+            	       <button class="btn btn-info btn-sm">查看</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+</template>
+
+
+<!-- 工商登记 表 -->
+<template name = "workbench_ICBCregister">
+    <table id="workbench_ICBCregister_table" class="table table-hover table-bordered">
+   	        <thead>
+   	            <tr>
+   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">客户名称</th>
+   	                <th colspan="4" style="text-align: center;background-color: beige;">办理进度</th>
+   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">耗时/天</th>
+   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">业务员</th>
+   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">操作</th>
+   	            </tr>
+   	            <tr>
+   	            	<th>文件准备</th>
+   	            	<th>客户确认</th>
+   	            	<th>提交工商</th>
+   	            	<th>登记通过</th>
+   	            </tr>
+   	        </thead>
+   	        <tbody>
+   	            <tr>
+   	                <td style="line-height:83px;font-size: 15px;">开业啦</td>
+   	                <td><div class="circle circle-gray"></div></td>
+   	                <td><div class="circle circle-gray"></div></td>
+   	                <td><div class="circle circle-gray"></div></td>
+   	                <td><div class="circle circle-gray"></div></td>
+   	                <td style="line-height:83px;font-size: 15px;">2</td>
+   	                <td style="line-height:83px;font-size: 15px;">cc</td>
+   	                <td>
+   	                	<div style="margin-bottom: 9px">
+   			                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#progress_control">办理进度控制</button>
+   	                	</div>
+   	            	       <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
+   	            	       <button class="btn btn-info btn-sm">查看</button>
+   	                </td>
+   	            </tr>
+   	        </tbody>
+   	</table>
+</template>
+
+
+
+<!-- setting progress_control -->
+<template name="workbench_progress_control">
+ <!-- Modal -->
+  <div class="modal-dialog" style="width: 930px;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="progress_control_title">办理进度控制<span style="font-size: 13px;">开业啦-公司注册-工商登记</span></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+        	<div class="form-group">
+        		<label for="progress_reset" class="col-sm-2 control-label">进度回退:</label>
+        		<div class="col-sm-10">
+        		    <select class="form-control" id="progress_reset">
+        		      <option>文件准备</option>
+        		      <option>客户确认</option>
+        		      <option>提交工商</option>
+        		      <option>登记通过</option>
+        		    </select>
+        		</div>
+        	</div>
+        	<div class="form-group">
+        		<label for="progress_reason" class="col-sm-2 control-label">原因:</label>
+        		<div class="col-sm-10">
+        		    <select class="form-control" id="progress_reason">
+        		      <option>客户更改需求</option>
+        		      <option>工商提交失败</option>
+        		      <option>我方操作失误</option>
+        		      <option>其他</option>
+        		    </select>
+        		</div>
+        	</div>
+        	<div class="form-group">
+        		<label for="progress_remarks" class="col-sm-2 control-label">备注:</label>
+        		<div class="col-sm-10">
+        		    <textarea class="form-control" id="progress_remarks" rows="3"></textarea>
+        		</div>
+        	</div>
+        	<div class="form-group">
+        		<label for="progress_clear" class="col-sm-2 control-label">是否清空子任务信息:</label>
+        		<div class="col-sm-10">
+        		    <select class="form-control" id="progress_clear">
+        		      <option>是</option>
+        		      <option>否</option>
+        		    </select>
+        		</div>
+        	</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- modal config template -->
+<template name="workbench_config">
+	<!-- Modal -->
+	 <div class="modal-dialog" role="document">
+	   <div class="modal-content">
+	     <div class="modal-header">
+	       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	       <h4 class="modal-title" id="config_title">子任务设置</h4>
+			<form class="form-horizontal">
+				<div class="form-group margin-top-bottom">
+					<label for="principal" class="col-sm-2 control-label">负责人</label>
+					<div class="col-sm-10">
+		       		    <select class="form-control" id="principal">
+		       		      <option>cc</option>
+		       		      <option>andy</option>
+		       		      <option>ww</option>
+		       		    </select>
+		       		</div>
+				</div>
+			</form>
+			<h4 class="pull-left">通知提醒</h4>
+	     </div>
+
+	     <!-- 邮箱通知 -->
+	     <div class="modal-body">
+	     	<div class="">
+	     	 	<h3 class="pull-left"><span class="label label-info label-lg" style="line-height: 45px;">邮箱通知</span></h3>
+	     		<button id="add_email_btn" class="btn btn-default btn-sm pull-right" style="margin-top: 33px"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+	     	</div>
+	     	<form class="form-inline" style="margin-top: 80px">
+	     		{{>add_email}}
+	     		{{>add_email}}
+	     	</form>
+	     </div>
+
+		<!-- 短信通知 -->
+	     <div class="modal-body">
+	     	<div class="">
+	     	 	<h3 class="pull-left"><span class="label label-info label-lg" style="line-height: 45px;">短信通知</span></h3>
+	     		<button id="add_tel_btn" class="btn btn-default btn-sm pull-right" style="margin-top: 33px"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+	     	</div>
+	     	<form class="form-inline" id="add_tel_form" style="margin-top: 80px">
+	     		{{>add_tel}}
+	     		{{>add_tel}}
+	     	</form>
+	     </div>
+
+	     <div class="modal-footer">
+	       <button type="button" class="btn btn-primary">确定</button>
+	       <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	     </div>
+	   </div>
+	 </div>
+</template>
+
+<!-- 邮箱添加模版 -->
+<template name="add_email">
+	<div class="add_email">
+		<div class="form-group">
+	    	<label for="telephone">电子邮箱：</label>
+	   	 	<input type="text" class="form-control" id="telephone">
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="remarks">备注：</label>
+	    	<input type="email" class="form-control" id="remarks" placeholder="(选填)">
+	  	</div>
+	  <button type="submit" class="btn btn-default">删除</button>
+  </div>
+</template>
+
+<!-- 短信添加模版 -->
+<template name="add_tel">
+	<div class="add_tel">
+		<div class="form-group">
+	    	<label for="telephone">手机号：</label>
+	   	 	<input type="text" class="form-control" id="telephone">
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="remarks">备注：</label>
+	    	<input type="email" class="form-control" id="remarks" placeholder="(选填)">
+	  	</div>
+	  <button type="submit" class="btn btn-default">删除</button>
+  </div>
+</template>
+
+<!-- autoform -->
+<template name="insertBookForm">
+	{{#autoForm collection="Customers" type="insert" id="reactiveCurrentValueForm" template="bootstrap3-inline"}}
+	  {{> afQuickField name="principal" options="allowed"}}
+	  {{> afQuickField name="email"}}
+	{{/autoForm}}
+</template>
+
+
