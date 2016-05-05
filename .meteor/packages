@@ -24,10 +24,10 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 http
 kadira:flow-router
 kadira:blaze-layout
-alanning:roles
 meteorhacks:npm
 
 npm-container
 email
 accounts-password
 check
+momentjs:moment
