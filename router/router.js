@@ -36,10 +36,10 @@ customerSection.route('/', {
 });
 
 // 客户基本信息
-customerSection.route('/basic_info', {
-  name: 'basic_info',
+customerSection.route('/customer_info', {
+  name: 'customer_info',
   action: function() {
-    BlazeLayout.render("mainLayout", {content: "basic_info"});
+    BlazeLayout.render("mainLayout", {content: "customer_info"});
   }
 });
 // 公司信息
