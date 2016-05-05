@@ -1,0 +1,13 @@
+<template name="mainLayout">
+<!-- logo&个人中心&退出系统 -->
+ 	{{>header}}
+	<!-- PAGE -->
+	<section id="page">
+		<div id="sidebar" class="sidebar">
+			{{> sidebar }}
+		</div>
+		<div id="main-content" class="main-content">
+			{{>Template.dynamic template=content}}
+		</div>
+	</section>
+</template>

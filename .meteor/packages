@@ -31,3 +31,11 @@ email
 accounts-password
 check
 momentjs:moment
+less
+mfactory:admin-lte
+twbs:bootstrap
+fortawesome:fontawesome
+ephemer:reactive-datatables
+aldeed:simple-schema
+aldeed:collection2
+aldeed:autoform
