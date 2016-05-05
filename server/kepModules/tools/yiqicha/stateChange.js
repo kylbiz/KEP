@@ -1,7 +1,12 @@
+/*
+ * 订阅用户状态更新的操作
+ **/
+
 Meteor.methods({
   'companyStatusChange': function (info) {
     // 这个需要权限判断 - 不然很危险
     log('companyStatusChange', info);
+
     // 更改子任务状态
 
     // 推送状态更新
@@ -13,13 +18,11 @@ Meteor.methods({
 // 推送消息
 function pushNotice(info) {
   // 系统的客户管理通知
-  // userId customerId
   NoticeSys.companyStatusChange(info.other.taskId, info);
 
   // 短信通知
-  // smsList
   SMSSend.companyStatusChange(info.other.taskId, info);
 
   // 邮箱通知
-  // emailList
+  EmailSend.companyStatusChange(info.other.taskId, info);
 }

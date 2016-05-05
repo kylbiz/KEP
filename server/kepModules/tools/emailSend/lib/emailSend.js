@@ -8,6 +8,7 @@ EmailSend.getTemplate = function (type) {
 }
 
 EmailSend.send = function (msg) {
+  msg.from = "air.cui@kyl.biz";
   Email.send(msg);
 }
 
@@ -17,7 +18,7 @@ Meteor.methods({
   'emailSend': function (key) {
     if (key == "this-is-not-a-game") {
       EmailSend.send({
-        from: "air.cui@kyl.biz",
+        // from: "air.cui@kyl.biz",
         to: "1145571693@qq.com",
         subject: "Meteor 测试邮件 -" + new Date(),
         html: "<p><strong>This will render as bold text</strong>, but this will not.</p>",

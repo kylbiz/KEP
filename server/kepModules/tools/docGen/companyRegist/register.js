@@ -9,8 +9,8 @@ var expectStruct = {
 }
 
 
-DocGen.register.genDoc = function () {
-  var doc = expectStruct;
+DocGen.register.genDoc = function (doc) {
+  doc = expectStruct;
 
   DocGen.genDocRemote(doc, function (err, result) {
     if (err || !result || !result.fileUrl) {

@@ -1,3 +1,7 @@
+/*
+ * 日志系统
+ **/
+
 LogSys = {}
 
 LogSys.writeCustomer = function(msg) {

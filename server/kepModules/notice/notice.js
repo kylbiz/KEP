@@ -1,5 +1,6 @@
 /*
  * 通知系统
+ * 包括： 客户管理通知，系统通知
  **/
 
 NoticeSys = {}
@@ -46,7 +47,7 @@ NoticeSys.companyStatusChange = function (taskId, statusInfo) {
   var status = statusInfo.status;
 
   var title = customerName + '的' + taskLabel + '的状态更新到' + status;
-  var content = userName + ', 您好！您的客户:' + customerName + '（公司名:' + companyName + '）的' +  taskLabel + '的状态更新到' + status;
+  var content = userName + ', 您好！您的客户:' + customerName + '（公司名:' + companyName + '）的' +  taskLabel + '状态更新到' + status;
 
   NoticeSys.addNotice({
     from: '',
