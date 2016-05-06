@@ -1,0 +1,44 @@
+@title_color:#999999;
+@normal_grey:#eaeaea;
+@normal_white:#ffffff;
+@word_color:#666666;
+@normal_red:#f75a47;
+ul.task_ul{
+	margin-top: 20px;
+	margin-left: 66px;
+	.font-weight;
+	list-style:none;
+	padding:0;
+	width:16px;
+	background:url(/img/controbg.png) no-repeat top center;
+	background-size: 1px 345px;
+	img{border:0;}
+	li{
+		width:18px;
+		height:18px;
+		margin-bottom:50px;
+		position:relative;
+	}
+	a{
+		text-decoration: none;
+		border:1px solid @word_color;
+		width:100%;
+		height:100%;
+		line-height:100%;
+		border-radius:50%;
+		text-indent:-55px;
+		color:@word_color;
+	    background-color:@normal_white;
+		position:absolute;
+		top:0;
+		left:0;
+		&:hover{
+			.current;
+		}
+	}
+}
+.current{
+	background-color:@normal_red;
+	-webkit-transform:scale(1.5);
+	transform:scale(1.5);
+}

@@ -26,8 +26,8 @@
 				<p>工作台</p>
 			</div>
 			<div class="col-md-4">	
-				<button type="button" class="btn btn-primary" style="width: 90px">核名</button>
-				<button type="button" class="btn btn-primary" style="width: 90px">工商登记</button>
+				<button type="button" class="btn btn-info" style="width: 90px"><a href="/console/workbench_checkname">核名</a></button>
+				<button type="button" class="btn btn-info" style="width: 90px"><a href="/console/workbench_ICBCregister">工商登记</a></button>
 			</div>
 			<div class="col-md-4">
 				<div class="form-inline pull-right">
@@ -42,10 +42,7 @@
 <!-- datatable reactive -->
 <template name="reactiveDataTable">
 	    <!-- {{>Template.dynamic template=workbench_table}} -->
-	    <!-- 核名 -->
-	    {{> workbench_checkname}}
-	    <!-- 工商登记 -->
-		  {{>workbench_ICBCregister}}
+      {{>Template.dynamic template=workbench_table}}
 	    <!-- progress control 办理进度控制 模态框 -->
 	    <div class="modal fade" id="progress_control" tabindex="-1" role="dialog" aria-labelledby="progress_control_title">
 	    	{{>workbench_progress_control}}
@@ -92,7 +89,7 @@
 		                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#progress_control">办理进度控制</button>
                 	</div>
             	       <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
-            	       <button class="btn btn-info btn-sm">查看</button>
+            	       <button class="btn btn-info btn-sm"><a href="/console/checkname">查看</a></button>
                 </td>
             </tr>
         </tbody>

@@ -9,9 +9,83 @@ var consoleSection = FlowRouter.group({
 consoleSection.route('/', {
   name: 'workbench',
   action: function() {
-    BlazeLayout.render("mainLayout", {content: "workbench"});
+    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_checkname"});
   }
 });
+
+// 工作台 核名表
+consoleSection.route('/workbench_checkname', {
+  name: 'workbench',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_checkname"});
+  }
+});
+// 工作台 工商登记表
+consoleSection.route('/workbench_ICBCregister', {
+  name: 'workbench',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_ICBCregister"});
+  }
+});
+
+
+
+
+//公司核名
+consoleSection.route('/checkname', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form"});
+  }
+});
+//公司核名-签字确认
+consoleSection.route('/checkname/confirm', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_confirm"});
+  }
+});
+//公司核名-提交工商
+consoleSection.route('/checkname/submitICBC', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_submitICBC"});
+  }
+});
+
+//公司核名-核名通过
+consoleSection.route('/checkname/checkSucess', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_checkSucess"});
+  }
+});
+
+//公司核名-申请通过
+consoleSection.route('/checkname/applicationAddress', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_applicationAddress"});
+  }
+});
+
+//公司核名-准备公章
+consoleSection.route('/checkname/prepareSeal', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_prepareSeal"});
+  }
+});
+
+
+// 公司核名-编辑
+consoleSection.route('/checkname/edit', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_edit"});
+  }
+});
+
 
 // consoleSection.route('/workbench/:tableId', {
 //   name: 'workbenchTable',
@@ -34,6 +108,8 @@ customerSection.route('/', {
     BlazeLayout.render("mainLayout", {content: "customers"});
   }
 });
+
+
 
 // 客户基本信息
 customerSection.route('/customer_info', {
