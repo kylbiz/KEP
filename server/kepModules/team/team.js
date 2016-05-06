@@ -71,8 +71,8 @@ KTeam.addUser = function (userId, teamId, roles) {
 KTeam.roleOfUser = function (userId) {
   check(userId, String);
 
-  var userInfo = Meteor.users.findOne({_id: userId}) || {roles:['']};
-  return userInfo.roles[0] || "";
+  var userInfo = Meteor.users.findOne({_id: userId}) || {team: {roles:['']}};
+  return userInfo.team.roles[0] || "";
 }
 
 /*
@@ -88,20 +88,64 @@ KTeam.roleOfUser = function (userId) {
  *
  *@param userId -- 请求权限的用户id
  *@param opt -- 请求的操作
+ *@param infoId -- 具体到某一条数据的操作权限
+ *
+ *
+ *@return
+ * 若无infoId, 则返回该用户对该操作的等级权限 <0 1 2>
+ * 若有infoId, 则返回该用户对该具体数据的该操作是否有权限
+ *
  **/
-KTeam.havePermission = function (userId, opt) {
+KTeam.havePermission = function (userId, opt, infoId) {
+  check(userId, String);
+  check(opt, String);
+  check(opt, Match.Maybe(String));
+
   // 所有的操作权限
   var optList = [
     'user.view', 'user.create', 'user.update', 'user.delete', // 用户管理的权限
     'customer.view', 'customer.create', 'customer.update', 'customer.delete', // 客户管理的权限
     'service.view', 'service.create', 'service.update', 'service.delete', // 业务管理的权限
+    // 'companyRegist.view', 'companyRegist.create', 'companyRegist.update', 'companyRegist.delete', // 公司注册的权限
     'task.view', 'task.create', 'task.update', 'task.delete', // 任务管理的权限
   ];
 
-  check(userId, String);
-  if (!optList.hasOwnProperty(opt)) {
+  if (optList.indexOf(opt) < 0) {
     throw new Meteor.Error('传入的参数有误');
   }
+
+  var permissionLevel = KTeam.getPermissionLevel(userId, opt);   // 权限等级
+
+  // 无infoId, 则返回该用户对该操作的等级权限
+  if (!infoId) {
+    return permissionLevel;
+  }
+
+  // 有infoId, 则返回该用户对该具体数据的该操作是否有权限
+  if (permissionLevel == 0) {
+    return false;
+  } else if (permissionLevel == 2) {
+    return true;
+  } else if (permissionLevel == 1) {
+    var optObj = opt.split(".")[0];
+    var collObj = {
+      'user': Meteor.users, // 用户
+      'customer': Customers,  // 客户
+      'task': Tasks,  // 任务
+      'service': Service, // 公司注册
+    }[optObj];
+
+    var dataInfo = collObj.findOne({_id: infoId, 'host.id': userId})
+    return !!dataInfo;
+  }
+
+  return false;
+}
+
+
+KTeam.getPermissionLevel = function (userId, opt) {
+  check(userId, String);
+  check(opt, String);
 
   var role = KTeam.roleOfUser(userId);
   var permissionHandle = {
@@ -130,9 +174,11 @@ KTeam.havePermission = function (userId, opt) {
     }
   };
 
-  if (permissionHandle.hasOwnProperty(role)) {
-    return permissionHandle[role]();
+  // log('KTeam.havePermission', userId, opt, role);
+  if (!permissionHandle.hasOwnProperty(role)) {
+    return 0;
   }
 
-  return false;
+  return permissionHandle[role]();   // 权限等级
 }
+
