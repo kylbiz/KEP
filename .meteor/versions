@@ -1,16 +1,11 @@
 accounts-base@1.2.2
 accounts-password@1.1.4
 aldeed:autoform@5.8.1
-<<<<<<< HEAD
-aldeed:collection2@2.3.1
-aldeed:simple-schema@1.1.0
-=======
 aldeed:collection2@2.9.1
 aldeed:collection2-core@1.1.1
 aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
->>>>>>> cd3b95ea9c96358817b7478048a88c6e1685d7b0
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
