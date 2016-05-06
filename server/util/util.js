@@ -13,20 +13,23 @@ KUtil.insertListToColl = function (listData, coll, preHandleFunc) {
 
 // 判断用户当前是否处于登录状态
 KUtil.isLogin = function (self) {
-  if (Meteor.userId) {
-    return Meteor.userId();
+  var userId = false;
+  if (self) {
+    userId = self.userId;
+  } else {
+    userId = Meteor.userId();
   }
 
-  if (self && self.userId) {
-    return self.userId;
+  log('isLogin', userId);
+  if (userId) {
+    return userId;
   }
-
   throw new Meteor.Error('未登录');
 }
 
 // 判断用户是否有权限
-KUtil.havePermission = function (userId, opt) {
-  var permission = KTeam.havePermission(userId, opt);
+KUtil.havePermission = function (userId, opt, infoId) {
+  var permission = KTeam.havePermission(userId, opt, infoId);
   if (!permission) {
     throw new Meteor.Error('当前账号无权限');
   }
@@ -51,6 +54,12 @@ KUtil.getInfoListBelongToUser = function (hostUserId, hostColl, fieldsWant) {
   //   }
   // });
   // return
+}
+
+
+// 根据业务的名称获取collection对象
+KUtil.getCollObjBySerType = function () {
+
 }
 
 

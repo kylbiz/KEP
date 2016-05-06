@@ -29,8 +29,9 @@ meteorhacks:npm
 npm-container
 email
 accounts-password
-check
 momentjs:moment
+check
+
 less
 mfactory:admin-lte
 twbs:bootstrap

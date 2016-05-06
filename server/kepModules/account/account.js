@@ -11,7 +11,7 @@ KAccount = {};
 KAccount.createTotalNewUser = function (teamInfo, adminInfo) {
   check(teamInfo, {
     name: String,
-    remark: Match.Maybe(String),
+    remark: Match.Maybe(String)
   });
 
   check(adminInfo, {
