@@ -31,6 +31,7 @@ email
 accounts-password
 check
 momentjs:moment
+<<<<<<< HEAD
 aldeed:autoform
 aldeed:collection2
 aldeed:simple-schema
@@ -39,3 +40,13 @@ mfactory:admin-lte
 twbs:bootstrap
 fortawesome:fontawesome
 less
+=======
+less
+mfactory:admin-lte
+twbs:bootstrap
+fortawesome:fontawesome
+ephemer:reactive-datatables
+aldeed:simple-schema
+aldeed:collection2
+aldeed:autoform
+>>>>>>> cd3b95ea9c96358817b7478048a88c6e1685d7b0

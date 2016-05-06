@@ -51,7 +51,13 @@
                       <p class="padding-both font-weight">联系客户</p>
                     </div>
                     <div class="col-md-10 contact-customer margin-bottom">
-                      <span class="line-height">联系人：cc 电话：1235555 邮箱：cc@cc.com</span>
+                      <div class="line-height">
+                        {{> afQuickField name='customer.contactor' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                        
+                        {{> afQuickField name='customer.contactorPhone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+
+                        {{> afQuickField name='customer.contactorEmail' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                      </div>
                     </div>
                   </div>
 
