@@ -13,7 +13,14 @@ consoleSection.route('/', {
   }
 });
 
+// consoleSection.route('/workbench/:tableId', {
+//   name: 'workbenchTable',
+//   action: function() {
+//     BlazeLayout.render("reactiveDataTable",{content: "workbench_checkname"});
+//   }
+// })
 
+//查看
 
 // 客户管理
 var customerSection = consoleSection.group({
@@ -22,8 +29,27 @@ var customerSection = consoleSection.group({
 });
 
 customerSection.route('/', {
-  name: 'customers'
+  name: 'customers',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "customers"});
+  }
 });
+
+// 客户基本信息
+customerSection.route('/customer_info', {
+  name: 'customer_info',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "customer_info"});
+  }
+});
+// 公司信息
+customerSection.route('/company_info', {
+  name: 'company_info',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "company_info"});
+  }
+});
+
 customerSection.route('/:customerId');
 customerSection.route('/:customerId/setting');
 customerSection.route('/:customerId/task');

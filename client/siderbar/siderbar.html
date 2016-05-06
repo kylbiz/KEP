@@ -1,0 +1,52 @@
+<template name="sidebar">
+  {{#AdminLTE skin="black"}}
+  <div class="main-sidebar">
+    <div class="sidebar">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/img/windy/windy.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{currentUser.username}}</p>
+          {{#if currentUser}}
+          <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+          {{else}}
+          <a href="#"><i class="fa fa-circle text-success"></i>离线</a>
+          {{/if}}
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="treeview">
+          <a href="/console/customer"><i class="fa fa-user-plus" aria-hidden="true"></i><span>客户管理</span><!--  <i class="fa fa-angle-left pull-right"></i> --></a>
+          <!-- <ul class="treeview-menu">
+            <li>
+              <a href="/list">
+                添加客户
+              </a>
+            </li>
+          </ul> -->
+        </li>
+        <li class="treeview">
+          <a href="/console"><i class="fa fa-wrench" aria-hidden="true"></i><span>工作台</span><!-- <i class="fa fa-angle-left pull-right"></i> --></a>
+         <!--  <ul class="treeview-menu">
+            <li><a href="/manager/user">核名</a></li>
+            <li><a href="/manager/registration">公司注册</a></li>
+          </ul> -->
+        </li>
+        <li class="treeview">
+          <a href="/console/notice"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>通知</span>
+          <!-- <i class="fa fa-angle-left pull-right"></i> -->
+          </a>
+         <!--  <ul class="treeview-menu">
+            <li><a href="/manager/user">客户管理通知</a></li>
+            <li><a href="/manager/registration">系统通知</a></li>
+          </ul> -->
+        </li>
+        <li>
+          <a href="/console/team"><i class="fa fa-users" aria-hidden="true"></i><span>团队</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  {{/AdminLTE}}
+</template>
