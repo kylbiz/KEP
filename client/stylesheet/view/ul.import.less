@@ -3,6 +3,7 @@
 @normal_white:#ffffff;
 @word_color:#666666;
 @normal_red:#f75a47;
+@border_grey:#b2b2b2;
 ul.task_ul{
 	margin-top: 20px;
 	margin-left: 66px;
@@ -26,7 +27,7 @@ ul.task_ul{
 		height:100%;
 		line-height:100%;
 		border-radius:50%;
-		text-indent:-55px;
+		text-indent:-64px;
 		color:@word_color;
 	    background-color:@normal_white;
 		position:absolute;
@@ -35,6 +36,8 @@ ul.task_ul{
 		&:hover{
 			.current;
 		}
+		-webkit-transition:-webkit-transform 0.5s ease, background-color 0.5s ease;
+		transition:transform 0.5s ease, background-color 0.5s ease;
 	}
 }
 .current{

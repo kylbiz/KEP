@@ -32,7 +32,7 @@
                   <!-- 表单表头 -->
                   {{> task_title }}
                   <!-- 申请书预览 -->
-                  {{>Template.dynamic template=application}}
+                  {{>Template.dynamic template=_dynamic}}
               </div>
           </div>
     </div>
@@ -45,11 +45,6 @@
 			<div class="col-md-4 content-title">
 				<p>公司注册 - 核名</p>
 			</div>
-			<!-- <div class="col-md-4">	
-			</div>
-			<div class="col-md-4">
-				
-			</div> -->
 		</div>
 	</div>
 </template>
@@ -57,12 +52,12 @@
 <!-- 圆角任务栏 -->
 <template name="checkname_content_ul">
     <ul id="task" class="task_ul">
-            <li><a href="/console/checkname">资料填写</a></li>
-            <li><a href="/console/checkname/confirm">签字确认</a></li>
-            <li><a href="/console/checkname/submitICBC">提交工商</a></li>
-            <li><a href="/console/checkname/checkSucess">核名通过</a></li>
-            <li><a href="/console/checkname/applicationAddress">申请地址</a></li>
-            <li><a href="/console/checkname/prepareSeal">准备公章</a></li>
+            <li><a value="application_form" href="#">资料填写</a></li>
+            <li><a value="application_form_confirm" href="#">签字确认</a></li>
+            <li><a value="application_form_submitICBC" href="#">提交工商</a></li>
+            <li><a value="application_form_checkSucess" href="#">核名通过</a></li>
+            <li><a value="application_form_applicationAddress" href="#">申请地址</a></li>
+            <li><a value="application_form_prepareSeal" href="#">准备公章</a></li>
     </ul>
 </template>
 
@@ -115,7 +110,7 @@
             <button class="btn btn-success">确认完成</button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-info"><a href="/console/checkname/edit">编辑</a></button>
+            <button class="btn btn-info applicationEdit"><a href="#" value="application_form_edit">编辑</a></button>
         </div>
         <div class="col-md-4">
             <button class="btn btn-default">下载</button>
@@ -125,7 +120,7 @@
 
 <!--  公司核名申请书编辑-表单  -->
 <template name="application_form_edit">
-    <div class="row grey-container">
+    <div class="row grey-container border-bottom">
         <button class="btn btn-danger pull-right goldweapon-btn">一企查-企业核名神器</button>
     </div>
     {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
@@ -200,13 +195,10 @@
             <button class="btn btn-default center">取消</button>
         </div>
     </div>
-
-<!-- 一企查神器 -->
-<div class="row goldweapon pull-right" id="goldweapon">
-    {{> goldweapon }}
-</div>
-
-
+    <!-- 一企查神器 -->
+    <div class="container border-all-grey goldweapon pull-right" id="goldweapon">
+        {{> goldweapon }}
+    </div>
 </template>
 
 <!--  签字确认-表单  -->
@@ -328,32 +320,36 @@
 
 <!-- 一企查-弹出框 -->
 <template name="goldweapon">
-    <div class="row">
-        <p class="center">一企查</p>
+    <div class="row margin-top-fifth border-bottom" style="min-height: 54px;">
+        <div class="col-md-4">
+            <i class="fa fa-times fa-2x center" id="close_goldweapon" aria-hidden="true"></i>            
+        </div>
+        <div class="col-md-4">
+            <p class="center weight-p">一企查</p>            
+        </div>
     </div>
-    <div class="">
-        <form class="form-horizontal">
-          <div class="form-group">
-              <input type="text" class="" placeholder="请输入企业名称字号" >
-              <button type="submit" class="btn btn-default">查询</button>
-          </div>
-        </form>
+    <form class="center margin-top-fifth">
+      <div class="form-group">
+          <input type="text" class="" placeholder="请输入企业名称字号" >
+      </div>
+      <button type="submit" class="center btn btn-danger">查询</button>
+    </form>
+    <div class="row search-count margin-top-fifth">
+        <p class="center ">已经查询到1家</p>
     </div>
-    <div class="row">
-        <p class="center">已经查询到1家</p>
-    </div>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th rowspan="2">开业啦(上海)网络技术有限公司</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>企业状态</td>
-                <td>确立</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container margin-top-fifth">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">开业啦(上海)网络技术有限公司</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>企业状态</td>
+                    <td>确立</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
 </template>

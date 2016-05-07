@@ -38,53 +38,6 @@ consoleSection.route('/checkname', {
     BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form"});
   }
 });
-//公司核名-签字确认
-consoleSection.route('/checkname/confirm', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_confirm"});
-  }
-});
-//公司核名-提交工商
-consoleSection.route('/checkname/submitICBC', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_submitICBC"});
-  }
-});
-
-//公司核名-核名通过
-consoleSection.route('/checkname/checkSucess', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_checkSucess"});
-  }
-});
-
-//公司核名-申请通过
-consoleSection.route('/checkname/applicationAddress', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_applicationAddress"});
-  }
-});
-
-//公司核名-准备公章
-consoleSection.route('/checkname/prepareSeal', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_prepareSeal"});
-  }
-});
-
-
-// 公司核名-编辑
-consoleSection.route('/checkname/edit', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form_edit"});
-  }
-});
 
 
 // consoleSection.route('/workbench/:tableId', {
