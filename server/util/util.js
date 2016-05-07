@@ -1,3 +1,7 @@
+/*
+ * KEP后端的辅助函数
+ **/
+
 KUtil = {};
 
 // 将list中数据批量插入collection中
@@ -40,7 +44,7 @@ KUtil.havePermission = function (userId, opt, infoId) {
 // 某一用户负责下的条目下内容
 KUtil.getInfoListBelongToUser = function (hostUserId, hostColl, fieldsWant) {
   check(hostUserId, String);
-  check(hostColl, Object);
+  // check(hostColl, Match.Any);
   check(fieldsWant, [String]);
 
   // var infoList = [];
@@ -57,9 +61,36 @@ KUtil.getInfoListBelongToUser = function (hostUserId, hostColl, fieldsWant) {
 }
 
 
-// 根据业务的名称获取collection对象
-KUtil.getCollObjBySerType = function () {
+// 获取在某个collection中是否有某个对象
+KUtil.dataIsInColl = function (infoList) {
+  var infos = [];
+  if ( _.isArray(infoList) ) {
+    infos = infoList;
+  } else {
+    infos.push(infoList);
+  }
 
+  check(infos, [{
+    coll: Match.Any, // check的Object只能用于识别简单的
+    dataId: String
+  }]);
+
+  var flag = true;
+  var dataList = [];
+  for (var key in infos) {
+    var info = infos[key];
+    var data = info.coll.findOne({_id: info.dataId});
+    if (!data) {
+      flag = false;
+    } else {
+      dataList.push(data);
+    }
+  }
+  if (!flag) {
+    throw new Meteor.Error('查找的信息不存在');
+  }
+
+  return ( (dataList.length == 1) ? dataList[0] : dataList );
 }
 
 

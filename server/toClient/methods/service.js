@@ -4,15 +4,13 @@
 
 Meteor.methods({
   'createService': function (serType, hostId, customerId, payed) {  // 为客户创建新的业务
-      // 账号权限
+      // 登录
       var userId = KUtil.isLogin();
 
+      // 账号权限
       // 创建新的业务需要两个权限 1.修改客户受理业务的权限，2. 创建业务的权限
-      if (!KTeam.havePermission(userId, 'service.create')
-          || !KTeam.havePermission(userId, 'customer.update', customerId)
-        ) {
-        throw new Meteor.Error('当前账号无权限');
-      }
+      KUtil.havePermission(userId, 'customer.update', customerId);
+      KUtil.havePermission(userId, 'service.create');
 
       var serId = KService.createService({
         serType: serType,
@@ -25,14 +23,41 @@ Meteor.methods({
         throw new Meteor.Error("创建业务的失败");
       }
 
-      // {type: serType, id: serId};
-
-      return ;
+      var customerChanged = KCustomer.updateCustomerService(customerId, {
+        opt: 'add',
+        service: {
+          type: serType,
+          id: serId
+        }
+      });
+      if (!customerChanged) {
+        throw new Meteor.Error('内部数据处理错误');
+      }
+      return serId;
   },
-  'updateService': function (serType, serId, serInfo) {  // 更新业务
+  'updateService': function (serId, serInfo) {  // 更新业务
+      // 登录
+      var userId = KUtil.isLogin();
 
+      // 账号权限
+      KUtil.havePermission(userId, 'service.update', serId);
+
+      var serChanged = KService.updateService(serId, serInfo);
+      if ( !serChanged ) {
+        throw new Meteor.Error('内部数据处理错误');
+      }
+      return serId;
   },
-  'deleteService': function (serType, serId) {  // 删除业务
+  'deleteService': function (serId) {  // 删除业务
+    // 登录
+    var userId = KUtil.isLogin();
 
+    // 账号权限
+    var serChanged = KUtil.havePermission(userId, 'service.delete', serId);
+    if (!serChanged) {
+      throw new Meteor.Error('内部数据处理错误');
+    }
+
+    return serId;
   }
 });

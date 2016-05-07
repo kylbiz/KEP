@@ -1,14 +1,19 @@
 Template.testCustomers.onCreated(function() {
   var self = this;
   self.autorun(function() {
-    self.subscribe('getCustomers');
+    // self.subscribe('getCustomers');
+    // self.subscribe('getService', Customers.findOne({}));
   });
+
+  // Test.optService(this);
 });
 
 
 Template.testCustomers.helpers({
-  customer: function() {
+  data: function() {
 log('customer', Customers.find({}).fetch() );
+// log('service', Service.find({}).fetch());
+
     var userInfo = Customers.findOne({}) || {};
     Session.set('customerId', userInfo._id || null);
     return Customers.find({}).count();

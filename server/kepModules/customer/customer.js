@@ -95,17 +95,25 @@ KCustomer.updateCustomerBasic = function (customerId, basicInfo) {
  * 更新客户的业务
  **/
 KCustomer.updateCustomerService = function (customerId, serviceInfo) {
-  // check(serviceInfo, {
-  //   opt: Match.oneOf('add'),
-  //   service: {
-  //     type: Match.oneOf('companyRegist'),
-  //     id: String,
-  //     // status: 0,
-  //   }
-  // });
+  check(customerId, String);
+  check(serviceInfo, {
+    opt: Match.OneOf('add'),
+    service: {
+      type: Match.OneOf('companyRegist'),
+      id: String,
+      // status: 0,
+    }
+  });
 
-  Customers.update({_id: customerId}, {service: {$push: serviceInfo.service}});
+  if (!Customers.findOne({_id: customerId})) {
+    throw new Meteor.Error('查找的信息不存在');
+  }
 
+  if (serviceInfo.opt == 'add') {
+    return Customers.update({_id: customerId}, {$push: {service: serviceInfo.service}});
+  }
+
+  throw new Metor.Error('内部数据处理错误');
 }
 
 
@@ -181,7 +189,7 @@ KCustomer.getCustomers = function (userId) {
 
   if (typeof handleMap[role] == 'function') {
     handleMap[role]();
-log('getCustomers', userId, role, dataFilter, dataOpt);
+// log('getCustomers', userId, role, dataFilter, dataOpt);
     return Customers.find(dataFilter, dataOpt);
   }
 
