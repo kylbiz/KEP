@@ -9,36 +9,24 @@ var consoleSection = FlowRouter.group({
 consoleSection.route('/', {
   name: 'workbench',
   action: function() {
-    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_checkname"});
+    BlazeLayout.render("mainLayout", {content: "workbench"});
   }
 });
-
-// 工作台 核名表
-consoleSection.route('/workbench_checkname', {
-  name: 'workbench',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_checkname"});
-  }
-});
-// 工作台 工商登记表
-consoleSection.route('/workbench_ICBCregister', {
-  name: 'workbench',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_ICBCregister"});
-  }
-});
-
-
-
 
 //公司核名
 consoleSection.route('/checkname', {
   name: 'checkname',
   action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form"});
+    BlazeLayout.render("mainLayout", {content: "checkname"});
   }
 });
-
+//工商登记
+consoleSection.route('/register', {
+  name: 'register',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "register"});
+  }
+});
 
 // consoleSection.route('/workbench/:tableId', {
 //   name: 'workbenchTable',

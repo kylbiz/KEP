@@ -3,13 +3,16 @@ Template.application_form_edit.events({
     // Prevent default browser form submit
     event.preventDefault();
     // Get value from form element
-    $('#goldweapon').css({"display":"block"});
+    $('#goldweapon').css({"display":"block","margin-right":"0px","max-width":"327px"});
+    $('.searchName').css({"max-width":"150px"});
+    // $('#goldweapon').addClass('goldweapon-show');
   },
   'click #close_goldweapon'(event){
     // Prevent default browser form submit
     event.preventDefault();
     // Get value from form element
-    $('#goldweapon').css({"display":"none"});
+    $('#goldweapon').css({"max-width":"0px","margin-right":"-362px"});
+    // $('#goldweapon').addClass('goldweapon-hide');
   },
 });
 
