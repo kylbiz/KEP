@@ -1,4 +1,4 @@
-/*
+  /*
  * 业务相关的梳理
  **/
 
@@ -10,19 +10,24 @@ KService = {};
  **/
 KService.createService = function (serInfo) {
   check(serInfo, {
-    serType: Match.oneOf('companyRegist'),
+    serType: Match.OneOf('companyRegist'),
     hostId: String,
     customerId: String,
     payed: Boolean,
     creatorId: String,
   });
 
-  var hostInfo = Meteor.users.findOne({_id: serInfo.hostId});
-  var customerInfo = Customers.findOne({_id: serInfo.customerId});
-  var creatorInfo = Meteor.users.findOne({_id: serInfo.creatorId});
-  if (!hostInfo || !customerInfo || !creatorInfo) {
-    throw new Meteor.Error('查找的信息不存在');
-  }
+
+  var retList = KUtil.dataIsInColl([
+    {coll: Customers, dataId: serInfo.customerId},
+    {coll: Meteor.users, dataId: serInfo.hostId},
+    {coll: Meteor.users, dataId: serInfo.creatorId}
+  ]);
+
+  var customerInfo = retList[0];
+  var hostInfo = retList[1];
+  var creatorInfo = retList[2];
+
 
   var serviceId = Service.insert({
     type: serInfo.serType,
@@ -46,8 +51,43 @@ KService.createService = function (serInfo) {
 
 
 /*
- *
+ * 更新已受理的业务
  **/
-KService.getService = function (userId, customerId) {
+KService.updateService = function (serId, serInfo) {
+  check(serId, String);
+  check(serInfo, {
+    hostId: String,
+    payed: Boolean,
+  });
+  KUtil.dataIsInColl([
+    {coll: Service, dataId: serId},
+    {coll: Meteor.users, dataId: serInfo.hostId}
+  ]);
 
+  return Service.update({_id: serId}, {$set: serInfo});
+}
+
+
+/*
+ * 注销已受理的业务
+ **/
+KService.deleteService = function (serId) {
+  check(serId, String);
+  KUtil.dataIsInColl({coll: Service, dataId: serId});
+
+  return Service.update({_id: serId}, {$set: {
+    status: -1,
+  }});
+}
+
+
+
+
+/*
+ * 获取某个客户所有的受理业务
+ **/
+KService.getService = function (customerId) {
+  check(customerId, String);
+  KUtil.dataIsInColl({coll: Customers, dataId: customerId});
+  return Service.find({customerId: customerId, status: {$gte: 0}});
 }

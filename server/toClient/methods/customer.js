@@ -7,9 +7,7 @@ Meteor.methods({
     // args 正确性
     // 账号权限
     var userId = KUtil.isLogin();
-    if (!KTeam.havePermission(userId, 'customer.create')) {
-      throw new Meteor.Error('当前账号无权限');
-    }
+    KUtil.havePermission(userId, 'customer.create');
 
     return KCustomer.createCustomer(customerInfo);
   },
@@ -17,9 +15,7 @@ Meteor.methods({
     // args 正确性
     // 账号权限
     var userId = KUtil.isLogin();
-    if (!KTeam.havePermission(userId, 'customer.update', customerId)) {
-      throw new Meteor.Error('当前账号无权限');
-    }
+    KUtil.havePermission(userId, 'customer.update', customerId)
 
     return KCustomer.updateCustomerBasic(customerId, basicInfo);
   },
@@ -27,9 +23,7 @@ Meteor.methods({
     // args 正确性
     // 账号权限
     var userId = KUtil.isLogin();
-    if (!KTeam.havePermission(userId, 'customer.delete')) {
-      throw new Meteor.Error('当前账号无权限');
-    }
+    KUtil.havePermission(userId, 'customer.delete');
 
     return KCustomer.deleteCustomer(customerId);
   }

@@ -25,8 +25,8 @@ http
 kadira:flow-router
 kadira:blaze-layout
 meteorhacks:npm
-
 npm-container
+
 email
 accounts-password
 momentjs:moment

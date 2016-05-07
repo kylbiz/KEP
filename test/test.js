@@ -1,5 +1,12 @@
 Test = {};
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 基本的测试数据
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // 模拟数据
 Test.testData = function () {
 
@@ -27,12 +34,6 @@ Test.testData = function () {
   // 其他
   var retOther = other(managerUserId, customerId);
 }
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 基本的测试数据
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 测试用超级管理员
 function createAdminUser() {
@@ -184,6 +185,7 @@ function other(hostId, customerId) {
     },
     customerId: customerId,   // 对应的客户id
     createdAt: new Date(),
+    createdBy: user._id,
     status: 0, // "0 - 准备中", "1 - 受理中", "2 - 已完成", "-1 - 废弃"
     payed: true, // 是否付费 有/无
     // companyInfo: '',  // 公司信息
@@ -350,15 +352,72 @@ function other(hostId, customerId) {
     taskIdCheckName: taskIdCheckName,
     taskIdRegist: taskIdRegist
   };
-
 }
 
 
 
 
-temp = {
+//////////////////////////////0////////////////////////////////////////////////////////////////////////////////////////////
+// 对数据的基本操作测试
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 对业务的操作
+Test.optService = function (self) {
+  log('Test.optService');
+  // self.subscribe('getService');
+  log("Service", Service.find({}).fetch());
 }
 
+Test.createService = function () {
+  var customerInfo = Customers.find().fetch();
+
+  var mock = {
+    serType: 'companyRegist',
+    hostId: Meteor.userId(),
+    customerId: Customers.findOne({})._id,
+    payed: true
+  }
+
+  log("createService", mock);
+
+  Meteor.call('createService', mock.serType, mock.hostId, mock.customerId, mock.payed
+      , function (error, result) {
+        log('Test.createService', error, result);
+  });
+};
+
+Test.updateService = function () {
+  var mock = {
+    serId: 'FS67pLcPwvYa4zKrQ',
+    hostId: 'mzu5FdrDdQBofMGSs',
+    payed: false,
+  };
+
+  Meteor.call('updateService', mock.serId, {hostId: mock.hostId, payed: mock.payed}, function (error, result) {
+    log('Test.updateService', error, result);
+  });
+};
+
+Test.deleteService = function () {
+  var mock = {
+    serId: 'FS67pLcPwvYa4zKrQ',
+  };
+
+  Meteor.call('deleteService', mock.serId, function (error, result) {
+    log('Test.deleteService', error, result);
+  });
+};
+
+
+//
+
+Meteor.methods({
+  'test': function (opt) {
+    if ( Test[opt] ) {
+      Test[opt]();
+    }
+  }
+});
 
 
 
@@ -370,7 +429,7 @@ temp = {
 Meteor.methods({
   'testhandle': function () {
     // remindTest();
-  }
+  },
 });
 
 
