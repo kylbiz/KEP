@@ -11,7 +11,7 @@ SchemaHandle = {};
 SchemaHandle.getSchema = function (schemaId) {
   check(schemaId, String);
   var schemaInfo = KUtil.dataIsInColl({coll: StepInfosSchema, dataId: schemaId});
-  return convToSchemaObj(schemaInfo);
+  return convToSchemaObj(schemaInfo.schema);
 }
 
 
@@ -37,7 +37,11 @@ SchemaHandle.deleteSchema = function (schemaId) {
  * 将保存在collection中的schema数据转换成实际生成schema所需要的obj
  **/
 function convToSchemaObj (saveObj) {
-
+  for (var key in saveObj) {
+    saveObj[ key.replace(/\-/g, ".") ] = saveObj[key];
+    delete saveObj[key];
+  }
+  return saveObj;
 }
 
 

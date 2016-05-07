@@ -409,7 +409,12 @@ Test.deleteService = function () {
 };
 
 
-//
+// schema的操作
+Test.getSchema = function () {
+  var schema = SchemaHandle.getSchema("stepInfoCompanyCheckName");
+  log("schema", schema);
+};
+
 
 Meteor.methods({
   'test': function (opt) {
