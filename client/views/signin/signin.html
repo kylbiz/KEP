@@ -1,0 +1,74 @@
+<template name="signinLayout">
+<!-- 登陆&找回密码 -->
+	<div class="container logocontainer">
+		<div class="row">
+			<div class="col-md-4">
+				{{>logo}}
+			</div>
+			<div class="col-md-8">
+				{{>Template.dynamic template=_dynamic}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- 左侧log页面 -->
+<template name="logo">
+	<div class="container">
+		<div class="row logorow">
+			<img src="/img/logo/1.png" style="margin-top:111px;max-height: 150px;margin-bottom: 204px;" class="img-responsive center" alt="开业啦log">
+			<br>
+			<img src="/img/login/login1.png" style="min-height: 201px;" class="img-responsive center" alt="">
+			<br>
+			<img src="/img/login/login2.png" class="img-responsive center" alt="">
+		</div>
+	</div>
+</template>
+
+<!-- 登陆界面 -->
+<template name="signin">
+	<div class="row logorow signin">
+		<div class="signincontent">
+			<h1>登录</h1>
+		</div>
+		<form class="form-horizontal border-both signincontent">
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputEmail3" placeholder="用户名">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+		    <div class="col-sm-10" style="display: inline-flex;">
+		      <input type="password" class="form-control" id="inputPassword3" placeholder="密码">
+		      <button class="btn btn-link" id="findPwd" value="findPwd">忘记密码?</button>
+		    </div>
+		  </div>
+		</form>
+		
+		<button class="btn btn-danger btn-lg sigininbtn">确认登录</button>
+	</div>
+</template>
+
+<!-- 找回密码 -->
+<template name="findPwd">
+	<div class="row logorow signin">
+			<div class="signincontent">
+				<h1>找回密码</h1>
+			</div>
+			<form class="form-horizontal border-both signincontent">
+			  <div class="form-group">
+			    <div class="col-sm-7">
+			      <input type="text" class="form-control" id="inputEmail3" placeholder="手机号/邮箱">
+			    </div>
+			    <div class="col-sm-4">
+			    	<button class="btn btn-success" style="height: 60px;width: 252px;">发送验证码</button>
+			    </div>
+			  </div>
+			  <div class="center info">
+			  	<p>输入您绑定的手机号或者邮箱，重置密码将发到你相应的手机或邮箱中</p>
+			  </div>
+			</form>
+		</div>
+</template>

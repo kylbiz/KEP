@@ -54,7 +54,7 @@ customerSection.route('/', {
 
 // 客户基本信息
 customerSection.route('/customer_info', {
-  name: 'customer_info',
+  name: ' customer_info',
   action: function() {
     BlazeLayout.render("mainLayout", {content: "customer_info"});
   }
@@ -89,7 +89,12 @@ var noticeSection = consoleSection.group({
   name: 'taskGroup'
 });
 
-noticeSection.route('/');
+noticeSection.route('/',{
+  name: "notice",
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "notice"});
+  }
+});
 noticeSection.route('/:noticeId');
 
 
@@ -100,7 +105,13 @@ consoleSection.route('/account');
 
 
 // 登录
-consoleSection.route('/signin');
+consoleSection.route('/signin',{
+  name:'signin',
+  action: function () {
+    BlazeLayout.render("signinLayout");
+  }
+
+});
 // 找回密码
 consoleSection.route('/password/forget');
 

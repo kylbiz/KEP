@@ -1,0 +1,38 @@
+.notice_change_btn{
+	button{
+		min-width: 150px;
+	}
+}
+
+.notice_container{
+	padding: 20px 66px;
+	.border-grey;
+	background-color: @normal_white;
+	.notice_row{
+		.border-grey;
+		background-color: #f8f8f8;
+		min-height: 70px;
+		div{
+			padding:10px;
+		}
+		p{
+			font-size: 16px;
+			font-weight: 600;
+		}
+		.col-md-8{
+			&:first-child{
+				line-height: 70px;
+			}
+		}
+		.col-md-2{
+			&:last-child{
+				border-left:1px solid @border_grey;
+			}
+			.row{
+				button{
+					min-width: 82px;
+				}
+			}
+		}
+	}
+}
