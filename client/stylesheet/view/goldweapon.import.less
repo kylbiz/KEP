@@ -3,15 +3,20 @@
 	width: 177px;
 }
 .goldweapon{
-	display: none;
+	margin-right: -362px;
 	background-color:@normal_white;
 	max-width: 327px;
-	min-height: 619px;
+	min-height: 457px;
 	border:1px solid @normal_grey;
 	position: absolute;
 	right: 15px;
 	top: 89px;
 	z-index:3;
+	.showAnima;
+	input{
+		max-width: 0px;
+		.showAnima;
+	}
 }
 .search-count{
 	p{
@@ -29,8 +34,8 @@
 }
 
 .showAnima{
-	transition:width 2s;
-	-moz-transition:width 2s; /* Firefox 4 */
-	-webkit-transition:width 2s; /* Safari and Chrome */
-	-o-transition:width 2s; /* Opera */
+	transition:max-width 2s;
+	-moz-transition:max-width 2s; /* Firefox 4 */
+	-webkit-transition:max-width 2s; /* Safari and Chrome */
+	-o-transition:max-width 2s; /* Opera */
 }

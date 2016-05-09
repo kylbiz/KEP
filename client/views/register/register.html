@@ -1,0 +1,269 @@
+<!-- 工商登记主页 -->
+<template name="register">
+	<!-- 主要内容 -->
+	<div class="container">
+        <div class="row">
+            <div id="content" class="col-lg-12">
+                <!-- 内部导航栏 -->
+                {{> breadcrumb_register }}
+                <!-- ORDERS -->
+                <div class="row">
+                    <div class="col-md-12">
+                    <!-- 工商登记主页内容 -->
+                      {{> register_content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- 工商登记主页内容 -->
+<template name="register_content">
+    <!-- 核名任务 -->
+   <div class="row">
+          <div class="col-md-1">
+              <!-- 圆角任务栏 -->
+              {{> register_content_ul}}
+          </div>
+          <div class="col-md-11">
+              <!-- 任务栏对应表单内容 -->
+              <div class="container container_radius">
+                  <!-- 表单表头 -->
+                  {{> task_title_register }}
+                  <!-- 申请书预览 -->
+                  {{>Template.dynamic template=_dynamic}}
+              </div>
+          </div>
+    </div>
+</template>
+
+<!-- 内部导航栏 -->
+<template name="breadcrumb_register">
+    <div class="container">
+        <div class="row" style="margin-bottom: 30px;"> 
+            <div class="col-md-4 content-title">
+                <p>公司注册 - 工商登记</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- 圆角任务栏 -->
+<template name="register_content_ul">
+    <ul id="task" class="task_ul">
+            <li><a value="register_form" href="#">资料填写</a></li>
+            <li><a value="register_form_confirm" href="#">签字确认</a></li>
+            <li><a value="register_form_submitICBC" href="#">提交工商</a></li>
+            <li><a value="register_form_checkSucess" href="#">登记通过</a></li>
+    </ul>
+</template>
+
+<!-- 表单表头 -->
+<template name="task_title_register">
+    <div class="row writedata-title">
+        <div class="col-md-6">
+            <p>工商登记资料</p>
+        </div>
+        <div class="col-md-6">
+            <button class="pull-right btn btn-default" data-toggle="modal" data-target="#remark_modal">备注信息</button>
+        </div>
+    </div>
+    <!-- 备注信息模态框 -->
+    <div class="modal fade"  id="remark_modal" tabindex="-1" role="dialog" aria-labelledby="remark_modal_title">
+     <div class="modal-dialog modal-lg" role="document">
+      {{> remark_modal }}
+     </div>
+    </div>
+</template>
+
+<!-- 工商登记申请书预览 -->
+<template name="register_form">
+    <!-- 公司章程下载 -->
+    <div class="row border-bottom">
+            <div class="col-md-10 margin-top-bottom">
+                <form class="form-inline center">
+                    <input type="text" class="form-control input-text-min" placeholder="公司章程">
+                    <button class="btn btn-success btn-sm">下载</button>
+                </form>
+            </div>
+    </div>
+    <!-- 股东会议决议书下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="股东会议决议书">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 股东确定书下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="股东确定书">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 租房合同产权说明下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="租房合同产权说明">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 公司登记申请书下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="公司登记申请书">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 公司登记审核表下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="公司登记审核表">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <div class="row margin-top-bottom">
+        <div class="col-md-4">
+            <button class="btn btn-success">确认完成</button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-info registerEdit"><a href="#" value="register_form_edit">查看/编辑</a></button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default">全部下载</button>
+        </div>
+    </div>
+</template>
+
+<!--  工商登记申请书编辑-表单  -->
+<template name="register_form_edit">
+    {{#autoForm collection="Register" id="insertRegisterInfoForm" type="insert"}}
+          <fieldset>
+             <!-- 公司名等 -->
+             <!-- 经营期限等 -->
+             <!-- 经营范围 -->
+              {{> registercompanyinfo }}
+              <!-- 股东信息等 -->
+              <div class="row margin-top">
+                <p class="holders-info-full">股东信息</p>
+              </div>
+              {{> registerholders }}
+              <!-- 法人信息 -->
+              <div class="row margin-top">
+                <p class="holders-info-full">法人信息</p>
+              </div>
+              {{> registerlegalPerson}}
+              <!-- 监事信息 -->
+              <div class="row margin-top">
+                <p class="holders-info-full">监事信息</p>
+              </div>
+              {{> registersupervisor }}
+              <!-- 经理信息 -->
+              <div class="row margin-top">
+                <p class="holders-info-full">经理信息</p>
+              </div>
+              {{> registermanager }}
+              <!-- 财务负责人信息 -->
+              <div class="row margin-top">
+                <p class="holders-info-full">财务负责人信息</p>
+              </div>
+              {{> registerfinancialStaff }}
+              <!-- 企业联络员信息 -->
+              <div class="row margin-top">
+                <p class="holders-info-full">企业联络员信息</p>
+              </div>
+              {{> registercontractor}}
+          </fieldset>
+        {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!--  工商登记签字确认-表单  -->
+<template name="register_form_confirm">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 签字确认人 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='signatory' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 时间 -->
+           <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='createTime' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!--  提交工商-表单  -->
+<template name="register_form_submitICBC">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 提交时间 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='submitTime' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!-- 登记通过-表单 -->
+<template name="register_form_checkSucess">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 申请通过的企业名称 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='passcompanyName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>

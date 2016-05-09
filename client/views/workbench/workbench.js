@@ -5,14 +5,20 @@ Template.workbench.onCreated(function() {
   });
 });
 
-// Template.workbench.events({
-// 	'click #add_email_btn': function (events) {
-// 		// ...
-// 		events.preventDefault();
-// 		var template = Blaze.toHTMLWithData(Template.shockhoderInputBundle, {selectType: parseInt({{>add_tel}})});
-// 		$("#add_tel_form").append(template);
-// 	}
-// });
+Template.reactiveDataTable.helpers({
+	_dynamic: function () {
+		return Session.get('workbenchTemplate')||'workbench_checkname';
+	}
+});
+
+
+Template.workbench.events({
+	'click .workbench_change_btn a'(event) {
+		// ...
+		event.preventDefault();
+		Session.set('workbenchTemplate', $(event.currentTarget).attr("value"));
+	}
+});
 
 // var orderlistsOptions = {
 //   columns: [
