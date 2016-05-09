@@ -1,5 +1,4 @@
-Test = {};
-
+ Test = {};
 
 
 
@@ -366,7 +365,7 @@ Test.optService = function (self) {
   log('Test.optService');
   // self.subscribe('getService');
   log("Service", Service.find({}).fetch());
-}
+};
 
 Test.createService = function () {
   var customerInfo = Customers.find().fetch();

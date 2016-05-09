@@ -11,14 +11,16 @@ SchemaHandle = {};
 SchemaHandle.getSchema = function (schemaId) {
   check(schemaId, String);
   var schemaInfo = KUtil.dataIsInColl({coll: StepInfosSchema, dataId: schemaId});
-  return convToSchemaObj(schemaInfo.schema);
+  var schemaOrigin = convToSchemaObj(schemaInfo.schema);
+  var schemaObj = new SimpleSchema(schemaOrigin);
+  return schemaObj;
 }
 
 
 /*
  * 创建一个新的schema
  **/
-SchemaHandle.createSchema = function (schemaObj) {
+SchemaHandle.createSchema = function (schemaOrigin) {
 
 }
 
@@ -36,7 +38,7 @@ SchemaHandle.deleteSchema = function (schemaId) {
 /*
  * 将保存在collection中的schema数据转换成实际生成schema所需要的obj
  **/
-function convToSchemaObj (saveObj) {
+function convToSchemaOrigin (saveObj) {
   for (var key in saveObj) {
     saveObj[ key.replace(/\-/g, ".") ] = saveObj[key];
     delete saveObj[key];
@@ -48,7 +50,7 @@ function convToSchemaObj (saveObj) {
 /*
  * 将schema的原始Obj转换成collection要求的结构
  **/
-function convToSaveObj (schemaObj) {
+function convToSaveObj (SchemaOrigin) {
 
 }
 

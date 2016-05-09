@@ -1,0 +1,355 @@
+<!-- 公司核名主页 -->
+<template name="checkname">
+	<!-- 主要内容 -->
+	<div class="container">
+        <div class="row">
+            <div id="content" class="col-lg-12">
+                <!-- 内部导航栏 -->
+                {{> breadcrumb_checkname }}
+                <!-- ORDERS -->
+                <div class="row">
+                    <div class="col-md-12">
+                    <!-- 核名主页内容 -->
+                      {{> checkname_content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- 核名主页内容 -->
+<template name="checkname_content">
+    <!-- 核名任务 -->
+   <div class="row">
+          <div class="col-md-1">
+              <!-- 圆角任务栏 -->
+              {{> checkname_content_ul}}
+          </div>
+          <div class="col-md-11">
+              <!-- 任务栏对应表单内容 -->
+              <div class="container container_radius">
+                  <!-- 表单表头 -->
+                  {{> task_title }}
+                  <!-- 申请书预览 -->
+                  {{>Template.dynamic template=_dynamic}}
+              </div>
+          </div>
+    </div>
+</template>
+
+<!-- 内部导航栏 -->
+<template name="breadcrumb_checkname">
+	<div class="container">
+		<div class="row" style="margin-bottom: 30px;"> 
+			<div class="col-md-4 content-title">
+				<p>公司注册 - 核名</p>
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- 圆角任务栏 -->
+<template name="checkname_content_ul">
+    <ul id="task" class="task_ul">
+            <li><a value="application_form" href="#">资料填写</a></li>
+            <li><a value="application_form_confirm" href="#">签字确认</a></li>
+            <li><a value="application_form_submitICBC" href="#">提交工商</a></li>
+            <li><a value="application_form_checkSucess" href="#">核名通过</a></li>
+            <li><a value="application_form_applicationAddress" href="#">申请地址</a></li>
+            <li><a value="application_form_prepareSeal" href="#">准备公章</a></li>
+    </ul>
+</template>
+
+<!-- 表单表头 -->
+<template name="task_title">
+    <div class="row writedata-title">
+        <div class="col-md-6">
+            <p>企业名称预先核准申请书</p>
+        </div>
+        <div class="col-md-6">
+            <button class="pull-right btn btn-default" data-toggle="modal" data-target="#remark_modal">备注信息</button>
+        </div>
+    </div>
+    <!-- 备注信息模态框 -->
+    <div class="modal fade"  id="remark_modal" tabindex="-1" role="dialog" aria-labelledby="remark_modal_title">
+     <div class="modal-dialog modal-lg" role="document">
+      {{> remark_modal }}
+     </div>
+    </div>
+</template>
+
+<!-- 备注信息模态框模版 -->
+<template name="remark_modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="remark_modal_title">备注</h4>
+    </div>
+    <div class="modal-body">
+       {{#autoForm collection="NameCheck" id="insertCustomersForm" type="insert"}}
+           <fieldset>
+               <div class="container">
+                   {{> afQuickField name='remarks' template="bootstrap3-horizontal" label-class="col-sm-1 line-height" input-col-class="col-sm-11" }}
+               </div>
+           </fieldset>
+     {{/autoForm}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    </div>
+  </div>
+</template>
+
+<!-- 申请书预览 -->
+<template name="application_form">
+    <h3 class="border-bottom">申请书 - 预览</h3>
+    <div class="row margin-top-bottom">
+        <div class="col-md-4">
+            <button class="btn btn-success">确认完成</button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-info applicationEdit"><a href="#" value="application_form_edit">编辑</a></button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default">下载</button>
+        </div>
+    </div>
+</template>
+
+<!--  公司核名申请书编辑-表单  -->
+<template name="application_form_edit">
+    <div class="row grey-container border-bottom">
+        <button class="btn btn-danger pull-right goldweapon-btn">一企查-企业核名神器</button>
+    </div>
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 企业字号 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.nativeName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 备选字号 -->
+           <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.alternativeName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 添加按钮 -->
+           <div class="row border-bottom paddingEight">
+               <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
+           </div>
+           <!-- 企业类型 注册区域 行业类型 -->
+           <div class="row paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.companyType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+            <div class="row paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.companyZone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+            <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.industryType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 名称结构 -->
+            <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.companyName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 经营范围 -->
+           <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='company.businessScope' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 公司地址 -->
+           <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='addressFlag' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 公司股东 -->
+            <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='holders' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 添加按钮 -->
+           <div class="row border-bottom paddingEight">
+               <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+    <!-- 一企查神器 -->
+    <div class="container border-all-grey goldweapon pull-right" id="goldweapon">
+        {{> goldweapon }}
+    </div>
+</template>
+
+<!--  签字确认-表单  -->
+<template name="application_form_confirm">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 签字确认人 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='signatory' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+           <!-- 时间 -->
+           <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='createTime' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!--  提交工商-表单  -->
+<template name="application_form_submitICBC">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 提交时间 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='submitTime' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!-- 核名通过-表单 -->
+<template name="application_form_checkSucess">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 申请通过的企业名称 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='passcompanyName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!-- 申请通过-表单 -->
+<template name="application_form_applicationAddress">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 企业地址 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name='companyAddress' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+<!-- 准备公章-表单 -->
+<template name="application_form_prepareSeal">
+    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+        <fieldset>
+            <!-- 企业公章 -->
+           <div class="row border-bottom margin-top paddingEight">
+               <div class="col-md-10">
+                 {{> afQuickField name='company.seal' options="allowed" noselect=true template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+           </div>
+        </fieldset>
+    {{/autoForm}}
+    <div class="row margin-top-bottom">
+        <div class="col-md-6">
+            <button class="btn btn-success center">保存</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-default center">取消</button>
+        </div>
+    </div>
+</template>
+
+
+<!-- 一企查-弹出框 -->
+<template name="goldweapon">
+    <div class="row margin-top-fifth border-bottom" style="min-height: 54px;">
+        <div class="col-md-4">
+            <i class="fa fa-times fa-2x center" id="close_goldweapon" aria-hidden="true"></i>            
+        </div>
+        <div class="col-md-4">
+            <p class="center weight-p">一企查</p>            
+        </div>
+    </div>
+    <form class="center margin-top-fifth">
+      <div class="form-group">
+          <input type="text" class="" placeholder="请输入企业名称字号" >
+      </div>
+      <button type="submit" class="center btn btn-danger">查询</button>
+    </form>
+    <div class="row search-count margin-top-fifth">
+        <p class="center ">已经查询到1家</p>
+    </div>
+    <div class="container margin-top-fifth">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">开业啦(上海)网络技术有限公司</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>企业状态</td>
+                    <td>确立</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
+</template>

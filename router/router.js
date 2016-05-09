@@ -9,9 +9,36 @@ var consoleSection = FlowRouter.group({
 consoleSection.route('/', {
   name: 'workbench',
   action: function() {
-    BlazeLayout.render("mainLayout", {content: "workbench"});
+    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_checkname"});
   }
 });
+
+// 工作台 核名表
+consoleSection.route('/workbench_checkname', {
+  name: 'workbench',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_checkname"});
+  }
+});
+// 工作台 工商登记表
+consoleSection.route('/workbench_ICBCregister', {
+  name: 'workbench',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "workbench",workbench_table:"workbench_ICBCregister"});
+  }
+});
+
+
+
+
+//公司核名
+consoleSection.route('/checkname', {
+  name: 'checkname',
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "checkname",application: "application_form"});
+  }
+});
+
 
 // consoleSection.route('/workbench/:tableId', {
 //   name: 'workbenchTable',
@@ -34,6 +61,8 @@ customerSection.route('/', {
     BlazeLayout.render("mainLayout", {content: "customers"});
   }
 });
+
+
 
 // 客户基本信息
 customerSection.route('/customer_info', {

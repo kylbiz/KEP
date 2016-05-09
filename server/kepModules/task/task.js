@@ -2,7 +2,7 @@
  * 子任务的管理
  **/
 
-KTask = {}
+KTask = {};
 
 /*
  * 创建任务
@@ -94,3 +94,14 @@ KTask.updateTask = function () {
 KTask.deleteTask = function () {
 
 }
+
+
+/*
+ * 初始化子任务下的步骤
+ **/
+KTask.initTaskStep = function (schemaId) {
+  var schemaObj = SchemaHandle.getSchema(schemaId);
+  TempStruct.attachSchema(schemaObj);
+  return TempStruct;
+}
+
