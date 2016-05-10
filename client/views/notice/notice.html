@@ -31,9 +31,16 @@
 				<button type="button" class="btn btn-info btn-sm" style="width: 90px"><a value="notice_system" href="#">系统通知</a></button>
 			</div>
 			<div class="col-md-4">
-				<div class="form-inline pull-right">
-					<input type="text" class="form-control" placeholder="全部">
-					<!-- <button class="btn btn-default" type="submit">全部</button> -->
+				<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    全部
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li><a href="#">全部</a></li>
+					    <li><a href="#">未读</a></li>
+					    <li><a href="#">已读</a></li>
+					  </ul>
 				</div>
 			</div>
 		</div>
@@ -45,20 +52,21 @@
 <template name="notice_customer">
     <div class="container notice_container">
     	{{> notice_customer_content }}
+    	{{> notice_customer_content }}
     </div>
 </template>
 
-<!-- 通知框 -->
+<!-- 客户通知框 -->
 <template name="notice_customer_content">
 	<div class="container">
-		<div class="row notice_row">
+		<div class="row notice_row" value="notice_content" >
 			<div class="col-md-8">
 				<p>开业啦核名状态已更新！</p>
 			</div>
 			<div class="col-md-2">
 				<div class="send_time pull-right">
 					<p>发送时间：</p>
-					<p>2016-01-01</p>		
+					<p>2016-01-01</p>
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -76,12 +84,13 @@
 <template name="notice_system">
 	<div class="container notice_container">
     	{{> notice_system_content }}
+    	{{> notice_system_content }}
     </div>
 </template>
 <!-- 系统通知消息框 -->
 <template name="notice_system_content">
 		<div class="container">
-		<div class="row notice_row">
+		<div class="row notice_row" value="notice_content">
 			<div class="col-md-8">
 				<p>系统更新了，赶紧来看看吧！</p>
 			</div>
@@ -103,33 +112,24 @@
 	</div>
 </template>
 
+<!-- 消息内容框 -->
 <template name="notice_content">
-
-	<div class="container">
+	<div class="container notice_container">
 		<div class="row">
-			<h3>消息标题</h3>
+			<h2 class="center">消息标题</h2>
 		</div>
-		<div class="row notice_row" vlaue="">
-			<div class="col-md-8">
-				<p>新功能上线，赶紧了解下！</p>
-			</div>
-			<div class="row">
-				<p class="center">2016-01-01</p>
-			</div>
-			<div class="col-md-2">
-				<div class="send_time pull-right">
-					<p>发送时间：</p>
-					<p>2016-01-01</p>		
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="border-bottom">
-					<button class="btn btn-danger center">删除</button>
-				</div>
-				<div class="">
-					<button class="btn btn-info center">标为已读</button>
-				</div>
-			</div>
+		<div class="row time_row">
+			<p class="center">2016-01-01</p>
+		</div>
+		<div class="row notice_content_row">
+			<p class="center">系统更新到1.3.0了，快来体验吧！</p>
+		</div>
+
+		<div class="row row-border">
+			
 		</div>
 	</div>
 </template>
+
+
+

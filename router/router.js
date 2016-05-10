@@ -100,7 +100,12 @@ noticeSection.route('/:noticeId');
 
 
 // 个人中心
-consoleSection.route('/account');
+consoleSection.route('/account', {
+  name:'account',
+  action: function () {
+    BlazeLayout.render("mainLayout", {content:"account"});
+  }
+});
 
 
 
@@ -108,12 +113,17 @@ consoleSection.route('/account');
 consoleSection.route('/signin',{
   name:'signin',
   action: function () {
-    BlazeLayout.render("signinLayout");
+    BlazeLayout.render("signinLayout",{content:"signin"});
   }
 
 });
 // 找回密码
-consoleSection.route('/password/forget');
+consoleSection.route('/password/forget',{
+  name:'finPwd',
+  action:function () {
+    BlazeLayout.render("signinLayout",{content:"findPwd"});
+  }
+});
 
 
 
@@ -125,7 +135,10 @@ FlowRouter.notFound = {
 }
 
 
-
-
 // 团队
-consoleSection.route('/team');
+consoleSection.route('/team',{
+  name:'team',
+  action:function () {
+    BlazeLayout.render("mainLayout", {content:'team'});
+  }
+});
