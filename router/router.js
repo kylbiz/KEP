@@ -12,6 +12,14 @@ consoleSection.route('/', {
     BlazeLayout.render("mainLayout", {content: "workbench"});
   }
 });
+//测试页面
+consoleSection.route('/dragtest', {
+  name: 'dragtest',
+  action: function() {
+    BlazeLayout.render("dragtest");
+  }
+})
+
 
 //公司核名
 consoleSection.route('/checkname', {

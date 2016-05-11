@@ -1,3 +1,11 @@
+Template.application_form_edit.onRendered(function () {
+  $('#drag-area').dad({
+    draggable: '.drag'
+  });
+});
+
+
+
 Template.application_form_edit.events({
   'click .goldweapon-btn'(event) {
     // Prevent default browser form submit
