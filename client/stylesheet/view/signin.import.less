@@ -1,0 +1,84 @@
+.logocontainer{
+	padding-top: 100px;
+	max-width: 950px;
+}
+
+.minheight{
+	margin: 0px;
+	min-height: 408px;
+}
+
+
+.logorow{
+	background-color: white;
+	height: 408px;
+	width: 93%;
+}
+
+.signin{
+	.minheight;
+	max-width: 495px;
+	background-image: url(/img/login/loginbg.jpg);
+	background-size: auto;
+}
+.findpwd{
+	.minheight;
+	max-width: 495px;
+	background-image: url(/img/login/findbg.jpg);
+	background-size: auto;
+}
+
+
+
+.sigininbtn{
+	.center;
+	max-width: 289px;
+	margin-top: 41px;
+	display: block;
+	box-sizing: border-box;
+	height: 30px;
+	line-height: 30px;
+	text-decoration: none;
+	color: @normal_white;
+	border:1px solid @normal_white;
+	cursor: default;
+	&:hover{
+		text-decoration: none;
+		color: @normal_white;
+	}
+}
+.signincontent{
+	color: @normal_white;
+	&:first-child{
+		padding: 15px;
+	}
+	img{
+		max-height: 75px;
+	}
+	.form-group{
+		&:first-child{
+			margin-top: 23px;
+		}
+		margin-left: 50px;
+		margin-right: auto;
+		#findPwd{
+			a{color: @normal_white;}
+		}
+	}
+	input{
+		min-width: 103px;
+		max-width: 253px;
+		height: 35px;
+	}
+	.info{
+		margin-bottom: 20px;
+		background-color: @word_color;
+		max-width: 391px;
+		height: 44px;
+		border-radius: 5px;
+		p{
+			font-size: 12px;
+			line-height: 46px;
+		}
+	}
+}

@@ -22,7 +22,6 @@ Template.checkname_content.helpers({
   }
 });
 
-
 Template.checkname.events({
   'click .task_ul li a'(event){
     log('click task', $(event.currentTarget).attr("value")  );

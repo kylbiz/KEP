@@ -54,7 +54,7 @@ customerSection.route('/', {
 
 // 客户基本信息
 customerSection.route('/customer_info', {
-  name: 'customer_info',
+  name: ' customer_info',
   action: function() {
     BlazeLayout.render("mainLayout", {content: "customer_info"});
   }
@@ -89,20 +89,41 @@ var noticeSection = consoleSection.group({
   name: 'taskGroup'
 });
 
-noticeSection.route('/');
+noticeSection.route('/',{
+  name: "notice",
+  action: function() {
+    BlazeLayout.render("mainLayout", {content: "notice"});
+  }
+});
 noticeSection.route('/:noticeId');
 
 
 
 // 个人中心
-consoleSection.route('/account');
+consoleSection.route('/account', {
+  name:'account',
+  action: function () {
+    BlazeLayout.render("mainLayout", {content:"account"});
+  }
+});
 
 
 
 // 登录
-consoleSection.route('/signin');
+consoleSection.route('/signin',{
+  name:'signin',
+  action: function () {
+    BlazeLayout.render("signinLayout",{content:"signin"});
+  }
+
+});
 // 找回密码
-consoleSection.route('/password/forget');
+consoleSection.route('/password/forget',{
+  name:'finPwd',
+  action:function () {
+    BlazeLayout.render("signinLayout",{content:"findPwd"});
+  }
+});
 
 
 
@@ -114,7 +135,10 @@ FlowRouter.notFound = {
 }
 
 
-
-
 // 团队
-consoleSection.route('/team');
+consoleSection.route('/team',{
+  name:'team',
+  action:function () {
+    BlazeLayout.render("mainLayout", {content:'team'});
+  }
+});
