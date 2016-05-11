@@ -17,5 +17,8 @@ Meteor.methods({
     // args 正确性
     // 账号权限
     // 删除
+  },
+  'getSchema': function (schemaId) {
+    return SchemaHandle.getSchema(schemaId);
   }
 });

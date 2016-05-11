@@ -414,6 +414,16 @@ Test.getSchema = function () {
   log("schema", schema);
 };
 
+Test.initTaskStep = function () {
+  var coll = KTask.initTaskStep(TempStruct, "stepInfoCompanyRegistInfo");
+  log("initTaskStep", coll);
+}
+
+Test.getColl = function () {
+  log("Register", Register);
+  log("TempStruct", TempStruct);
+}
+
 
 Meteor.methods({
   'test': function (opt) {
