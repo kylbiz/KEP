@@ -4,8 +4,8 @@
 
 Meteor.startup(function () {
   // initAccount();   // 初始化管理员
-  //initSupportInfo();  // 初始化相关的辅助信息
-  //Test.testData();    // 测试数据
+  initSupportInfo();  // 初始化相关的辅助信息
+  Test.testData();    // 测试数据
 });
 
 
@@ -154,66 +154,87 @@ function getSupportInfo() {
         createBy: 'default', // 系统定义 用户自定义的用 'customer'
         schema: {
           'company': {
-            type: Object,
+            type: "Object",
             label: "公司基本信息",
             optional: true
           },
           'company-zone': {
-            type: String,
+            type: "String",
             label: '注册区域',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '虹口', value: '虹口'},
-                  {label: '浦东', value: '浦东'}
-                ]
-              }
+              options: [
+                {label: '虹口', value: '虹口'},
+                {label: '浦东', value: '浦东'}
+              ]
             }
           },
           "company-type": {
-            type: String,
+            type: "String",
             label: '公司类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '有限责任公司', value: '有限责任公司'},
-                  {label: '有限合伙', value: '有限合伙'}
-                ]
-              }
+              options: [
+                {label: '有限责任公司', value: '有限责任公司'},
+                {label: '有限合伙', value: '有限合伙'}
+              ]
             }
           },
-          "company-name": {
-            type: String,
+          "company-nativeName": {
+            type: "String",
             label: '公司名称（必填）'
           },
           'company-alternativeName': {
-            type: Array,
+            type: "Array",
             minCount: 0,
             maxCount: 10,
             label: "备选企业字号",
             optional: true
           },
           "company-alternativeName-$": {
-            type: Object,
+            type: "Object",
             optional: true
           },
           "company-alternativeName-$-name": {
-            type: String,
+            type: "String",
             label: "备选字号",
             optional: true
           },
           'company-moneyAmount': {
-            type: Number,
+            type: "Number",
             label: '注册资本(单位：万元，必填)'
           },
+          "company-industryType": {
+            type: "String",
+            label: '行业类型',
+            optional: true,
+            autoform: {
+              type: 'select',
+              firstOption: false,
+              options: [
+                {label: '网络技术', value: '网络技术'},
+                {label: '生物技术', value: '生物技术'}
+              ]
+            }
+          },
+          'company-nameStruct': {
+            type: "String",
+            label: "公司名称结构",
+            autoform: {
+              type: 'select',
+              firstOption: false,
+              options: [
+                {label: '<公司名>(<地区>)<行业类型><公司性质>', value: 'name-area-industry-type'},
+                {label: '<地区><公司名><行业类型><公司性质>>', value: 'area-name-industry-type'},
+              ]
+            }
+          },
           'company-businessScope': {
-            type: String,
+            type: "String",
             label: '经营范围',
             optional: true,
             min: 0,
@@ -223,26 +244,26 @@ function getSupportInfo() {
             }
           },
           'company-address': {
-            type: String,
+            type: "String",
             label: '地 址',
             optional: true
           },
           "holders": {
-            type: Array,
+            type: "Array",
             minCount: 0,
             maxCount: 10,
             label: "股东信息（必填）",
           },
           "holders-$": {
-            type: Object,
+            type: "Object",
             label: '添加股东'
           },
           "holders-$-name": {
-            type: String,
+            type: "String",
             label: "股东名称或姓名"
           },
           "holders-$-ID": {
-            type: String,
+            type: "String",
             label: "证照号码",
             min: 18,
             max: 18
@@ -254,59 +275,55 @@ function getSupportInfo() {
         createBy: 'default',
         schema: {
           "company": {
-            type: Object,
+            type: "Object",
             label: "公司基本信息",
             optional: true
           },
           "company-zone": {
-            type: String,
+            type: "String",
             label: '注册区域（必填）',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '虹口', value: '虹口'},
-                  {label: '浦东', value: '浦东'}
-                ]
-              }
+              options: [
+                {label: '虹口', value: '虹口'},
+                {label: '浦东', value: '浦东'}
+              ]
             }
           },
           "company-name": {
-            type: String,
+            type: "String",
             label: '公司名称（必填）'
           },
           "company-type": {
-            type: String,
+            type: "String",
             label: '公司类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '有限责任公司', value: '有限责任公司'},
-                  {label: '有限合伙', value: '有限合伙'}
-                ]
-              }
+              options: [
+                {label: '有限责任公司', value: '有限责任公司'},
+                {label: '有限合伙', value: '有限合伙'}
+              ]
             }
           },
           'company-companyId': {
-            type: String,
+            type: "String",
             label: '名称预先核准文号/注册号/统一社会信用代码',
             optional: true
           },
           'company-tel': {
-            type: String,
+            type: "String",
             label: '联系电话（必填）'
           },
           'company-moneyAmount': {
-            type: Number,
+            type: "Number",
             label: '注册资本(单位：万元，必填)'
           },
           'company-businessScope': {
-            type: String,
+            type: "String",
             label: '经营范围',
             optional: true,
             min: 0,
@@ -316,52 +333,50 @@ function getSupportInfo() {
             }
           },
           'company-businessPeriod': {
-            type: String,
+            type: "String",
             label: '经营期限',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '10年', value: '10年'},
-                  {label: '20年', value: '20年'},
-                  {label: '长期', value: '长期'}
-                ]
-              }
+              options: [
+                {label: '10年', value: '10年'},
+                {label: '20年', value: '20年'},
+                {label: '长期', value: '长期'}
+              ]
             }
           },
           'company-address': {
-            type: String,
+            type: "String",
             label: '地 址',
             optional: true
           },
           'company-productionAddress': {
-            type: String,
+            type: "String",
             label: '生产经营地',
             optional: true
           },
 
           "legalPerson": {
-            type: Object,
+            type: "Object",
             label: '法人（必填）',
             optional: true
           },
           "legalPerson-name": {
-            type: String,
+            type: "String",
             label: '法定代表人姓名'
           },
           "legalPerson-tel": {
-            type: String,
+            type: "String",
             label: '固定电话',
             optional: true
           },
           "legalPerson-phone": {
-            type: String,
+            type: "String",
             label: '移动电话（必填）'
           },
           "legalPerson-email": {
-            type: String,
+            type: "String",
             label: '电子邮箱',
             optional: true,
             autoform: {
@@ -371,227 +386,218 @@ function getSupportInfo() {
             }
           },
           "legalPerson-IDType": {
-            type: String,
+            type: "String",
             label: '身份证类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "legalPerson-ID": {
-            type: String,
+            type: "String",
             label: '身份证号码（必填）'
           },
           "chairman": {
-            type: Object,
+            type: "Object",
             label: '董事',
             optional: true
           },
           "chairman-name": {
-            type: String,
+            type: "String",
             label: '董事姓名',
             optional: true
           },
           "chairman-type": {
-            type: String,
+            type: "String",
             label: '董事职务',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '执行董事', value: '执行董事'}
-                ]
-              }
+              options: [
+                {label: '执行董事', value: '执行董事'}
+              ]
             }
           },
           "chairman-IDType": {
-            type: String,
+            type: "String",
             label: '董事身份证类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "chairman-ID": {
-            type: String,
+            type: "String",
             label: '董事身份证号码',
             optional: true
           },
           "chairman-phone": {
-            type: String,
+            type: "String",
             label: "董事手机号码",
             optional: true
           },
           "supervisor": {
-            type: Object,
+            type: "Object",
             label: '监事（必填）',
             optional: true
           },
           "supervisor-name": {
-            type: String,
+            type: "String",
             label: '监事姓名（必填）'
           },
           "supervisor-type": {
-            type: String,
+            type: "String",
             label: '监事职务',
             optional: true,
-            defaultValue: function() {
-              return '监事';
+            autoform: {
+              type: 'select',
+              firstOption: false,
+              options: [
+                {label: '监事', value: '监事'}
+              ]
             }
+            // defaultValue: function() {
+            //   return '监事';
+            // }
           },
           "supervisor-IDType": {
-            type: String,
+            type: "String",
             label: '监事身份证类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "supervisor-ID": {
-            type: String,
+            type: "String",
             label: '监事身份证号码（必填）'
           },
 
           "manager": {
-            type: Object,
+            type: "Object",
             label: "经理",
             optional: true
           },
           "manager-name": {
-            type: String,
+            type: "String",
             label: "经理姓名",
             optional: true
           },
           "manager-type": {
-            type: String,
+            type: "String",
             label: '经理职务',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '经理', value: '经理'}
-                ]
-              }
+              options: [
+                {label: '经理', value: '经理'}
+              ]
             }
           },
           "manager-IDType": {
-            type: String,
+            type: "String",
             label: '经理身份证类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'},
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'},
+              ]
             }
           },
           "manager-ID": {
-            type: String,
+            type: "String",
             label: '经理身份证号码',
             optional: true
           },
 
           "holders": {
-            type: Array,
+            type: "Array",
             minCount: 0,
             maxCount: 10,
             label: "股东信息(必填)",
             optional: true
           },
           "holders-$": {
-            type: Object,
+            type: "Object",
             optional: true
           },
           "holders-$-name": {
-            type: String,
+            type: "String",
             label: "股东（发起人）名称或姓名"
           },
 
           "holders-$-IDType": {
-            type: String,
+            type: "String",
             label: "证件类型",
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "holders-$-ID": {
-            type: String,
+            type: "String",
             label: "证照号码"
           },
           "holders-$-investType": {
-            type: String,
+            type: "String",
             label: '出资方式',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '货币', value: '货币'}
-                ]
-              }
+              options: [
+                {label: '货币', value: '货币'}
+              ]
             }
           },
           "holders-$-investShare": {
-            type: Number,
+            type: "Number",
             label: '占股比例(%)',
             decimal: true
           },
 
           "contractor": {
-            type: Object,
+            type: "Object",
             label: '联络员',
             optional: true
           },
           "contractor-name": {
-            type: String,
+            type: "String",
             label: '联络员姓名',
             optional: true
           },
           "contractor-tel": {
-            type: String,
+            type: "String",
             label: '固定电话',
             optional: true
           },
           "contractor-phone": {
-            type: String,
+            type: "String",
             label: '移动电话',
             optional: true
           },
           "contractor-email": {
-            type: String,
+            type: "String",
             label: '电子邮箱',
             optional: true,
             autoform: {
@@ -601,47 +607,45 @@ function getSupportInfo() {
             }
           },
           "contractor-IDType": {
-            type: String,
+            type: "String",
             label: '身份证件类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "contractor-ID": {
-            type: String,
+            type: "String",
             label: '身份证件号码',
             optional: true
           },
 
           "financialStaff": {
-            type: Object,
+            type: "Object",
             label: '财务负责人',
             optional: true
           },
           "financialStaff-name": {
-            type: String,
+            type: "String",
             label: '联络员姓名',
             optional: true
           },
           "financialStaff-tel": {
-            type: String,
+            type: "String",
             label: '固定电话',
             optional: true
           },
           "financialStaff-phone": {
-            type: String,
+            type: "String",
             label: '移动电话',
             optional: true
           },
           "financialStaff-email": {
-            type: String,
+            type: "String",
             label: '电子邮箱',
             optional: true,
             autoform: {
@@ -651,21 +655,19 @@ function getSupportInfo() {
             }
           },
           "financialStaff-IDType": {
-            type: String,
+            type: "String",
             label: '身份证件类型',
             optional: true,
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "financialStaff-ID": {
-            type: String,
+            type: "String",
             label: '身份证件号码',
             optional: true
           }
@@ -676,11 +678,11 @@ function getSupportInfo() {
         createBy: 'default',
         schema: {
           name: {
-            type: String,
+            type: "String",
             label: '签字或确认人',
           },
           time: {
-            type: Date,
+            type: "Date",
             label: '时间',
           }
         }
@@ -690,7 +692,7 @@ function getSupportInfo() {
         createBy: 'default',
         schema: {
           time: {
-            type: Date,
+            type: "Date",
             label: '提交时间'
           }
         }
@@ -700,7 +702,7 @@ function getSupportInfo() {
         createBy: 'default',
         schema: {
           companyName: {
-            type: String,
+            type: "String",
             label: '申请通过的企业名称'
           }
         }
@@ -710,7 +712,7 @@ function getSupportInfo() {
         createBy: 'default',
         schema: {
           companyAddress: {
-            type: String,
+            type: "String",
             label: '企业地址',
           }
         }
@@ -727,17 +729,15 @@ function getSupportInfo() {
         createBy: 'default',
         schema: {
           registPass: {
-            type: Boolean,
+            type: "Boolean",
             label: '确认登记通过',
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '未确认', value: false},
-                  {label: '确认', value: true}
-                ]
-              }
+              options: [
+                {label: '未确认', value: false},
+                {label: '确认', value: true}
+              ]
             }
           }
         }

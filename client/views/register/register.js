@@ -1,3 +1,12 @@
+Template.register.onRendered(function () {
+  Meteor.call('getSchema', 'stepInfoCompanyRegistInfo', function (err, schemaOrigin) {
+    if (!err) {
+      var schemaO = KEPUtil.convToSchemaOrigin(schemaOrigin);
+      var schemaObj = new SimpleSchema(schemaO);
+      TempStruct.attachSchema( schemaObj );
+    }
+  });
+});
 
 Template.register_content.helpers({
   _dynamic: function () {
@@ -15,4 +24,11 @@ Template.register.events({
     log('click task', $(event.currentTarget).attr("value")  );
     Session.set('stepTemplate', $(event.currentTarget).attr("value"));
   },
+});
+
+Template.register_form_edit.helpers({
+  collectionName: function () {
+    // return KTask.initTaskStep("stepInfoCompanyRegistInfo");
+    return "TempStruct";
+  }
 });

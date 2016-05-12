@@ -41,7 +41,7 @@
 <!-- 内部导航栏 -->
 <template name="breadcrumb_register">
     <div class="container">
-        <div class="row" style="margin-bottom: 30px;"> 
+        <div class="row" style="margin-bottom: 30px;">
             <div class="col-md-4 content-title">
                 <p>公司注册 - 工商登记</p>
             </div>
@@ -148,44 +148,44 @@
 
 <!--  工商登记申请书编辑-表单  -->
 <template name="register_form_edit">
-    {{#autoForm collection="Register" id="insertRegisterInfoForm" type="insert"}}
-          <fieldset>
-             <!-- 公司名等 -->
-             <!-- 经营期限等 -->
-             <!-- 经营范围 -->
-              {{> registercompanyinfo }}
-              <!-- 股东信息等 -->
-              <div class="row margin-top">
-                <p class="holders-info-full">股东信息</p>
-              </div>
-              {{> registerholders }}
-              <!-- 法人信息 -->
-              <div class="row margin-top">
-                <p class="holders-info-full">法人信息</p>
-              </div>
-              {{> registerlegalPerson}}
-              <!-- 监事信息 -->
-              <div class="row margin-top">
-                <p class="holders-info-full">监事信息</p>
-              </div>
-              {{> registersupervisor }}
-              <!-- 经理信息 -->
-              <div class="row margin-top">
-                <p class="holders-info-full">经理信息</p>
-              </div>
-              {{> registermanager }}
-              <!-- 财务负责人信息 -->
-              <div class="row margin-top">
-                <p class="holders-info-full">财务负责人信息</p>
-              </div>
-              {{> registerfinancialStaff }}
-              <!-- 企业联络员信息 -->
-              <div class="row margin-top">
-                <p class="holders-info-full">企业联络员信息</p>
-              </div>
-              {{> registercontractor}}
-          </fieldset>
-        {{/autoForm}}
+    {{#autoForm collection=collectionName id="insertRegisterInfoForm" type="insert"}}
+      <fieldset>
+         <!-- 公司名等 -->
+         <!-- 经营期限等 -->
+         <!-- 经营范围 -->
+          {{> registercompanyinfo }}
+          <!-- 股东信息等 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">股东信息</p>
+          </div>
+          {{> registerholders }}
+          <!-- 法人信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">法人信息</p>
+          </div>
+          {{> registerlegalPerson}}
+          <!-- 监事信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">监事信息</p>
+          </div>
+          {{> registersupervisor }}
+          <!-- 经理信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">经理信息</p>
+          </div>
+          {{> registermanager }}
+          <!-- 财务负责人信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">财务负责人信息</p>
+          </div>
+          {{> registerfinancialStaff }}
+          <!-- 企业联络员信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">企业联络员信息</p>
+          </div>
+          {{> registercontractor }}
+      </fieldset>
+    {{/autoForm}}
     <div class="row margin-top-bottom">
         <div class="col-md-6">
             <button class="btn btn-success center">保存</button>

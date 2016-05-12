@@ -7,7 +7,7 @@
 	    <div class="col-md-4">
 	      {{> afQuickField name='company.moneyAmount' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
 	    </div>
-	</div> 
+	</div>
 	<!-- 企业类型等 -->
 	 <div class="row border-bottom margin-top">
 	    <div class="col-md-4">
@@ -19,7 +19,7 @@
 	    <div class="col-md-4">
 	      {{> afQuickField name='company.businessPeriod' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
 	    </div>
-	</div> 
+	</div>
 	<!-- 公司地址等 -->
 	<div class="row border-bottom margin-top">
 	  <div class="col-md-8">
@@ -49,7 +49,7 @@
             {{> afQuickField name='legalPerson.ID' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
           </div>
           <div class="col-md-4">
-            
+
           </div>
       </div>
       <div class="row margin-top">
@@ -100,15 +100,15 @@
 	      {{> afQuickField name='manager.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='manager.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='manager.type' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
 	<div class="row margin-top">
 	    <div class="col-md-4">
-	      {{> afQuickField name='manager.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='manager.IDType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='manager.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='manager.ID' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
 </template>
@@ -121,44 +121,52 @@
 	      {{> afQuickField name='financialStaff.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='financialStaff.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='financialStaff.email' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
-	
+
 	<div class="row margin-top">
 	  <div class="col-md-4">
-	      {{> afQuickField name='financialStaff.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='financialStaff.IDType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='financialStaff.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='financialStaff.ID' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
 	<div class="row margin-top">
 	  <div class="col-md-4">
-	      {{> afQuickField name='financialStaff.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='financialStaff.phone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='financialStaff.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='financialStaff.tel' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
 </template>
 
-<!-- 企业联络员信息 -->	
+<!-- 企业联络员信息 -->
 <template name="registercontractor">
 	<div class="row margin-top">
 	    <div class="col-md-4">
 	      {{> afQuickField name='contractor.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='contractor.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='contractor.email' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
 	<div class="row margin-top">
 	    <div class="col-md-4">
-	      {{> afQuickField name='contractor.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='contractor.IDType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	    <div class="col-md-4">
-	      {{> afQuickField name='contractor.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	      {{> afQuickField name='contractor.ID' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	    </div>
+	</div>
+	<div class="row margin-top">
+	    <div class="col-md-4">
+	      {{> afQuickField name='contractor.phone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+	    </div>
+	    <div class="col-md-4">
+	      {{> afQuickField name='contractor.tel' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 	    </div>
 	</div>
 </template>

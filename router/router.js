@@ -61,15 +61,15 @@ customerSection.route('/', {
 
 
 // 客户基本信息
-customerSection.route('/customer_info', {
-  name: ' customer_info',
+customerSection.route('/:customerId/info', {
+  name: 'customerInfo',
   action: function() {
     BlazeLayout.render("mainLayout", {content: "customer_info"});
   }
 });
 // 公司信息
-customerSection.route('/company_info', {
-  name: 'company_info',
+customerSection.route('/:customerId/company', {
+  name: 'companyInfo',
   action: function() {
     BlazeLayout.render("mainLayout", {content: "company_info"});
   }
@@ -118,12 +118,11 @@ consoleSection.route('/account', {
 
 
 // 登录
-consoleSection.route('/signin',{
-  name:'signin',
+consoleSection.route('/login',{
+  name:'login',
   action: function () {
     BlazeLayout.render("signinLayout",{content:"signin"});
   }
-
 });
 // 找回密码
 consoleSection.route('/password/forget',{

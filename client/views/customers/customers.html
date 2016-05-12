@@ -21,7 +21,7 @@
 <!-- 内部导航栏 -->
 <template name="breadcrumb_customers">
   <div class="container">
-    <div class="row" style="margin-bottom: 30px;"> 
+    <div class="row" style="margin-bottom: 30px;">
       <div class="col-md-4 content-title">
         <p>客户管理-公司注册</p>
       </div>
@@ -56,20 +56,9 @@
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td>开业啦</td>
-                  <td>准备中</td>
-                  <td>有</td>
-                  <td>cc</td>
-                  <td>2016-04-21</td>
-                  <td>
-                    <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#progress_control"><a href="/console/customer/customer_info">客户管理</a></button>
-                     <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#config"><a href="/console/customer/company_info">公司资料</a></button>
-                  </td>
-                  <td>
-                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customers_delete">删除</button>
-                  </td>
-              </tr>
+              {{#each customers}}
+                {{> customerTableCell}}
+              {{/each}}
           </tbody>
       </table>
 
@@ -77,6 +66,24 @@
       <div class="modal fade" id="customers_delete" tabindex="-1" role="dialog" aria-labelledby="customers_delete_title">
         {{> customers_delete }}
       </div>
+</template>
+
+
+<template name="customerTableCell">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{statusLabel}}</td>
+    <td>{{payLabel}}</td>
+    <td>{{host.name}}</td>
+    <td>{{createTime}}</td>
+    <td>
+      <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#progress_control"><a href="{{managePath}}">客户管理</a></button>
+       <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#config"><a href="{{companyInfoPath}}">公司资料</a></button>
+    </td>
+    <td>
+      <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customers_delete">删除</button>
+    </td>
+  </tr>
 </template>
 
 <!-- 删除按钮-模态框 -->
@@ -125,14 +132,14 @@
       <fieldset>
        <form class="form-inline">
           {{> afQuickField name='customername' }}
-          {{> afQuickField name='principal'}}
+          {{> afQuickField name='principal' }}
           <p class="section-division">客户联系方式:</p>
           {{> afQuickField name='name' label-class="label_style"}}
           {{> afQuickField name='tel'  label-class="label_style"}}
           {{> afQuickField name='email'}}
           {{> afQuickField name='localtion'}}
           {{> afQuickField name='customerOrigin'}}
-       </form> 
+       </form>
        <form class="form-horizontal business">
          <p class="section-division">当前公司需办理的业务:</p>
          {{> afQuickField name="business" label-class="display_none" options="allowed" noselect=true}}

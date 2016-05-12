@@ -1,9 +1,21 @@
+
+Template.checkname.onRendered(function () {
+  this.autorun(function () {
+    Meteor.call('getSchema', 'stepInfoCompanyCheckName', function (err, schemaOrigin) {
+      if (!err) {
+        var schemaO = KEPUtil.convToSchemaOrigin(schemaOrigin);
+        var schemaObj = new SimpleSchema(schemaO);
+        TempStruct.attachSchema( schemaObj );
+      }
+    });
+  });
+});
+
 Template.application_form_edit.onRendered(function () {
   $('#drag-area').dad({
     draggable: '#drag'
   });
 });
-
 
 
 Template.application_form_edit.events({
@@ -40,3 +52,6 @@ Template.checkname.events({
     Session.set('stepTemplate', $(event.currentTarget).attr("value"));
   },
 });
+
+
+

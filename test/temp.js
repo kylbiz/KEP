@@ -45,6 +45,31 @@
 // // observeChangesUse();
 
 
+function cloneTest() {
+  Object.prototype.clone = function () {
+    var Constructor = this.constructor;
+    var obj = new Constructor();
+
+    for (var attr in this) {
+        if (this.hasOwnProperty(attr)) {
+            if (typeof(this[attr]) !== "function") {
+                if (this[attr] === null) {
+                    obj[attr] = null;
+                }
+                else {
+                  obj[attr] = this[attr].clone();
+                }
+            }
+        }
+    }
+    return obj;
+  };
+
+  var a = {a: '12', b: '123'};
+  log( 'a --- ', a.clone() );
+
+}
+// cloneTest();
 
 
 
