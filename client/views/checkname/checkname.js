@@ -1,3 +1,4 @@
+
 Template.checkname.onRendered(function () {
   this.autorun(function () {
     Meteor.call('getSchema', 'stepInfoCompanyCheckName', function (err, schemaOrigin) {
@@ -7,6 +8,12 @@ Template.checkname.onRendered(function () {
         TempStruct.attachSchema( schemaObj );
       }
     });
+  });
+});
+
+Template.application_form_edit.onRendered(function () {
+  $('#drag-area').dad({
+    draggable: '.drag'
   });
 });
 
