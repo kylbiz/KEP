@@ -41,7 +41,7 @@
 <!-- 内部导航栏 -->
 <template name="breadcrumb_checkname">
 	<div class="container">
-		<div class="row" style="margin-bottom: 30px;"> 
+		<div class="row" style="margin-bottom: 30px;">
 			<div class="col-md-4 content-title">
 				<p>公司注册 - 核名</p>
 			</div>
@@ -101,7 +101,7 @@
     <div class="row grey-container border-bottom">
         <button class="btn btn-danger pull-right goldweapon-btn">一企查-企业核名神器</button>
     </div>
-    {{#autoForm collection="NameCheck" id="insertCompanyInfoForm" type="insert"}}
+    {{#autoForm collection="TempStruct" id="insertCompanyInfoForm"}}
         <fieldset>
             <!-- 企业字号 -->
            <div class="row border-bottom margin-top paddingEight">
@@ -116,18 +116,18 @@
                </div>
            </div>
            <!-- 添加按钮 -->
-           <div class="row border-bottom paddingEight">
-               <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
-           </div>
+<!--            <div class="row border-bottom paddingEight">
+             <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
+           </div> -->
            <!-- 企业类型 注册区域 行业类型 -->
            <div class="row paddingEight">
                <div class="col-md-8">
-                 {{> afQuickField name='company.companyType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 {{> afQuickField name='company.type' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                </div>
            </div>
             <div class="row paddingEight">
                <div class="col-md-8">
-                 {{> afQuickField name='company.companyZone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 {{> afQuickField name='company.zone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                </div>
            </div>
             <div class="row border-bottom paddingEight">
@@ -138,7 +138,7 @@
            <!-- 名称结构 -->
             <div class="row border-bottom paddingEight">
                <div class="col-md-8">
-                 {{> afQuickField name='company.companyName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 {{> afQuickField name='company.nameStruct' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                </div>
            </div>
            <!-- 经营范围 -->
@@ -150,7 +150,7 @@
            <!-- 公司地址 -->
            <div class="row border-bottom paddingEight">
                <div class="col-md-8">
-                 {{> afQuickField name='addressFlag' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 {{> afQuickField name='company.address' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                </div>
            </div>
            <!-- 公司股东 -->
@@ -160,19 +160,21 @@
                </div>
            </div>
            <!-- 添加按钮 -->
-           <div class="row border-bottom paddingEight">
+<!--            <div class="row border-bottom paddingEight">
                <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
-           </div>
+           </div> -->
         </fieldset>
+
+        <div class="row margin-top-bottom">
+            <div class="col-md-6">
+                <!-- <button type="submit" class="btn btn-success center">保存</button> -->
+                <button type="submit" class="btn btn-primary">新建</button>
+            </div>
+            <!-- <div class="col-md-6">
+                <button class="btn btn-default center">取消</button>
+            </div> -->
+        </div>
     {{/autoForm}}
-    <div class="row margin-top-bottom">
-        <div class="col-md-6">
-            <button class="btn btn-success center">保存</button>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-default center">取消</button>
-        </div>
-    </div>
     <!-- 一企查神器 -->
     <div class="container border-all-grey goldweapon pull-right" id="goldweapon">
         {{> goldweapon }}
@@ -300,10 +302,10 @@
 <template name="goldweapon">
     <div class="row margin-top-fifth border-bottom" style="min-height: 54px;">
         <div class="col-md-4">
-            <i class="fa fa-times fa-2x center" id="close_goldweapon" aria-hidden="true"></i>            
+            <i class="fa fa-times fa-2x center" id="close_goldweapon" aria-hidden="true"></i>
         </div>
         <div class="col-md-4">
-            <p class="center weight-p">一企查</p>            
+            <p class="center weight-p">一企查</p>
         </div>
     </div>
     <form class="center margin-top-fifth">

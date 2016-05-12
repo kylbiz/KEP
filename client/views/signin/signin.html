@@ -32,24 +32,25 @@
 			<!-- <h1>登录</h1> -->
 			<img src="/img/login/loginword.png" class="img-responsive" alt="">
 		</div>
+		<i>{{errMsg}}</i>
 		<form class="form-horizontal border-both signincontent">
 		  <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+		    <label for="userNameInput" class="col-sm-2 control-label">用户名</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" placeholder="用户名">
+		      <input type="text" class="form-control" id="userNameInput" placeholder="用户名">
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+		    <label for="passwordInput" class="col-sm-2 control-label">密码</label>
 		    <div class="col-sm-10" style="display: inline-flex;">
-		      <input type="password" class="form-control" id="inputPassword3" placeholder="密码">
+		      <input type="password" class="form-control" id="passwordInput" placeholder="密码">
 		      <button class="btn btn-link" id="findPwd">
 		      	<a href="/console/password/forget" title="">忘记密码?</a>
 		      </button>
 		    </div>
 		  </div>
 		</form>
-		
+
 		<a class="sigininbtn">确认登录</a>
 	</div>
 </template>

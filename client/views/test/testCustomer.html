@@ -1,3 +1,12 @@
 <template name="testCustomers">
   <p>客户 {{data}}</p>
+
+  {{#autoForm collection="TestColl" id="test_insert" doc=docInfo}}
+    <fieldset>
+      {{> afQuickField name='name'}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">新建</button>
+  {{/autoForm}}
+
+
 </template>

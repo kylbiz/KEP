@@ -5,7 +5,7 @@
 Meteor.startup(function () {
   // initAccount();   // 初始化管理员
   initSupportInfo();  // 初始化相关的辅助信息
-  //Test.testData();    // 测试数据
+  Test.testData();    // 测试数据
 });
 
 
@@ -165,12 +165,10 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '虹口', value: '虹口'},
-                  {label: '浦东', value: '浦东'}
-                ]
-              }
+              options: [
+                {label: '虹口', value: '虹口'},
+                {label: '浦东', value: '浦东'}
+              ]
             }
           },
           "company-type": {
@@ -180,15 +178,13 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '有限责任公司', value: '有限责任公司'},
-                  {label: '有限合伙', value: '有限合伙'}
-                ]
-              }
+              options: [
+                {label: '有限责任公司', value: '有限责任公司'},
+                {label: '有限合伙', value: '有限合伙'}
+              ]
             }
           },
-          "company-name": {
+          "company-nativeName": {
             type: "String",
             label: '公司名称（必填）'
           },
@@ -211,6 +207,31 @@ function getSupportInfo() {
           'company-moneyAmount': {
             type: "Number",
             label: '注册资本(单位：万元，必填)'
+          },
+          "company-industryType": {
+            type: "String",
+            label: '行业类型',
+            optional: true,
+            autoform: {
+              type: 'select',
+              firstOption: false,
+              options: [
+                {label: '网络技术', value: '网络技术'},
+                {label: '生物技术', value: '生物技术'}
+              ]
+            }
+          },
+          'company-nameStruct': {
+            type: "String",
+            label: "公司名称结构",
+            autoform: {
+              type: 'select',
+              firstOption: false,
+              options: [
+                {label: '<公司名>(<地区>)<行业类型><公司性质>', value: 'name-area-industry-type'},
+                {label: '<地区><公司名><行业类型><公司性质>>', value: 'area-name-industry-type'},
+              ]
+            }
           },
           'company-businessScope': {
             type: "String",
@@ -265,12 +286,10 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '虹口', value: '虹口'},
-                  {label: '浦东', value: '浦东'}
-                ]
-              }
+              options: [
+                {label: '虹口', value: '虹口'},
+                {label: '浦东', value: '浦东'}
+              ]
             }
           },
           "company-name": {
@@ -284,12 +303,10 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '有限责任公司', value: '有限责任公司'},
-                  {label: '有限合伙', value: '有限合伙'}
-                ]
-              }
+              options: [
+                {label: '有限责任公司', value: '有限责任公司'},
+                {label: '有限合伙', value: '有限合伙'}
+              ]
             }
           },
           'company-companyId': {
@@ -322,13 +339,11 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '10年', value: '10年'},
-                  {label: '20年', value: '20年'},
-                  {label: '长期', value: '长期'}
-                ]
-              }
+              options: [
+                {label: '10年', value: '10年'},
+                {label: '20年', value: '20年'},
+                {label: '长期', value: '长期'}
+              ]
             }
           },
           'company-address': {
@@ -377,11 +392,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "legalPerson-ID": {
@@ -405,11 +418,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '执行董事', value: '执行董事'}
-                ]
-              }
+              options: [
+                {label: '执行董事', value: '执行董事'}
+              ]
             }
           },
           "chairman-IDType": {
@@ -419,11 +430,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "chairman-ID": {
@@ -449,9 +458,16 @@ function getSupportInfo() {
             type: "String",
             label: '监事职务',
             optional: true,
-            defaultValue: function() {
-              return '监事';
+            autoform: {
+              type: 'select',
+              firstOption: false,
+              options: [
+                {label: '监事', value: '监事'}
+              ]
             }
+            // defaultValue: function() {
+            //   return '监事';
+            // }
           },
           "supervisor-IDType": {
             type: "String",
@@ -460,11 +476,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "supervisor-ID": {
@@ -489,11 +503,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '经理', value: '经理'}
-                ]
-              }
+              options: [
+                {label: '经理', value: '经理'}
+              ]
             }
           },
           "manager-IDType": {
@@ -503,11 +515,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'},
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'},
+              ]
             }
           },
           "manager-ID": {
@@ -539,11 +549,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "holders-$-ID": {
@@ -557,11 +565,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '货币', value: '货币'}
-                ]
-              }
+              options: [
+                {label: '货币', value: '货币'}
+              ]
             }
           },
           "holders-$-investShare": {
@@ -607,11 +613,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "contractor-ID": {
@@ -657,11 +661,9 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '身份证', value: '身份证'}
-                ]
-              }
+              options: [
+                {label: '身份证', value: '身份证'}
+              ]
             }
           },
           "financialStaff-ID": {
@@ -732,12 +734,10 @@ function getSupportInfo() {
             autoform: {
               type: 'select',
               firstOption: false,
-              options: function() {
-                return [
-                  {label: '未确认', value: false},
-                  {label: '确认', value: true}
-                ]
-              }
+              options: [
+                {label: '未确认', value: false},
+                {label: '确认', value: true}
+              ]
             }
           }
         }

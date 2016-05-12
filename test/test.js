@@ -442,6 +442,7 @@ Meteor.methods({
 
 Meteor.methods({
   'testhandle': function () {
+      log('testhandle');
     // remindTest();
   },
 });
