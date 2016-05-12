@@ -13,7 +13,7 @@ Template.checkname.onRendered(function () {
 
 Template.application_form_edit.onRendered(function () {
   $('#drag-area').dad({
-    draggable: '#drag'
+    draggable: 'button'
   });
 });
 

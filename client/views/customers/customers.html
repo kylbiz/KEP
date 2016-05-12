@@ -128,25 +128,32 @@
 
 <!-- 添加客户表单 -->
 <template name="customers_add_autoform">
-  {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
-      <fieldset>
-       <form class="form-inline">
-          {{> afQuickField name='customername' }}
-          {{> afQuickField name='principal' }}
-          <p class="section-division">客户联系方式:</p>
-          {{> afQuickField name='name' label-class="label_style"}}
-          {{> afQuickField name='tel'  label-class="label_style"}}
-          {{> afQuickField name='email'}}
-          {{> afQuickField name='localtion'}}
-          {{> afQuickField name='customerOrigin'}}
-       </form>
-       <form class="form-horizontal business">
-         <p class="section-division">当前公司需办理的业务:</p>
-         {{> afQuickField name="business" label-class="display_none" options="allowed" noselect=true}}
-       </form>
-       <form name="form-inline">
-          {{> afQuickField name='remarks' rows=2}}
-       </form>
-      </fieldset>
-  {{/autoForm}}
+      <div class="row margin-top">
+          <div class="col-md-6">
+            <label for="" class="col-sm-4 line-height">客户名称</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control">
+            </div>                
+          </div>
+          <div class="col-md-6">
+            <label for="" class="col-sm-4 line-height">客户负责人</label>
+            <div class="dropdown col-sm-8">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                cc
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">cc</a></li>
+                <li><a href="#">aa</a></li>
+                <li><a href="#">bb</a></li>
+                <li><a href="#">dd</a></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+       <p class="section-division">客户联系方式:</p>
+
+       <p class="section-division">当前公司需办理的业务:</p>
+
+
 </template>
