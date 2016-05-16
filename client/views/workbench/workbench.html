@@ -21,13 +21,14 @@
 <!-- 内部导航栏 -->
 <template name="breadcrumb_workbench">
 	<div class="container">
-		<div class="row" style="margin-bottom: 30px;"> 
+		<div class="row" style="margin-bottom: 30px;">
 			<div class="col-md-4 content-title">
 				<p>工作台</p>
 			</div>
-			<div class="col-md-4 workbench_change_btn">	
-				<button type="button" class="btn btn-info" style="width: 90px"><a value="workbench_checkname" href="#">核名</a></button>
-				<button type="button" class="btn btn-info" style="width: 90px"><a value="workbench_ICBCregister" href="#">工商登记</a></button>
+			<div class="col-md-4 workbench_change_btn">
+        {{#each tasks}}
+  				<button type="button" class="btn btn-info" style="width: 90px"><a value="{{name}}" href="#">{{label}}</a></button>
+        {{/each}}
 			</div>
 			<div class="col-md-4">
 				<div class="form-inline pull-right">
@@ -42,11 +43,11 @@
 <!-- datatable reactive -->
 <template name="reactiveDataTable">
 	    <!-- {{>Template.dynamic template=workbench_table}} -->
-      {{>Template.dynamic template=_dynamic }}
+      {{> Template.dynamic template=_dynamic data=templateData}}
 
 	    <!-- progress control 办理进度控制 模态框 -->
 	    <div class="modal fade" id="progress_control" tabindex="-1" role="dialog" aria-labelledby="progress_control_title">
-	    	{{>workbench_progress_control}}
+	    	{{> workbench_progress_control}}
 	    </div>
 	    <!-- config 设置模态框 -->
 	    <div class="modal fade" id="config" tabindex="-1" role="dialog" aria-labelledby="config_title">
@@ -75,26 +76,33 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style="line-height:83px;font-size: 15px;">开业啦</td>
-                <td><div class="circle circle-green"></div>1天</td>
-                <td><div class="circle circle-red"></div>2天</td>
-                <td><div class="circle circle-gray"></div></td>
-                <td><div class="circle circle-gray"></div></td>
-                <td><div class="circle circle-gray"></div></td>
-                <td><div class="circle circle-gray"></div></td>
-                <td style="line-height:83px;font-size: 15px;">2</td>
-                <td style="line-height:83px;font-size: 15px;">cc</td>
-                <td>
-                	<div style="margin-bottom: 9px">
-		                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#progress_control">办理进度控制</button>
-                	</div>
-            	       <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
-            	       <button class="btn btn-info btn-sm"><a href="/console/checkname">查看</a></button>
-                </td>
-            </tr>
+          {{#each checkNameInfos }}
+            {{> checknameTableCell }}
+          {{/each}}
         </tbody>
-    </table>  
+    </table>
+</template>
+
+
+<template name="checknameTableCell">
+  <tr>
+    <td style="line-height:83px;font-size: 15px;">{{name}}</td>
+    <td><div class="circle circle-green"></div>1天</td>
+    <td><div class="circle circle-red"></div>2天</td>
+    <td><div class="circle circle-gray"></div></td>
+    <td><div class="circle circle-gray"></div></td>
+    <td><div class="circle circle-gray"></div></td>
+    <td><div class="circle circle-gray"></div></td>
+    <td style="line-height:83px;font-size: 15px;">2</td>
+    <td style="line-height:83px;font-size: 15px;">cc</td>
+    <td>
+      <div style="margin-bottom: 9px">
+        <button class="btn btn-info btn-sm" data-toggle="modal" data-taskId="{{_id}}" data-target="#progress_control">办理进度控制</button>
+      </div>
+         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
+         <button class="btn btn-info btn-sm"><a href="/console/checkname">查看</a></button>
+    </td>
+  </tr>
 </template>
 
 

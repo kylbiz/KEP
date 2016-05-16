@@ -3,17 +3,21 @@
  ***/
 
 
-FlowRouter.triggers.exit([setLastPath]);
 FlowRouter.triggers.enter([loginPermission]);
+FlowRouter.triggers.exit([setLastPath]);
 
 // 登录权限
 function loginPermission() {
   if(!Meteor.userId()) {
+    // 未登录
     FlowRouter.go("login");
+  } else if (FlowRouter.current().route.name == "login") {
+    // 已登录了就不允许调转到login界面
+    FlowRouter.go(Session.get('lastPath') || "/" );
   }
 }
 
 // 记录即将离开的路由的地址
 function setLastPath() {
-  log("FlowRouter.current().route", FlowRouter.current().route.path);
+  Session.set('lastPath', FlowRouter.current().route.path);
 }

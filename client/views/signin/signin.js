@@ -33,6 +33,8 @@ function loginFunc(username, password, redirectUrl) {
       }
       Session.set('errMsg', msg);
     } else {
+
+log("redirectUrl", redirectUrl);
       FlowRouter.go(redirectUrl || "/");
     }
   });

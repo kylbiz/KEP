@@ -198,7 +198,7 @@ function other(hostId, customerId) {
   // 核名
   var taskIdCheckName = Tasks.insert({
       _id: 'testCompanyCheckName',
-      name: 'companyCheckName',   // 如: companyCheckName
+      name: 'checkName',   // 如: companyCheckName
       label: '公司核名',  // 如: 公司核名
 
       host: {   // 负责人
@@ -271,7 +271,7 @@ function other(hostId, customerId) {
   // 登记
   var taskIdRegist = Tasks.insert({
       _id: 'testCompanyRegist',
-      name: 'companyRegiste',   // 如: companyCheckName
+      name: 'regist',   // 如: regist
       label: '工商登记',  // 如: 公司核名
 
       host: {   // 负责人
