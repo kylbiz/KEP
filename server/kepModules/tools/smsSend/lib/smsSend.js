@@ -34,7 +34,6 @@ SMSSend.getParams = function () {
 
 SMSSend.send = function (templateId, phone, message, callback) {
   // check params
-
   var params = SMSSend.getParams();
 
   HTTP.call("POST", params.url,

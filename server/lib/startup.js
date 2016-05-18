@@ -3,9 +3,9 @@
  **/
 
 Meteor.startup(function () {
-  // initAccount();   // 初始化管理员
-  //initSupportInfo();  // 初始化相关的辅助信息
-  //Test.testData();    // 测试数据
+  //initAccount();   // 初始化管理员
+  initSupportInfo();  // 初始化相关的辅助信息
+  Test.testData();    // 测试数据 
 });
 
 
@@ -48,6 +48,11 @@ function initSupportInfo() {
     taskStep.updateTime = new Date();
     return taskStep;
   });
+
+  //  其他辅助信息
+  SupportInfo.remove({});
+  var supportInfo = retInfo.supportInfo || [];
+  KUtil.insertListToColl(supportInfo, SupportInfo);
 }
 
 
@@ -146,7 +151,7 @@ function getSupportInfo() {
             data: {},
           },
         ]
-      }
+      },
     ],
     'stepInfosSchema': [
       {    // 公司核名申请书资料
@@ -742,6 +747,23 @@ function getSupportInfo() {
           }
         }
       }
-    ]
+    ],
+    'supportInfo': [
+      {
+        type: 'service',
+        items: [
+          {name: 'companyRegist', label: '公司注册'},
+          {name: 'financeAgent', label: '财务代理'},
+        ]
+      },
+      {
+        type: 'task',
+        service: 'companyRegist',
+        items: [
+          {name: 'checkName', label: '核名'},
+          {name: 'regist', label: '工商登记'},
+        ]
+      }
+    ],
   }
 }

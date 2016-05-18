@@ -44,9 +44,9 @@
 		    <label for="passwordInput" class="col-sm-2 control-label">密码</label>
 		    <div class="col-sm-10" style="display: inline-flex;">
 		      <input type="password" class="form-control" id="passwordInput" placeholder="密码">
-		      <button class="btn btn-link" id="findPwd">
-		      	<a href="/console/password/forget" title="">忘记密码?</a>
-		      </button>
+		      <!-- <button class="btn btn-link" id="findPwd"> -->
+		      	<!-- <a href="/password/forget" title="">忘记密码?</a> -->
+		      <!-- </button> -->
 		    </div>
 		  </div>
 		</form>
@@ -64,10 +64,10 @@
 			<form class="form-horizontal border-both signincontent">
 			  <div class="form-group">
 			    <div class="col-sm-7">
-			      <input type="text" class="form-control" id="inputEmail3" placeholder="手机号/邮箱">
+			      <input type="text" class="form-control" id="sendTo" placeholder="手机号/邮箱">
 			    </div>
 			    <div class="col-sm-4">
-			    	<button class="btn btn-success" style="height: 32px;width: 103px;">发送验证码</button>
+			    	<button class="btn btn-success" style="height: 32px;width: 103px;" id="sendBtn">发送</button>
 			    </div>
 			  </div>
 			  <div class="center info">

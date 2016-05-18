@@ -20,22 +20,16 @@ KCustomer.createCustomer = function (customerInfo) {
       phone: String,
       email: Match.Maybe(String)
     },
-    // service: Match.Maybe([String]),
+    // service: Match.Any,
     remark: Match.Maybe(String)
   });
 
   if (!isSafeToProcess) {
+    log("customerInfo", customerInfo);
     throw new Meteor.Error('传入的参数有误');
   }
 
   var hostInfo = Meteor.users.findOne({_id: customerInfo.hostId});
-  // var service = [];
-  // customerInfo.service.forEach(function (type) {
-  //   // 检测service的数据是否非法 这个地方写得比较死
-  //   if ( ['companyRegist'].indexOf(type) ) {
-  //     service.push({type: type});
-  //   }
-  // });
 
   var customerId = Customers.insert({
     name: customerInfo.name,
@@ -82,10 +76,7 @@ KCustomer.updateCustomerBasic = function (customerId, basicInfo) {
     throw new Meteor.Error('传入的参数有误');
   }
 
-  var customerInfo = Customers.findOne({_id: customerId});
-  if (!customerInfo) {
-    throw new Meteor.Error('查找的信息不存在');
-  }
+  KUtil.dataIsInColl({coll: Customers, dataId: customerId});
 
   return Customers.update({_id: customerId}, {$set: basicInfo});
 }
@@ -105,9 +96,7 @@ KCustomer.updateCustomerService = function (customerId, serviceInfo) {
     }
   });
 
-  if (!Customers.findOne({_id: customerId})) {
-    throw new Meteor.Error('查找的信息不存在');
-  }
+  KUtil.dataIsInColl({coll: Customers, dataId: customerId});
 
   if (serviceInfo.opt == 'add') {
     return Customers.update({_id: customerId}, {$push: {service: serviceInfo.service}});
@@ -121,11 +110,7 @@ KCustomer.updateCustomerService = function (customerId, serviceInfo) {
  * 删除客户
  **/
 KCustomer.deleteCustomer = function (customerId) {
-
-  if (Customers.findOne({_id: customerId})) {
-    throw new Meteor.Error('传入的参数有误');
-  }
-
+  KUtil.dataIsInColl({coll: Customers, dataId: customerId});
   return Customers.update({_id: customerId}, {$set: {status: -1}});
 }
 
@@ -195,6 +180,15 @@ KCustomer.getCustomers = function (userId) {
 
   return [];
 }
+
+/*
+ * 获取某一客户的信息
+ **/
+ KCustomer.getCustomer = function (customerId) {
+    check(customerId, String);
+    KUtil.dataIsInColl({coll: Customers, dataId: customerId});
+    return Customers.find({_id: customerId});
+ }
 
 
 

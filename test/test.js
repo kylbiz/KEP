@@ -48,6 +48,8 @@ function createAdminUser() {
     password: 'kyl123',
     phone: '18521595051',
     email: 'air.cui@kyl.biz',
+    qq: '',
+    wechat: '',
   };
 
   var team = {
@@ -75,6 +77,8 @@ function createManageUser (teamId) {
     password: 'kyl123',
     phone: '18521595051',
     email: 'air.cui@kyl.biz',
+    qq: '',
+    wechat: '',
   };
 
   var userId = KAccount.createUser(user, { teamId: teamId, roles: ['manager'] });
@@ -96,6 +100,8 @@ function createAdvUser (teamId) {
     password: 'kyl123',
     phone: '18521595051',
     email: 'air.cui@kyl.biz',
+    qq: '',
+    wechat: '',
   };
 
   var userId = KAccount.createUser(user, { teamId: teamId, roles: ['advUser'] });
@@ -116,6 +122,8 @@ function createUser (teamId) {
     password: 'kyl123',
     phone: '18521595051',
     email: 'air.cui@kyl.biz',
+    qq: '',
+    wechat: '',
   };
 
   var userId = KAccount.createUser(user, { teamId: teamId, roles: ['user'] });
@@ -198,7 +206,7 @@ function other(hostId, customerId) {
   // 核名
   var taskIdCheckName = Tasks.insert({
       _id: 'testCompanyCheckName',
-      name: 'companyCheckName',   // 如: companyCheckName
+      name: 'checkName',   // 如: companyCheckName
       label: '公司核名',  // 如: 公司核名
 
       host: {   // 负责人
@@ -271,7 +279,7 @@ function other(hostId, customerId) {
   // 登记
   var taskIdRegist = Tasks.insert({
       _id: 'testCompanyRegist',
-      name: 'companyRegiste',   // 如: companyCheckName
+      name: 'regist',   // 如: regist
       label: '工商登记',  // 如: 公司核名
 
       host: {   // 负责人

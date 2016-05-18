@@ -18,7 +18,7 @@ Meteor.methods({
     // 账号权限
     // 删除
   },
-  'getSchema': function (schemaId) {
+  'getSchema': function (schemaId) {  //获取子步骤的schema
     return SchemaHandle.getSchema(schemaId);
   }
 });

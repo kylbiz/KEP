@@ -1,24 +1,81 @@
-Template.workbench.onCreated(function() {
+Template.workbench.onRendered(function() {
   var self = this;
-  self.autorun(function() {
-    self.subscribe('');
+  self.autorun(function () {
+    self.subscribe("getSupportInfo", {type: 'task', service: 'companyRegist'});
+    // 任务信息
+    var taskType = Session.get('taskType') || "checkName";
+    self.subscribe("getTasksByType", taskType);
+
+    // 客户信息
   });
 });
 
+
+Template.breadcrumb_workbench.helpers({
+  tasks: function () {
+    var supportInfo = SupportInfo.findOne({}) || {items: []};
+    return supportInfo.items || [];
+  }
+});
+
+
 Template.reactiveDataTable.helpers({
 	_dynamic: function () {
-		return Session.get('workbenchTemplate')||'workbench_checkname';
-	}
+    if (!Session.get('taskType')) {
+      // var type = SupportInfo.findOne({}).items[0].name;
+      var type = false;
+      Session.set('taskType', type || "checkName");
+    }
+
+    var taskType = Session.get('taskType');
+
+    return {
+      'checkName': 'workbench_checkname',
+      'regist': 'workbench_ICBCregister'
+    }[taskType];
+  },
+  templateData: function () {
+    log("dataTempl", Tasks.find({}).fetch());
+    var tasks = Tasks.find({}).fetch();
+    var dataInfos = [];
+    return dataInfos;
+  }
 });
 
 
 Template.workbench.events({
 	'click .workbench_change_btn a'(event) {
-		// ...
 		event.preventDefault();
-		Session.set('workbenchTemplate', $(event.currentTarget).attr("value"));
+		Session.set('taskType', $(event.currentTarget).attr("value"));
 	}
 });
+
+
+
+// // 核名列表
+// Template.workbench_checkname.onRendered(function () {
+//   // var self = this;
+//   // self.autorun(function () {
+//   //   var taskType = Session.get('taskType');
+//   //   log('workbench_checkname taskType', taskType);
+//   //   self.subscribe("getTasks", taskType);
+//   // });
+// });
+
+// Template.workbench_checkname.helpers({
+//   // checkNameInfos: function () {
+//   //   log("workbench_checkname this", this);
+//   //   return Tasks.find({}).fetch();
+//   // }
+// });
+
+
+// // 工商登记列表
+// Template.workbench_ICBCregister.helpers({
+//   foo: function () {
+//     // ...
+//   }
+// });
 
 // var orderlistsOptions = {
 //   columns: [

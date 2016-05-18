@@ -14,7 +14,7 @@ KTeam.createTeam = function (name, remark) {
   check(remark, Match.Maybe(String));
 
   if (UsersTeam.findOne({name: name})) {
-    throw new Meteor.Error('该团队名中已被占有');
+    throw new Meteor.Error('该团队名称已被占有');
   }
 
   var teamId = UsersTeam.insert({
@@ -64,6 +64,20 @@ KTeam.addUser = function (userId, teamId, roles) {
   var user = Meteor.users.findOne({_id: userId, 'team.roles': {$in: roles}});
   return !!user;
  }
+
+ /*
+  * 获取处于对应role下的用户
+  **/
+KTeam.getUsersInRoles = function (roles) {
+  check( roles, Match.OneOf(String, [String]) );
+
+  if (_.isString(roles)) {
+    roles = [roles];
+  }
+
+  return Meteor.users.find({ 'team.roles': {$in: [roles]}}).fetch();
+}
+
 
 /*
  * 获取用户的role信息

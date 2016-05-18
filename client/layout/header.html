@@ -24,44 +24,52 @@
 					</a>
 				</li>
 			</ul>
-			<!-- /NAVBAR LEFT -->	
+			<!-- /NAVBAR LEFT -->
 </template>
 
 
-<template name="status">   
-	<!-- BEGIN TOP NAVIGATION MENU -->					
+<template name="status">
+	<!-- BEGIN TOP NAVIGATION MENU -->
 	<ul class="nav navbar-nav pull-right">
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 			<li class="dropdown user pull-right" id="header-user" style="margin-right:60px;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img alt="userPic" src="/img/person/man30.png" />
-						<span class="username">{{currentUser.username}}Alex Kaser</span>
+						<span class="username">{{currentUser.username}}</span>
 						<i class="fa fa-angle-down"></i>
 					</a>
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" style="margin-top: 3px;">
 					{{> dropdownMenu}}
-             	<!-- 	<li>
+             		<!-- <li>
              			<a href='/console/account'><i class="fa fa-user"></i>个人信息</a>
+             		<li>
+             			<a href='/account'><i class="fa fa-user"></i>个人信息</a>
              		</li>
 					<li>
 						<a href="#" id='a-logout'><i class="fa fa-power-off"></i>登出</a>
 					</li> -->
 				</ul>
 			</li>
-	<!-- END USER LOGIN DROPDOWN -->
+	
 	</ul>		
 </template>
 
 <template name="dropdownMenu">
-	<li>
-		<img alt="userPic" src="/img/windy/windy.jpg" />
-		<p>{{currentUser.username}}Alex Kaser</p>
-		<time datetime="2011-01-12">January 12th, 2011</time>
-	</li>
-	<li>
-		<button class="btn btn-default" id="a-logout"><i class="fa fa-power-off"></i>登出</button>
-		<a href='/console/account' class="btn btn-default"><i class="fa fa-user"></i>个人信息</a>
-		<!-- <a href="#" id='a-logout'><i class="fa fa-power-off"></i>登出</a> -->
-		<!-- <a href='/console/account'><i class="fa fa-user"></i>个人信息</a> -->
-	</li>
+  <!-- User image -->
+  <li class="user-header">
+    <img src="/img/person/man90.png" class="img-circle" alt="User Image">
+    <p>
+      {{currentUser.username}}  
+    </p>
+    <small>2016-05-18</small>
+  </li>
+  <!-- Menu Footer-->
+  <li class="user-footer">
+    <div class="pull-left">
+      <a href="#" class="btn btn-default btn-flat">登出</a>
+    </div>
+    <div class="pull-right">
+      <a href="#" class="btn btn-default btn-flat">个人中心</a>
+    </div>
+  </li>
 </template>

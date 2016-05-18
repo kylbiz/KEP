@@ -9,9 +9,55 @@ Meteor.publish('getCustomers', function () {
   return KCustomer.getCustomers(userId);
 });
 
+Meteor.publish('getCustomer', function (customerId) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  KUtil.havePermission(userId, 'customer.view'); // 权限
+  return  KCustomer.getCustomer(customerId);
+});
+
 // 业务数据
 Meteor.publish('getService', function (customerId) {
   var userId = KUtil.isLogin(this); // 登录状态
   KUtil.havePermission(userId, 'service.view', customerId);   // 权限
   return KService.getService(customerId);
+});
+
+// 获得某一类型任务数据
+Meteor.publish('getTasksByType', function (taskType) {
+  log('getTasksByType', taskType);
+  var userId = KUtil.isLogin(this); // 登录状态
+  KUtil.havePermission(userId, 'task.view');   // 权限
+
+  return KTask.getTasksByType(userId, taskType);
+});
+
+// 通过从属业务的ID获得相应的任务
+Meteor.publish("getTasksBySerId", function (serviceId) {
+  log("getTasksBySerId", serviceId);
+  var userId = KUtil.isLogin(this); // 登录状态
+  KUtil.havePermission(userId, 'task.view');   // 权限
+
+  return KTask.getTasksBySerId(serviceId);
+});
+
+// 获取辅助信息
+Meteor.publish('getSupportInfo', function (opt) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  opt = opt || {};
+// log("getSupportInfo-opt", opt, this.userId);
+// var info = SupportInfo.findOne({type: 'task', service: 'companyRegist'});
+// log("getSupportInfo-info", info.items);
+  return SupportInfo.find(opt);
+});
+
+// 获得相关的用户信息
+Meteor.publish('getHostUser', function (roles) {
+  if (_.isString(roles)) {
+    roles = [roles];
+  }
+
+  if (_.isArray(roles)) {
+    return Meteor.users.find({'team.roles': {$in: roles}}, {fields: {username: 1, _id: 1}});
+  }
+  return [];
 });
