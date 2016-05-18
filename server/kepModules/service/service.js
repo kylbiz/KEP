@@ -89,5 +89,8 @@ KService.deleteService = function (serId) {
 KService.getService = function (customerId) {
   check(customerId, String);
   KUtil.dataIsInColl({coll: Customers, dataId: customerId});
+
+  log("KService.getService", customerId);
+
   return Service.find({customerId: customerId, status: {$gte: 0}});
 }

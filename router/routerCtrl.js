@@ -3,8 +3,8 @@
  ***/
 
 
-FlowRouter.triggers.enter([loginPermission]);
-FlowRouter.triggers.exit([setLastPath]);
+FlowRouter.triggers.enter([loginPermission], {except: ['login', 'findPwd']});
+FlowRouter.triggers.exit([setLastPath], {except: ['login', 'findPwd']});
 
 // 登录权限
 function loginPermission() {
@@ -21,3 +21,4 @@ function loginPermission() {
 function setLastPath() {
   Session.set('lastPath', FlowRouter.current().route.path);
 }
+

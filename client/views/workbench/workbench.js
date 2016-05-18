@@ -2,13 +2,11 @@ Template.workbench.onRendered(function() {
   var self = this;
   self.autorun(function () {
     self.subscribe("getSupportInfo", {type: 'task', service: 'companyRegist'});
-
     // 任务信息
     var taskType = Session.get('taskType') || "checkName";
-    self.subscribe("getTasks", taskType);
+    self.subscribe("getTasksByType", taskType);
 
-    // 客户的信息
-
+    // 客户信息
   });
 });
 

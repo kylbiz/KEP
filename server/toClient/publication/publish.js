@@ -12,7 +12,7 @@ Meteor.publish('getCustomers', function () {
 Meteor.publish('getCustomer', function (customerId) {
   var userId = KUtil.isLogin(this); // 登录状态
   KUtil.havePermission(userId, 'customer.view'); // 权限
-  // return
+  return  KCustomer.getCustomer(customerId);
 });
 
 // 业务数据
@@ -22,24 +22,42 @@ Meteor.publish('getService', function (customerId) {
   return KService.getService(customerId);
 });
 
-// 任务数据
-Meteor.publish('getTasks', function (taskType) {
-  log('getTasks', taskType);
+// 获得某一类型任务数据
+Meteor.publish('getTasksByType', function (taskType) {
+  log('getTasksByType', taskType);
   var userId = KUtil.isLogin(this); // 登录状态
   KUtil.havePermission(userId, 'task.view');   // 权限
 
-  log("KTask-", KTask.getTasks(userId, taskType).fetch());
-  return KTask.getTasks(userId, taskType);
+  return KTask.getTasksByType(userId, taskType);
+});
+
+// 通过从属业务的ID获得相应的任务
+Meteor.publish("getTasksBySerId", function (serviceId) {
+  log("getTasksBySerId", serviceId);
+  var userId = KUtil.isLogin(this); // 登录状态
+  KUtil.havePermission(userId, 'task.view');   // 权限
+
+  return KTask.getTasksBySerId(serviceId);
 });
 
 // 获取辅助信息
 Meteor.publish('getSupportInfo', function (opt) {
-  // var userId = KUtil.isLogin(this); // 登录状态
-
+  var userId = KUtil.isLogin(this); // 登录状态
   opt = opt || {};
 // log("getSupportInfo-opt", opt, this.userId);
 // var info = SupportInfo.findOne({type: 'task', service: 'companyRegist'});
 // log("getSupportInfo-info", info.items);
-
   return SupportInfo.find(opt);
+});
+
+// 获得相关的用户信息
+Meteor.publish('getHostUser', function (roles) {
+  if (_.isString(roles)) {
+    roles = [roles];
+  }
+
+  if (_.isArray(roles)) {
+    return Meteor.users.find({'team.roles': {$in: roles}}, {fields: {username: 1, _id: 1}});
+  }
+  return [];
 });

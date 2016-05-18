@@ -1,9 +1,12 @@
+
+///////////////////////////////////////////////////////////////////////////////
+// 登录
+///////////////////////////////////////////////////////////////////////////////
 Template.signin.helpers({
   errMsg: function () {
     return Session.get('errMsg');
   }
 });
-
 
 
 Template.signin.events({
@@ -21,8 +24,6 @@ Template.signin.events({
 });
 
 
-
-
 // 登录的处理函数
 function loginFunc(username, password, redirectUrl) {
   Meteor.loginWithPassword(username, password, function (error, result) {
@@ -34,8 +35,28 @@ function loginFunc(username, password, redirectUrl) {
       Session.set('errMsg', msg);
     } else {
 
-log("redirectUrl", redirectUrl);
+      // log("redirectUrl", redirectUrl);
       FlowRouter.go(redirectUrl || "/");
     }
   });
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// 忘记密码
+///////////////////////////////////////////////////////////////////////////////
+Template.findPwd.events({
+  'click #sendBtn': function () {
+    var sendTo = $("#sendTo").val() || "";
+
+    if (KEPUtil.validatePhone(sendTo)) {
+      // 手机号
+
+    } else if (KEPUtil.validateEmail(sendTo)) {
+      // 邮箱
+    }
+
+  }
+});
+

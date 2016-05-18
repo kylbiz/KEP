@@ -103,14 +103,23 @@ KTask.deleteTask = function () {
 }
 
 /*
- * 获取任务的信息
+ * 获取某一类型任务的信息
  **/
- KTask.getTasks = function (userId, taskType) {
+KTask.getTasksByType = function (userId, taskType) {
   check(userId, String);
   check(taskType, String);
 
   return Tasks.find({name: taskType});
  }
+
+/*
+ *
+ **/
+KTask.getTasksBySerId = function (serviceId) {
+  check(serviceId, String);
+
+  return Tasks.find({serviceId: serviceId});
+}
 
 
 

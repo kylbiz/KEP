@@ -5,19 +5,23 @@
         <div class="row">
             <div id="content" class="col-lg-12">
                 <div class="container">
-                    <div class="row" style="margin-bottom: 30px;"> 
+                    <div class="row" style="margin-bottom: 30px;">
                       <div class="col-md-4 content-title">
                         <p>客户管理-基本资料</p>
                       </div>
                       <div class="col-md-8">
-                        
+
                       </div>
                     </div>
                   <!-- ORDERS -->
                   <div class="row">
                       <div class="col-md-12">
-                          <!-- {{> containsTheDataTable }} -->
-                          {{> customers_basic_info}}
+                          <div class="container basic_info_container">
+                              <!-- 客户基本资料 -->
+                              {{> customerBasicInfo}}
+                              <!-- 客户受理业务 -->
+                              {{> customerService}}
+                          </div>
                       </div>
                   </div>
                   <!-- /ORDERS -->
@@ -28,116 +32,136 @@
   </div>
 </template>
 
-<!-- 客户基本信息表单 -->
-<template name="customers_basic_info">
-      <div class="container basic_info_container">
-          {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
-              <fieldset>
-                  <div class="row border-bottom margin-top">
-                      <div class="col-md-4">
-                        {{> afQuickField name='customerId' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
-                      </div>
-                      <div class="col-md-4">
-                        {{> afQuickField name='principal' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
-                      </div>
-                      <div class="col-md-4">
-                        {{> afQuickField name='createAt' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
-                      </div>
-                  </div>
-                  
-                  <!-- 联系客户方式 -->
-                  <div class="row border-bottom margin-top">
-                    <div class="col-md-2">
-                      <p class="padding-both font-weight">联系客户</p>
-                    </div>
-                    <div class="col-md-10 contact-customer margin-bottom">
-                      <div class="line-height">
-                        {{> afQuickField name='customer.contactor' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
-                        
-                        {{> afQuickField name='customer.contactorPhone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
 
-                        {{> afQuickField name='customer.contactorEmail' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
-                      </div>
-                    </div>
-                  </div>
+<!-- 客户基本资料 -->
+<template name="customerBasicInfo">
+  {{#autoForm collection="Customers" id="updateCustomer" doc=customerInfo}}
+    <fieldset>
+        <div class="row border-bottom margin-top">
+            <div class="col-md-4">
+                {{> afQuickField name='name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+            </div>
+            <div class="col-md-4">
+                {{> afQuickField name='host.id' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
+            </div>
+            <div class="col-md-4">
+                {{> afQuickField name='createdAt' template="bootstrap3-horizontal" readonly=true label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
+            </div>
+        </div>
+        <div class="row border-bottom margin-top">
+            <div class="col-md-2">
+                <p class="padding-both font-weight">联系客户</p>
+            </div>
+            <div class="col-md-10 contact-customer margin-bottom">
+                <div class="line-height">
+                    {{> afQuickField name='contactInfo.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                    {{> afQuickField name='contactInfo.phone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                    {{> afQuickField name='contactInfo.email' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                    {{> afQuickField name='contactInfo.address' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                </div>
+            </div>
+        </div>
+        <div class="row border-bottom margin-top">
+            <div class="col-md-4">
+                {{> afQuickField name='from' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="row border-bottom margin-top">
+            {{> afQuickField name='remark' value=remarkInfo template="bootstrap3-horizontal" class='border-bottom' label-class="col-md-1 padding-both line-height-more remark-margin-style" input-col-class="col-md-10" rows=3 }}
+        </div>
+    </fieldset>
 
-                  <div class="row border-bottom margin-top">
-                      <div class="col-md-4">
-                        {{> afQuickField name='customerOrigin' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
-                      </div>
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-4">
-                      </div>
-                  </div>
-                  <div class="row border-bottom margin-top">
-                    {{> afQuickField name='remarks' template="bootstrap3-horizontal" class='border-bottom' label-class="col-md-1 padding-both line-height-more remark-margin-style" input-col-class="col-md-10" rows=3 }}
-                  </div>
-              </fieldset>
-          {{/autoForm}}
-          <div class="row margin-top">
-            <div class="col-md-6">
-              <button type="button" class="btn btn-success btn-lg pull-right">保存</button>
-            </div>
-             <div class="col-md-6">
-              <button type="button" class="btn btn-default btn-lg pull-left">取消</button>
-            </div>
-          </div>
-          <div class="row margin-top section-division-full">
-            <div class="col-md-6 pull-left">
-              <p class="margin-top">受理业务</p>
-            </div>
-            <div class="col-md-6">
-              <button class="btn btn-info pull-right" data-toggle="modal" data-target="#service_accept"><i class="fa fa-plus"></i>添加受理业务</button>
-            </div>
-          </div>
-          <table class="table table-bordered margin-top">
-            <tbody>
-              <tr>
-                <td rowspan="2">公司注册</td>
-                <td>子任务：工商登记</td>
-                <td colspan="2">状态：提交工商</td>
-                <td rowspan="2"><button class="btn btn-info">详细</button></td>
-              </tr>
-              <tr>
-                <td colspan="3">负责人：cc 创建时间: 最后更新时间</td>
-              </tr>
-              <tr>
-                <td>负责人：CC</td>
-                <td>子任务：核名</td>
-                <td colspan="2">状态：提交工商</td>
-                <td rowspan="2">
+    <div class="row margin-top">
+      <div class="col-md-6">
+          <button type="submit" class="btn btn-success btn-lg pull-right">保存</button>
+      </div>
+<!--       <div class="col-md-6">
+          <button type="button" class="btn btn-default btn-lg pull-left" id="cancelCustomerChange">取消</button>
+      </div> -->
+    </div>
+  {{/autoForm}}
+</template>
+
+
+<!-- 客户受理业务 -->
+<template name="customerService">
+  <div class="row margin-top section-division-full">
+      <div class="col-md-6 pull-left">
+          <p class="margin-top">受理业务</p>
+      </div>
+      <div class="col-md-6">
+          <button class="btn btn-info pull-right" data-toggle="modal" data-target="#service_accept"><i class="fa fa-plus"></i>添加受理业务</button>
+      </div>
+  </div>
+
+  {{#each service}}
+    {{> serviceInfo}}
+  {{/each}}
+
+  <!-- 添加受理业务模态框 -->
+  <div class="modal fade"  id="service_accept" tabindex="-1" role="dialog" aria-labelledby="service_accept_title">
+       <div class="modal-dialog modal-lg" role="document">
+        {{> service_accept }}
+       </div>
+  </div>
+
+  <!-- 设置按钮模态框 -->
+   <div class="modal fade"  id="service_setting" tabindex="-1" role="dialog" aria-labelledby="service_setting_title">
+       <div class="modal-dialog modal-lg" role="document">
+        {{> service_setting }}
+       </div>
+  </div>
+
+  <!-- 删除按钮模态框 -->
+  <div class="modal fade"  id="service_delete" tabindex="-1" role="dialog" aria-labelledby="service_delete_title">
+    <div class="modal-dialog modal-lg" role="document">
+     {{> service_delete }}
+    </div>
+  </div>
+
+</template>
+
+
+<!-- 客户受理业务信息 -->
+<template name="serviceInfo">
+  <table class="table table-bordered margin-top">
+      <tbody>
+
+          <tr>
+              <td rowspan="2">公司注册</td>
+              <td>子任务：工商登记</td>
+              <td colspan="2">状态：提交工商</td>
+              <td rowspan="2">
                   <button class="btn btn-info">详细</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="3">负责人：cc 创建时间: 最后更新时间</td>
+          </tr>
+
+
+
+          <tr>
+              <td>负责人：CC</td>
+              <td>子任务：核名</td>
+              <td colspan="2">状态：提交工商</td>
+              <td rowspan="2">
+                  <button class="btn btn-info">详细</button>
+              </td>
+          </tr>
+          <tr>
+              <td>
                   <button class="btn btn-default" data-toggle="modal" data-target="#service_setting">设置</button>
                   <button class="btn btn-danger" data-toggle="modal" data-target="#service_delete">删除</button>
-                </td>
-                <td colspan="3">负责人：cc 创建时间: 最后更新时间</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-      <!-- 添加受理业务模态框 -->
-      <div class="modal fade"  id="service_accept" tabindex="-1" role="dialog" aria-labelledby="service_accept_title">
-           <div class="modal-dialog modal-lg" role="document">
-            {{> service_accept }}
-           </div>
-      </div>
-      <!-- 设置按钮模态框 -->
-       <div class="modal fade"  id="service_setting" tabindex="-1" role="dialog" aria-labelledby="service_setting_title">
-           <div class="modal-dialog modal-lg" role="document">
-            {{> service_setting }}
-           </div>
-      </div>
-      <!-- 删除按钮模态框 -->
-      <div class="modal fade"  id="service_delete" tabindex="-1" role="dialog" aria-labelledby="service_delete_title">
-        <div class="modal-dialog modal-lg" role="document">
-         {{> service_delete }}
-        </div>
-      </div>
+              </td>
+              <td colspan="3">负责人：cc 创建时间: 最后更新时间</td>
+          </tr>
+      </tbody>
+  </table>
 </template>
 
 <!-- 添加受理业务模态框 -->
@@ -151,8 +175,8 @@
        {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
            <fieldset>
                <div class="container">
-                   {{> afQuickField name='service' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
-                   {{> afQuickField name='principal' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
+                   <!-- {{> afQuickField name='service' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }} -->
+                   <!-- {{> afQuickField name='principal' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}} -->
                </div>
            </fieldset>
      {{/autoForm}}
@@ -164,6 +188,7 @@
   </div>
 </template>
 
+
 <!-- 设置受理业务模态框 -->
 <template name="service_setting">
   <div class="modal-content">
@@ -172,13 +197,13 @@
       <h4 class="modal-title" id="service_setting_title">受理业务设置</h4>
     </div>
     <div class="modal-body">
-       {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
+       <!-- {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
            <fieldset>
                <div class="container">
                    {{> afQuickField name='principal' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
                </div>
            </fieldset>
-     {{/autoForm}}
+      {{/autoForm}} -->
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-success">确定</button>
@@ -186,6 +211,7 @@
     </div>
   </div>
 </template>
+
 
 <!-- 受理业务删除模态框 -->
 <template name="service_delete">
