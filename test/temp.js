@@ -72,6 +72,17 @@ function cloneTest() {
 // cloneTest();
 
 
+function testMatch (test) {
+  check(test, {
+    // label: Match.Maybe(String),
+    list: [
+      {a: Match.Maybe(String)}
+    ]
+  })
+  log("testMatch", test);
+}
+// testMatch({list: [{a: '123'}, {}]});
+
 
 
 // log("test/temp.js end");

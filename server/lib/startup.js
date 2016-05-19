@@ -61,7 +61,7 @@ function getSupportInfo() {
   return {
     'taskSteps': [
       { // 核名预设步骤
-        type: 'checkName',
+        type: 'companyCheckName',
         createBy: 'default',
         steps: [
           {
@@ -115,7 +115,7 @@ function getSupportInfo() {
         ]
       },
       { // 工商登记预设步骤
-        type: 'regist',
+        type: 'companyRegistInfo',
         createBy: 'default',
         steps: [
           {
@@ -760,8 +760,8 @@ function getSupportInfo() {
         type: 'task',
         service: 'companyRegist',
         items: [
-          {name: 'checkName', label: '核名'},
-          {name: 'regist', label: '工商登记'},
+          {name: 'companyCheckName', label: '核名'},
+          {name: 'companyRegistInfo', label: '工商登记'},
         ]
       }
     ],

@@ -1,19 +1,6 @@
-// AutoForm.addHooks(['updateCustomer'], {});
 
 AutoForm.hooks({
-  'insertCompanyInfoForm': {
-    'beginSubmit': function () {
-      var docId = this.docId;
-      var insertDoc = this.insertDoc;
-      var updateDoc = this.updateDoc;
-      if (this.docId) {
-
-      } else {
-
-      }
-
-    }
-  },
+  // 更新客户信息
   'updateCustomer': {
     endSubmit: function () {
       Meteor.call("updateCustomerLess", this.docId, this.updateDoc, function (error, result) {
@@ -26,20 +13,5 @@ AutoForm.hooks({
         $("#updateCustomer [type=submit]").removeAttr("disabled");
       });
     },
-    // onError: function (formType, error) {
-    //   log("updateCustomer onError", formType, error);
-    // },
-    // onSubmit: function (insertDoc, updateDoc, currentDoc) {
-    //   log("fuck onSubmit");
-    //   // console.log('insertDoc', insertDoc);
-    //   // console.log('updateDoc', updateDoc);
-    //   // console.log('currentDoc', currentDoc);
-    //   // var hook = this;
-
-    //   return false;
-    // },
-    // onSuccess: function (formType, collection) {
-    //   log("updateCustomer onSuccess");
-    // }
   }
 });

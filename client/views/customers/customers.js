@@ -121,6 +121,7 @@ Template.customers_delete.onRendered(function () {
 
     $("#deleteCustomerBtn").click(function() {
       var customerId = $("#deleteCustomerBtn").data("customerid");
+      log("deleteCustomer", customerId);
       Meteor.call("deleteCustomer", customerId);
       $('#customers_delete').modal("hide");
     });

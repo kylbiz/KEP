@@ -5,15 +5,17 @@
 Meteor.methods({
   'initCustomer': function (customerInfo, service) {
     log('initCustomer', customerInfo);
-    // // 创建新客户
+    // 创建新客户
     var customerId = Meteor.call('createCustomer', customerInfo);
+    log('createCustomer', customerId);
 
     // 为新客户开通业务
     var hostId = customerInfo.hostId;
     var service = service || [];
     var serList = [];
     service.forEach(function (ser) {
-      var serId = Meteor.call('createService', ser.serType, hostId, customerId, ser.payed || false);
+      var serId = Meteor.call('initService', ser.serType, hostId, customerId, ser.payed || false);
+      log("initService", ser.serType, serId)
       serList.push({serType: ser.serType, serId: serId});
     });
 

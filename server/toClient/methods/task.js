@@ -3,10 +3,13 @@
  **/
 
 Meteor.methods({
-  'createTask': function () {
-    // args 正确性
+  'createTask': function (taskInfo) {
+    var userId = KUtil.isLogin();
     // 账号权限
+    KUtil.havePermission(userId, 'task.create');
+
     // 创建
+    return KTask.createTask(taskInfo);
   },
   'updateTask': function () {
     // args 正确性

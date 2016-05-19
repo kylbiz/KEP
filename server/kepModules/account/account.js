@@ -20,10 +20,9 @@ KAccount.createTotalNewUser = function (teamInfo, adminInfo) {
     phone: Match.Maybe(String),
     email: Match.Maybe(String),
     qq: Match.Maybe(String),
-    wechat: Match.Maybe(String),
+    wechat: Match.Maybe(String)
     // nickname: Match.Maybe(String),
   });
-
 
   var teamId = KTeam.createTeam(teamInfo.name, teamInfo.remark || '');
   var userId = KAccount.createUser(adminInfo, {
