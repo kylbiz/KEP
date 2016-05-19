@@ -3,9 +3,9 @@
  **/
 
 Meteor.startup(function () {
-  // initAccount();   // 初始化管理员
+  //initAccount();   // 初始化管理员
   initSupportInfo();  // 初始化相关的辅助信息
-  Test.testData();    // 测试数据
+  Test.testData();    // 测试数据 
 });
 
 

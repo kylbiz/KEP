@@ -1,11 +1,11 @@
 <template name="header">
 	<!-- HEADER -->
-	<header class="navbar clearfix" id="header">
+	<header class="navbar clearfix header-kep" id="header">
 		<div class="container">
 			<div class="navbar-brand">
 				<!-- COMPANY LOGO -->
 				<a href="/">
-					<img src="/img/logo/logo.png" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
+					<img src="/img/logo/1.png" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
 				</a>
 				<!-- /COMPANY LOGO -->
 			</div>
@@ -32,21 +32,44 @@
 	<!-- BEGIN TOP NAVIGATION MENU -->
 	<ul class="nav navbar-nav pull-right">
 					<!-- BEGIN USER LOGIN DROPDOWN -->
-			<li class="dropdown user pull-right" id="header-user" style="margin-right:30px;">
+			<li class="dropdown user pull-right" id="header-user" style="margin-right:60px;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img alt="userPic" src="/img/windy/windy.jpg" />
+						<img alt="userPic" src="/img/person/man30.png" />
 						<span class="username">{{currentUser.username}}</span>
 						<i class="fa fa-angle-down"></i>
 					</a>
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" style="margin-top: 3px;">
+					{{> dropdownMenu}}
+             		<!-- <li>
+             			<a href='/console/account'><i class="fa fa-user"></i>个人信息</a>
              		<li>
              			<a href='/account'><i class="fa fa-user"></i>个人信息</a>
              		</li>
 					<li>
 						<a href="#" id='a-logout'><i class="fa fa-power-off"></i>登出</a>
-					</li>
+					</li> -->
 				</ul>
 			</li>
-	<!-- END USER LOGIN DROPDOWN -->
-	</ul>
+	
+	</ul>		
+</template>
+
+<template name="dropdownMenu">
+  <!-- User image -->
+  <li class="user-header">
+    <img src="/img/person/man90.png" class="img-circle" alt="User Image">
+    <p>
+      {{currentUser.username}}  
+    </p>
+    <small>2016-05-18</small>
+  </li>
+  <!-- Menu Footer-->
+  <li class="user-footer">
+    <div class="pull-left">
+      <a href="#" class="btn btn-default btn-flat">登出</a>
+    </div>
+    <div class="pull-right">
+      <a href="#" class="btn btn-default btn-flat">个人中心</a>
+    </div>
+  </li>
 </template>

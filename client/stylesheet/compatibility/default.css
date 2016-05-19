@@ -28,6 +28,11 @@
 .navbar .dropdown-toggle {
   color: #FFFFFF;
 }
+
+.navbar .dropdown-toggle span{
+  color: #676767;
+}
+
 .navbar .dropdown-toggle i {
   color: #FFFFFF;
   font-size: 17px;
