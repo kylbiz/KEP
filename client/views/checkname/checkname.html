@@ -85,13 +85,13 @@
     <h3 class="border-bottom">申请书 - 预览</h3>
     <div class="row margin-top-bottom">
         <div class="col-md-4">
-            <button class="btn btn-success">确认完成</button>
+            <button class="btn btn-success pull-right">确认完成</button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-info applicationEdit"><a href="#" value="application_form_edit">编辑</a></button>
+            <button class="btn btn-info center applicationEdit"><a href="#" value="application_form_edit">编辑</a></button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-default">下载</button>
+            <button class="btn btn-default pull-left">下载</button>
         </div>
     </div>
 </template>
@@ -128,9 +128,9 @@
               </div>
            </div>
            <!-- 添加按钮 -->
-<!--            <div class="row border-bottom paddingEight">
+           <div class="row border-bottom paddingEight">
              <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
-           </div> -->
+           </div>
            <!-- 企业类型 注册区域 行业类型 -->
            <div class="row paddingEight">
                <div class="col-md-8">
@@ -151,6 +151,7 @@
             <div class="row border-bottom paddingEight">
                <div class="col-md-8">
                  {{> afQuickField name='company.nameStruct' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 <textarea style="margin-right: 13px;width: 63%;" class="form-control pull-right" rows="3"></textarea>
                </div>
            </div>
            <!-- 经营范围 -->
@@ -179,11 +180,11 @@
 
         <div class="row margin-top-bottom">
             <div class="col-md-6">
-                <!-- <button type="submit" class="btn btn-success center">保存</button> -->
+                <!-- <button type="submit" class="btn btn-success pull-right">保存</button> -->
                 <button type="submit" class="btn btn-primary">新建</button>
             </div>
             <!-- <div class="col-md-6">
-                <button class="btn btn-default center">取消</button>
+                <button class="btn btn-default pull-left">取消</button>
             </div> -->
         </div>
     {{/autoForm}}
@@ -213,10 +214,10 @@
     {{/autoForm}}
     <div class="row margin-top-bottom">
         <div class="col-md-6">
-            <button class="btn btn-success center">保存</button>
+            <button class="btn btn-success pull-right">保存</button>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-default center">取消</button>
+            <button class="btn btn-default pull-left">取消</button>
         </div>
     </div>
 </template>
@@ -235,10 +236,10 @@
     {{/autoForm}}
     <div class="row margin-top-bottom">
         <div class="col-md-6">
-            <button class="btn btn-success center">保存</button>
+            <button class="btn btn-success pull-right">保存</button>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-default center">取消</button>
+            <button class="btn btn-default pull-left">取消</button>
         </div>
     </div>
 </template>
@@ -257,10 +258,10 @@
     {{/autoForm}}
     <div class="row margin-top-bottom">
         <div class="col-md-6">
-            <button class="btn btn-success center">保存</button>
+            <button class="btn btn-success pull-right">保存</button>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-default center">取消</button>
+            <button class="btn btn-default pull-left">取消</button>
         </div>
     </div>
 </template>
@@ -279,10 +280,10 @@
     {{/autoForm}}
     <div class="row margin-top-bottom">
         <div class="col-md-6">
-            <button class="btn btn-success center">保存</button>
+            <button class="btn btn-success pull-right">保存</button>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-default center">取消</button>
+            <button class="btn btn-default pull-left">取消</button>
         </div>
     </div>
 </template>
@@ -293,18 +294,18 @@
         <fieldset>
             <!-- 企业公章 -->
            <div class="row border-bottom margin-top paddingEight">
-               <div class="col-md-10">
-                 {{> afQuickField name='company.seal' options="allowed" noselect=true template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               <div class="col-md-10 kepCheckbox center">
+                 {{> afQuickField name='company.seal' options="allowed" noselect=true template="bootstrap3-horizontal" label-class="line-height center" input-col-class="" }}
                </div>
            </div>
         </fieldset>
     {{/autoForm}}
     <div class="row margin-top-bottom">
         <div class="col-md-6">
-            <button class="btn btn-success center">保存</button>
+            <button class="btn btn-success pull-right">确认完成</button>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-default center">取消</button>
+            <button class="btn btn-default pull-left">取消</button>
         </div>
     </div>
 </template>

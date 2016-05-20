@@ -49,13 +49,43 @@
 	.border-grey;
 	min-height: 800px;
 	.serviceInfoTable{
+		padding-bottom: 16px;
+		padding-top: 9px;
 		.border-bottom;
 		.col-md-3{
-			table{
-				height: 100%;
+			margin-top: 9px;
+			>div{
+				p{
+					color: #fff;
+					line-height: 21px;
+				}
+			
+				&:first-child{
+					// height: 70px;
+				}
+				&:last-child{
+					height: 35px;
+					line-height: 16px;
+					button{
+						height: 25px;
+						line-height: 12px;
+					}
+				}
+				border-bottom:1px solid #fff;
+				text-align: center;
+				height: 35px;
+				padding: 5px;
+				background-color: #999999;
 			}
 		}
+		.tableOverflow{
+			overflow-y: auto;
+			max-height: 347px;
+		}
 	}
+
+
+
 	.form-group{
 		label{
 			width: 100px;
@@ -63,8 +93,12 @@
 	}
 }
 
-.basic_info_container_label{
-	
+#customers_register_table{
+	th{
+		text-align: center !important;
+		background-color: #eaeaea;
+		color: #666666;
+	}
 }
 
 .contact-customer{
@@ -72,4 +106,32 @@
 	margin-left: -40px;
 	border-radius:5px;
 	background-color: #f8f8f8;
+}
+
+.customers_add_autoform{
+	.row{
+		padding-bottom: 10px;
+	}
+}
+
+#hostId{
+	padding: 8px;
+}
+
+.row{
+	.kepCheckbox2{
+		label{
+			color: @word_color;	
+		}
+		padding: 10px;
+		background-color: #f8f8f8 !important;
+		border-radius: 6px;
+		.checkbox{
+			display: inline !important;
+			padding: 18px !important;
+			label{
+				font-size: 16px !important;
+			}
+		}
+	}
 }

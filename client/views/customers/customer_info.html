@@ -74,11 +74,8 @@
 
     <div class="row margin-top">
       <div class="col-md-6">
-          <button type="submit" class="btn btn-success btn-lg pull-right">保存</button>
+          <button type="submit" class="btn btn-success btn-lg pull-right" style="width: 175px">保存</button>
       </div>
-<!--       <div class="col-md-6">
-          <button type="button" class="btn btn-default btn-lg pull-left" id="cancelCustomerChange">取消</button>
-      </div> -->
     </div>
   {{/autoForm}}
 </template>
@@ -112,14 +109,12 @@
         {{> service_setting }}
        </div>
   </div>
-
   <!-- 删除按钮模态框 -->
   <div class="modal fade"  id="service_delete" tabindex="-1" role="dialog" aria-labelledby="service_delete_title">
     <div class="modal-dialog modal-lg" role="document">
      {{> service_delete }}
     </div>
   </div>
-
 </template>
 
 
@@ -134,30 +129,29 @@
 <template name="serviceInfoTable">
   <div class="row serviceInfoTable">
     <div class="col-md-3">
-       <table class="table table-bordered margin-top">
-          <tbody> 
-              <tr>
-                <td colspan="2">公司注册</td>
-              </tr>
-              <tr>
-                <td>负责人：cc</td>
-              </tr>
-              <tr>
-                <td>
-                  <button class="btn btn-default" data-toggle="modal" data-target="#service_setting">设置</button>
-                  <button class="btn btn-danger" data-toggle="modal" data-target="#service_delete">删除</button>
-                </td>
-              </tr>
-          </tbody>
-      </table>
+      <div class="serviceInfoTable_Button">
+        <p>公司注册</p>
+      </div>
+      <div>
+        <p>负责人:{{currentUser.username}}</p>
+      </div>
+      <div >
+          <button class="btn btn-default" data-toggle="modal" data-target="#service_setting">设置</button>
+          <button class="btn btn-danger" data-toggle="modal" data-target="#service_delete">删除</button>
+      </div>
     </div>
-    <div class="col-md-9">
-      <table class="table table-bordered margin-top" style="border:red" >
+    <div class="col-md-9 tableOverflow">
+      <table class="table table1 table-bordered margin-top">
           <tbody> 
               {{>serviceInfoChildTable}}
               {{>serviceInfoChildTable}}
-              <!-- {{>serviceInfoChildTable}} -->
-              <!-- {{>serviceInfoChildTable}} -->
+              {{>serviceInfoChildTable}}
+              {{>serviceInfoChildTable}}
+              {{>serviceInfoChildTable}}
+              {{>serviceInfoChildTable}}
+              {{>serviceInfoChildTable}}
+              
+              
           </tbody>
       </table>
     </div>
@@ -166,7 +160,7 @@
 
 <!-- 受理业务子任务表 -->
 <template name="serviceInfoChildTable">
-  <tr>
+  <tr class="trtable">
       <td>子任务：工商登记</td>
       <td colspan="2">状态：提交工商</td>
       <td rowspan="2">
@@ -177,6 +171,10 @@
       <td colspan="3">负责人：cc 创建时间: 最后更新时间</td>
   </tr>
 </template>
+
+
+
+
 
 
 <!-- 添加受理业务模态框 -->

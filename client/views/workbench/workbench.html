@@ -57,14 +57,14 @@
 
 <!-- 核名表 -->
 <template name="workbench_checkname">
-    <table id="workbench_checkname_table" class="table table-hover table-bordered">
+    <table id="workbench_checkname_table" class="table table-bordered">
         <thead>
             <tr>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">客户名称</th>
-                <th colspan="6" style="text-align: center;background-color: beige;">办理进度</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">耗时/天</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">业务员</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">操作</th>
+                <th rowspan="2" class="thgrey">客户名称</th>
+                <th colspan="6" class="thdeepgrey">办理进度</th>
+                <th rowspan="2" class="thgrey">耗时/天</th>
+                <th rowspan="2" class="thgrey">业务员</th>
+                <th rowspan="2" class="thgrey">操作</th>
             </tr>
             <tr>
             	<th>文件准备</th>
@@ -76,9 +76,9 @@
             </tr>
         </thead>
         <tbody>
-          {{#each checkNameInfos }}
+          <!-- {{#each checkNameInfos }} -->
             {{> checknameTableCell }}
-          {{/each}}
+          <!-- {{/each}} -->
         </tbody>
     </table>
 </template>
@@ -100,7 +100,7 @@
         <button class="btn btn-info btn-sm" data-toggle="modal" data-taskId="{{_id}}" data-target="#progress_control">办理进度控制</button>
       </div>
          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
-         <button class="btn btn-info btn-sm"><a href="/console/checkname">查看</a></button>
+         <button class="btn btn-info btn-sm"><a href="/checkname">查看</a></button>
     </td>
   </tr>
 </template>
@@ -108,14 +108,15 @@
 
 <!-- 工商登记表 -->
 <template name = "workbench_ICBCregister">
-    <table id="workbench_ICBCregister_table" class="table table-hover table-bordered">
+    <table id="workbench_ICBCregister_table" class="table table-bordered">
    	        <thead>
    	            <tr>
-   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">客户名称</th>
-   	                <th colspan="4" style="text-align: center;background-color: beige;">办理进度</th>
-   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">耗时/天</th>
-   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">业务员</th>
-   	                <th rowspan="2" style="line-height: 50px;font-size: 16px">操作</th>
+   	                <th rowspan="2" class="thgrey">客户名称</th>
+   	                <th  class="thdeepgrey" colspan="4">办理进度</th>
+   	                <th rowspan="2" class="thgrey">耗时/天</th>
+   	                <th rowspan="2" class="thgrey">业
+                    务员</th>
+   	                <th rowspan="2" class="thgrey">操作</th>
    	            </tr>
    	            <tr>
    	            	<th>文件准备</th>
@@ -138,7 +139,7 @@
    			                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#progress_control">办理进度控制</button>
    	                	</div>
    	            	       <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config">设置</button>
-   	            	       <button class="btn btn-info btn-sm"><a href="/console/register">查看</a></button>
+   	            	       <button class="btn btn-info btn-sm"><a href="/register">查看</a></button>
    	                </td>
    	            </tr>
    	        </tbody>
@@ -264,14 +265,14 @@
 <template name="add_email">
 	<div class="add_email">
 		<div class="form-group">
-	    	<label for="telephone">电子邮箱：</label>
+	    	<label for="telephone">电子邮箱</label>
 	   	 	<input type="text" class="form-control" id="telephone">
 	  	</div>
 	  	<div class="form-group">
-	    	<label for="remarks">备注：</label>
+	    	<label for="remarks">备注</label>
 	    	<input type="email" class="form-control" id="remarks" placeholder="(选填)">
 	  	</div>
-	  <button type="submit" class="btn btn-default">删除</button>
+	  <button type="submit" class="btn btn-danger">删除</button>
   </div>
 </template>
 
@@ -279,14 +280,14 @@
 <template name="add_tel">
 	<div class="add_tel">
 		<div class="form-group">
-	    	<label for="telephone">手机号：</label>
+	    	<label for="telephone">手机号</label>
 	   	 	<input type="text" class="form-control" id="telephone">
 	  	</div>
 	  	<div class="form-group">
-	    	<label for="remarks">备注：</label>
+	    	<label for="remarks">备注</label>
 	    	<input type="email" class="form-control" id="remarks" placeholder="(选填)">
 	  	</div>
-	  <button type="submit" class="btn btn-default">删除</button>
+	  <button type="submit" class="btn btn-danger">删除</button>
   </div>
 </template>
 

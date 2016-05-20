@@ -127,3 +127,14 @@ Template.customers_delete.onRendered(function () {
 });
 
 
+//客户基本信息
+Template.serviceInfoTable.onRendered(function () {
+  if ($('.table1').height()<347) {
+      var ChildLength = $('.table1').height()-110;
+      console.log(ChildLength);
+      $('.serviceInfoTable_Button').height(ChildLength);
+  }
+  else{
+      $('.serviceInfoTable_Button').height(260);
+  }
+});
