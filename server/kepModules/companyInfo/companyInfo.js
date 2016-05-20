@@ -43,6 +43,14 @@ KCompanyInfo.updateCompanyInfo = function (companyId, companyInfo) {
 };
 
 
+/*
+ * 通过客户获取其相对的公司信息
+ **/
+KCompanyInfo.getCompanyInfoByCustomer = function (customerId) {
+  check(customerId, String);
+  return CompanyInfo.find({customerId: customerId});
+}
+
 
 // 检测公司的信息
 function checkCompanyInfo(companyInfo) {
@@ -76,15 +84,13 @@ function checkCompanyInfo(companyInfo) {
         IDType: Match.Maybe(String),
         ID: Match.Maybe(String),
       }),
-      chairman: Match.Maybe([ // 股东
-        {
-          name: Match.Maybe(String),
-          type: Match.Maybe(String), // 执行董事
-          IDType: Match.Maybe(String),
-          ID: Match.Maybe(String),
-          phone: Match.Maybe(String),
-        }
-      ]),
+      chairman: Match.Maybe({ // 股东
+        name: Match.Maybe(String),
+        type: Match.Maybe(String), // 执行董事
+        IDType: Match.Maybe(String),
+        ID: Match.Maybe(String),
+        phone: Match.Maybe(String),
+      }),
       supervisor: Match.Maybe({ // 监事
         name: Match.Maybe(String),
         type: Match.Maybe(String),

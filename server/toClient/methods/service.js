@@ -2,27 +2,6 @@
  * 受理的业务相关的处理
  **/
 
-
-// check(taskInfo, {
-//   name: Match.OneOf('companyCheckName', 'CompanyRegistInfo'),
-//   hostId: String,
-//   serviceId: String,
-//   email: Match.Maybe([{
-//     to: String,
-//     template: String,
-//     data: Match.Maybe(Object),
-//     other: Match.Maybe(String),
-//   }]),
-//   sms: Match.Maybe([{
-//     to: String,
-//     template: String,
-//     data: Match.Maybe(Object),
-//     other: Match.Maybe(String),
-//   }]),
-//   taskStepId: String
-// });
-
-
 Meteor.methods({
   'initService': function (serType, hostId, customerId, payed) {
       // 创建业务
@@ -80,7 +59,6 @@ Meteor.methods({
   'updateService': function (serId, serInfo) {  // 更新业务
       // 登录
       var userId = KUtil.isLogin();
-
       // 账号权限
       KUtil.havePermission(userId, 'service.update', serId);
 
@@ -90,8 +68,16 @@ Meteor.methods({
       }
       return serId;
   },
+  'updateServiceLess': function (serId, opt) {
+    log('updateServiceLess', serId, opt);
+      // 登录
+      var userId = KUtil.isLogin();
+      // 账号权限
+      KUtil.havePermission(userId, 'service.update', serId);
+      return Service.update({_id: serId}, opt)
+  },
   'updateServiceTasks': function (serId, tasksInfo) { // 更新业务的子任务信息
-    // 登录
+      // 登录
       var userId = KUtil.isLogin();
       // 账号权限
       KUtil.havePermission(userId, 'service.update', serId);
@@ -101,14 +87,10 @@ Meteor.methods({
   'deleteService': function (serId) {  // 删除业务
     // 登录
     var userId = KUtil.isLogin();
-
     // 账号权限
-    var serChanged = KUtil.havePermission(userId, 'service.delete', serId);
-    if (!serChanged) {
-      throw new Meteor.Error('内部数据处理错误');
-    }
+    KUtil.havePermission(userId, 'service.delete', serId);
 
-    return serId;
+    return KService.deleteService(serId);
   }
 });
 

@@ -40,6 +40,14 @@ Meteor.publish("getTasksBySerId", function (serviceId) {
   return KTask.getTasksBySerId(serviceId);
 });
 
+
+// 通过客户获取其相对的公司信息
+Meteor.publish("getCompanyInfoByCustomer", function (customerId) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  // 暂时只需要登录权限,未想好
+  return KCompanyInfo.getCompanyInfoByCustomer(customerId);
+});
+
 // 获取辅助信息
 Meteor.publish('getSupportInfo', function (opt) {
   var userId = KUtil.isLogin(this); // 登录状态

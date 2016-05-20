@@ -108,23 +108,23 @@ Template.customers_add_autoform.helpers({
 // 删除客户
 Template.customers_delete.onRendered(function () {
   $('#customers_delete').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      var modal = $(this);
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var modal = $(this);
 
-      var customerId = button.data("customerid");
-      var customerName = button.data("customername");
+    var customerId = button.data("customerid");
+    var customerName = button.data("customername");
 
-      modal.find("#deleteCustomerBtn").data("customerid", customerId);
-      modal.find("#deleteCustomerBtn").data("customername", customerName);
-      modal.find("#deleteMsg").html("确定删除 - " + customerName + "?");
-    })
+    modal.find("#deleteCustomerBtn").data("customerid", customerId);
+    modal.find("#deleteCustomerBtn").data("customername", customerName);
+    modal.find("#deleteMsg").html("确定删除 - " + customerName + "?");
+  });
 
-    $("#deleteCustomerBtn").click(function() {
-      var customerId = $("#deleteCustomerBtn").data("customerid");
-      log("deleteCustomer", customerId);
-      Meteor.call("deleteCustomer", customerId);
-      $('#customers_delete').modal("hide");
-    });
+  $("#deleteCustomerBtn").click(function() {
+    var customerId = $("#deleteCustomerBtn").data("customerid");
+    log("deleteCustomer", customerId);
+    Meteor.call("deleteCustomer", customerId);
+    $('#customers_delete').modal("hide");
+  });
 });
 
 

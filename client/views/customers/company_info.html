@@ -31,7 +31,7 @@
 <!-- 公司基本信息表单 -->
 <template name="company_info_form">
       <div class="container container_radius">
-          {{#autoForm collection="Company" id="insertCompanyInfoForm"}}
+          {{#autoForm collection="CompanyInfo" id="insertCompanyInfo" doc=companyDoc}}
               <fieldset>
                  <!-- 公司名等 -->
                  <!-- 经营期限等 -->
@@ -41,7 +41,6 @@
                   <div class="row margin-top">
                     <p class="holders-info-full">股东信息</p>
                   </div>
-                  {{> holders }}
                   {{> holders }}
                   <!-- 法人信息 -->
                   <div class="row margin-top">

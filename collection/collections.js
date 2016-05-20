@@ -1,28 +1,4 @@
 
-// 公司注册业务
-// CompanyRegist = new Mongo.Collection('CompanyRegist');
-Service = new Mongo.Collection('Service');
-struct = {
-  type: 'companyRegist',
-  host: {   // 负责人
-    name: '',
-    id: '',
-  },
-  customerId: '', // 对应的客户id
-  createdAt: '',
-  createdBy: '',
-  contactInfo: {   // 公司注册时的联系人，这个跟客户信息中有重复可不使用，这里放上来主要是考虑以后拓展业务后，各业务间区格
-    name: '',
-    address: '',
-    phone: '',
-    email: '',
-  },
-  remark: '', // 备注信息, 只有单业务（公司注册）的情况下，可不使用
-  status: 0, // "0 - 准备中", "1 - 受理中", "2 - 已完成", "-1 - 废弃"
-  payed: true, // 是否付费 有/无
-  companyInfo: '_id',  // 公司信息
-  tasks: [{type: 'companyCheckName', id: ''}, {type: 'companyRegistInfo', id: ''}], // 子任务id 列表
-}
 
 // 子任务信息
 Tasks = new Mongo.Collection('Tasks');
@@ -114,126 +90,31 @@ struct = {
   ]
 }
 
+Tasks.helpers({
+  stepStatus: function () {
+    var stepStatus = "未知";
+    var steps = this.steps || [];
+    var stepsNum = steps.length;
+    for (var key in steps) {
+      var stepInfo = steps[key];
+      if (!stepInfo.finished) {
+        return stepInfo.name;
+      }
 
-// 公司信息
-CompanyInfo = new Mongo.Collection('CompanyInfo');
-// CompanyInfo.attachSchema(new SimpleSchema({
-//   name: {
-//     type: String,
-//     label: '公司名'
-//   },
-//   RegisterCapital: {
-//     type: Number,
-//     label: '注册资本'
-//   },
-//   property: {
-//     type: String,
-//     label: '公司性质'
-//   },
-//   RegistrationDistrict: {
-//     type: String,
-//     label: '注册区域'
-//   },
-//   CompanyAddress: {
-//     type: String,
-//     label: '公司地址'
-//   },
-//   ProductionAddress:{
-//     type: String,
-//     label: '生产经营地址'
-//   },
-//   CheckId: {
-//     type: String,
-//     label: '名称预先核准文号/注册号/统一社会信用代码'
-//   },
-//   OperationPeriod:{
-//     type: String,
-//     label: '经营期限'
-//   },
-//   BusinessScope: {
-//     type: String,
-//     label: '经营范围'
-//   },
-//   HoldersName:{
-//     type: String,
-//     label: '股东姓名'
-//   },
-//   HoldersCredentials:{
-//     type: String,
-//     label: '证件类型'
-//   },
-//   CredentialsNum: {
-//     type: String,
-//     label: '证件号码'
-//   }
-// }));
+      if (stepInfo.finished && (key+1) == stepsNum ) {
+        return "完成";
+      }
+    }
 
-struct = {
-  company: { // 公司基本信息
-    name: '',
-    moneyAmount: '',
-    type: '',
-    zone: '',
-    address: '',
-    productionAddress: '',
-    companyId: '',
-    businessPeriod: '',
-    businessScope: '',
+    return stepStatus;
   },
-  holders: [ // 股东
-    {
-      name: '',
-      IDType: '',
-      ID: '',
-      investType: '',
-      investShare: '',
-    }
-  ],
-  legalPerson: {  // 法人
-    name: '',
-    tel: '',
-    phone: '',
-    email: '',
-    IDType: '',
-    ID: '',
+  createdAtLabel: function () {
+    return moment(this.createdAt).format("YYYY-MM-DD");
   },
-  chairman: [ // 股东
-    {
-      name: '',
-      type: '', // 执行董事
-      IDType: '',
-      ID: '',
-      phone: '',
-    }
-  ],
-  supervisor: { // 监事
-    name: '',
-    type: '',
-    IDType: '',
-    ID: '',
-  },
-  manager: { // 经理
-    name: '',
-    type: '',
-    IDType: '',
-    ID: '',
-  },
-  financialStaff: { // 财务负责人
-    name: '',
-    tel: '',
-    phone: '',
-    email: '',
-    IDType: '',
-    ID: '',
-  },
-  contractor: { // 企业联络员
-    name: '',
-    phone: '',
-    email: '',
-    IDType: '',
-    ID: ''
+  updateTimeLabel: function () {
+    return moment(this.updateTime).format("YYYY-MM-DD");
   }
-}
+});
 
 
 

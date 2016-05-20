@@ -12,11 +12,16 @@ Customers.attachSchema( new SimpleSchema({
   "host.name": {
     type: String,
     label: "负责人名字",
-    autoValue: function () {
+    autoValue: function () { // 创建
+      log("host.name", this);
       var docId = this.docId;
       var hostId = this.field("host.id").value;
-      var userInfo = Meteor.users.findOne({_id: hostId}) || {};
-      return userInfo.username || "未知";
+      if (hostId) {
+        var userInfo = Meteor.users.findOne({_id: hostId}) || {};
+        return userInfo.username || "未知";
+      } else {
+        this.unset();
+      }
     }
   },
   "host.id": {

@@ -96,7 +96,7 @@
   </div>
 
   {{#each service}}
-    {{> serviceInfo}}
+    {{> serviceInfo serviceId=this._id}}
   {{/each}}
 
   <!-- 添加受理业务模态框 -->
@@ -109,7 +109,7 @@
   <!-- 设置按钮模态框 -->
    <div class="modal fade"  id="service_setting" tabindex="-1" role="dialog" aria-labelledby="service_setting_title">
        <div class="modal-dialog modal-lg" role="document">
-        {{> service_setting }}
+        {{> service_setting}}
        </div>
   </div>
 
@@ -124,27 +124,20 @@
 
 <!-- 客户受理业务信息 -->
 <template name="serviceInfo">
-  {{> serviceInfoTable }}
-  {{> serviceInfoTable }}
-</template>
-
-<!-- 受理业务信息表 -->
-
-<template name="serviceInfoTable">
   <div class="row serviceInfoTable">
     <div class="col-md-3">
        <table class="table table-bordered margin-top">
-          <tbody> 
+          <tbody>
               <tr>
-                <td colspan="2">公司注册</td>
+                <td colspan="2">{{serInfo.label}}</td>
               </tr>
               <tr>
-                <td>负责人：cc</td>
+                <td>负责人：{{serInfo.host.name}}</td>
               </tr>
               <tr>
                 <td>
-                  <button class="btn btn-default" data-toggle="modal" data-target="#service_setting">设置</button>
-                  <button class="btn btn-danger" data-toggle="modal" data-target="#service_delete">删除</button>
+                  <button class="btn btn-default" data-toggle="modal" data-target="#service_setting" data-serviceid="{{serInfo._id}}">设置</button>
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#service_delete" data-serviceid="{{serInfo._id}}" data-servicename="{{serInfo.label}}">删除</button>
                 </td>
               </tr>
           </tbody>
@@ -152,11 +145,10 @@
     </div>
     <div class="col-md-9">
       <table class="table table-bordered margin-top" style="border:red" >
-          <tbody> 
-              {{>serviceInfoChildTable}}
-              {{>serviceInfoChildTable}}
-              <!-- {{>serviceInfoChildTable}} -->
-              <!-- {{>serviceInfoChildTable}} -->
+          <tbody>
+              {{#each tasks serInfo._id}}
+                {{>serviceInfoChildTable}}
+              {{/each}}
           </tbody>
       </table>
     </div>
@@ -166,14 +158,14 @@
 <!-- 受理业务子任务表 -->
 <template name="serviceInfoChildTable">
   <tr>
-      <td>子任务：工商登记</td>
-      <td colspan="2">状态：提交工商</td>
+      <td>子任务：{{this.label}}</td>
+      <td colspan="2">状态：{{this.stepStatus}}</td>
       <td rowspan="2">
-          <button class="btn btn-info">详细</button>
+          <a class="btn btn-info taskDetail" href="#">详细</a>
       </td>
   </tr>
   <tr style="margin-bottom: 10px;">
-      <td colspan="3">负责人：cc 创建时间: 最后更新时间</td>
+      <td colspan="3">负责人：{{this.host.name}} 创建时间：{{this.createdAtLabel}} 最后更新时间：{{this.updateTimeLabel}}</td>
   </tr>
 </template>
 
@@ -186,18 +178,19 @@
       <h4 class="modal-title" id="service_accept_title">添加受理业务</h4>
     </div>
     <div class="modal-body">
-       {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
+       {{#autoForm collection="Service" id="insertService" doc=serviceDoc}}
            <fieldset>
                <div class="container">
-                   <!-- {{> afQuickField name='service' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }} -->
-                   <!-- {{> afQuickField name='principal' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}} -->
+                   {{> afQuickField name='type' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   {{> afQuickField name='host.id' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
+                   {{> afQuickField name='payed' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
                </div>
            </fieldset>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
      {{/autoForm}}
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success">确定</button>
-      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
     </div>
   </div>
 </template>
@@ -211,17 +204,18 @@
       <h4 class="modal-title" id="service_setting_title">受理业务设置</h4>
     </div>
     <div class="modal-body">
-       <!-- {{#autoForm collection="Customers" id="insertCustomersForm" type="insert"}}
+       {{#autoForm collection="Service" id="updateService" doc=serviceDoc}}
            <fieldset>
                <div class="container">
-                   {{> afQuickField name='principal' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
+                   {{> afQuickField name='host.id' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
+                   {{> afQuickField name='payed' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8"}}
                </div>
            </fieldset>
-      {{/autoForm}} -->
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success">确定</button>
-      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+      {{/autoForm}}
     </div>
   </div>
 </template>
@@ -235,10 +229,11 @@
       <h4 class="modal-title" id="service_delete_title">警告</h4>
     </div>
     <div class="modal-body">
-      <h3>确定删除该受理业务？</h3>
+      <h3 id="deleteServiceMsg"></h3>
+      <h4>注意: 若确认删除该业务，则该业务下的所有子任务将全部废弃</h4>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-success">确定</button>
+      <button type="button" class="btn btn-success" id="deleteServiceBtn">确定</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
     </div>
   </div>

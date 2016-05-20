@@ -31,6 +31,7 @@ KService.createService = function (serInfo) {
   // 创建公司信息
   var companyInfoId = KCompanyInfo.createCompanyInfo(serInfo.customerId);
 
+
   var serviceId = Service.insert({
     type: serInfo.serType,
     host: {
@@ -83,10 +84,12 @@ KService.updateServiceTasks = function (serviceId, tasksInfo) {
     }]
   });
 
-  KUtil.dataIsInColl({coll: Service, dataId: serviceId});
+  var info = KUtil.dataIsInColl({coll: Service, dataId: serviceId});
+  var tasks = info.tasks || [];
+  tasks.concat(tasksInfo.tasks);
 
   if (tasksInfo.opt == 'add') {
-    return Service.update({_id: serviceId}, {$push: {tasks: tasksInfo.tasks}});
+    return Service.update({_id: serviceId}, {$set: {tasks: tasks}});
   }
 
   throw new Metor.Error('内部数据处理错误');

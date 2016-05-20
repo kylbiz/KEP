@@ -122,6 +122,7 @@ KTeam.havePermission = function (userId, opt, infoId) {
     'service.view', 'service.create', 'service.update', 'service.delete', // 业务管理的权限
     // 'companyRegist.view', 'companyRegist.create', 'companyRegist.update', 'companyRegist.delete', // 公司注册的权限
     'task.view', 'task.create', 'task.update', 'task.delete', // 任务管理的权限
+    'companyInfo.view', 'companyInfo.create', 'companyInfo.update', 'companyInfo.delete', // 客户公司资料的权限 （目前无对应的权限）
   ];
 
   if (optList.indexOf(opt) < 0) {
@@ -146,7 +147,7 @@ KTeam.havePermission = function (userId, opt, infoId) {
       'user': Meteor.users, // 用户
       'customer': Customers,  // 客户
       'task': Tasks,  // 任务
-      'service': Service, // 公司注册
+      'service': Service, // 客户业务
     }[optObj];
 
     var dataInfo = collObj.findOne({_id: infoId, 'host.id': userId})
