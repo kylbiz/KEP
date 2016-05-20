@@ -111,7 +111,15 @@ KCustomer.updateCustomerService = function (customerId, serviceInfo) {
  **/
 KCustomer.deleteCustomer = function (customerId) {
   KUtil.dataIsInColl({coll: Customers, dataId: customerId});
-  return Customers.update({_id: customerId}, {$set: {status: -1}});
+
+  // 标记客户为废弃状态
+  var _id = Customers.update({_id: customerId}, {$set: {status: -1}});
+  log('del customer', customerId);
+
+  // 标记客户的相关的业务为废弃状态
+  KService.delSerByCustomer(customerId);
+
+  return customerId;
 }
 
 

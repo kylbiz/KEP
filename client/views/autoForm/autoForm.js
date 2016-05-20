@@ -1,19 +1,6 @@
-// AutoForm.addHooks(['updateCustomer'], {});
 
 AutoForm.hooks({
-  'insertCompanyInfoForm': {
-    'beginSubmit': function () {
-      var docId = this.docId;
-      var insertDoc = this.insertDoc;
-      var updateDoc = this.updateDoc;
-      if (this.docId) {
-
-      } else {
-
-      }
-
-    }
-  },
+  // 更新客户信息
   'updateCustomer': {
     endSubmit: function () {
       Meteor.call("updateCustomerLess", this.docId, this.updateDoc, function (error, result) {
@@ -26,20 +13,34 @@ AutoForm.hooks({
         $("#updateCustomer [type=submit]").removeAttr("disabled");
       });
     },
-    // onError: function (formType, error) {
-    //   log("updateCustomer onError", formType, error);
-    // },
-    // onSubmit: function (insertDoc, updateDoc, currentDoc) {
-    //   log("fuck onSubmit");
-    //   // console.log('insertDoc', insertDoc);
-    //   // console.log('updateDoc', updateDoc);
-    //   // console.log('currentDoc', currentDoc);
-    //   // var hook = this;
-
-    //   return false;
-    // },
-    // onSuccess: function (formType, collection) {
-    //   log("updateCustomer onSuccess");
-    // }
-  }
+  },
+  'insertService': {
+    endSubmit: function () {
+      log("insertService", this);
+      var doc = this.insertDoc;
+      Meteor.call('initService', doc.type, doc.host.id, this.currentDoc.customerId, doc.payed, function (error, result) {
+        if (error) {
+          log("updateServiceLess error", error);
+          alert("添加业务失败！" + error);
+        } else {
+          $('#service_accept').modal("hide");
+        }
+        $("#service_accept [type=submit]").removeAttr("disabled");
+      });
+    }
+  },
+  'updateService': {
+    endSubmit: function () {
+      Meteor.call('updateServiceLess', this.docId, this.updateDoc, function (error, result) {
+        if (error) {
+          log("updateServiceLess error", error);
+          alert("更新业务信息失败！" + error);
+        } else {
+          // alert("更新业务信息成功！");
+          $('#service_setting').modal("hide");
+        }
+        $("#service_setting [type=submit]").removeAttr("disabled");
+      });
+    }
+  },
 });

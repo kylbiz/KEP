@@ -15,8 +15,8 @@ struct = {  // 子任务
   type: 'task',
   service: 'companyRegist',
   items: [
-    {name: 'checkName', label: '公司核名'},
-    {name: 'regist', label: '工商登记'},
+    {name: 'companyCheckName', label: '公司核名'},
+    {name: 'companyRegistInfo', label: '工商登记'},
   ]
 }
 
@@ -30,7 +30,7 @@ struct = {
 }
 // 公司注册 - 核名预设步骤
 struct = {
-  type: 'checkName',
+  type: 'companyCheckName',
   steps: [
     {
       name: '填写资料',
@@ -84,7 +84,7 @@ struct = {
 }
 // 公司注册 - 工商登记预设步骤
 struct = {
-  type: 'regist',
+  type: 'companyRegistInfo',
   steps: [
     {
       name: '资料填写',
