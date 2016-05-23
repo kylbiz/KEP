@@ -27,3 +27,37 @@
 		color: #666666;
 	}
 }
+
+.workbench_change_btn{
+	.col-sm-6{
+		background-color: #FFFFFF;
+		border-radius: 5px 0 0 5px;
+		border: 1px solid @border_grey;
+		padding: 5px 20px;
+		&:last-child{
+			border-radius: 0px 5px 5px 0;
+		}
+	}
+	button{
+		.center;
+		min-width: 150px;
+	}
+	@media screen and (max-width:1337px) {
+		button{
+			min-width: 100px;
+		}
+	}
+}
+.workbench_search{
+	// width: 114px;
+	.form-inline{
+		background-color: #fff;
+		padding: 8px 8px;
+		border:1px solid @border_grey;
+		border-radius: 8px;
+		input{
+			max-width:150px; 
+		}
+	}
+	margin-top: -5px;
+}

@@ -27,13 +27,15 @@
 			</div>
 			<div class="col-md-4 workbench_change_btn">
         {{#each tasks}}
-  				<button type="button" class="btn btn-info" style="width: 90px"><a value="{{name}}" href="#">{{label}}</a></button>
+          <div class="col-sm-6">
+  				  <button type="button" class="btn btn-info btn-sm"><a value="{{name}}" href="#">{{label}}</a></button>
+          </div>
         {{/each}}
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 workbench_search">
 				<div class="form-inline pull-right">
 					<input type="text" class="form-control" placeholder="">
-					<button class="btn btn-default" type="submit">搜索</button>
+					<button class="btn btn-success" type="submit">搜索</button>
 				</div>
 			</div>
 		</div>

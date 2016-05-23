@@ -116,11 +116,11 @@
                    <label for="col-sm-4 line-height">备选字号</label>
                 </div>
                 <div class="col-sm-8" id="drag-area">
-                  <div class="margin-bottom">
+                  <!-- <div class="margin-bottom">
                     <input type="text" class="form-contrl">
                     <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
                     <button class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></button>
-                  </div>
+                  </div> -->
                   {{> reserveWord }}
                   {{> reserveWord }}
                   {{> reserveWord }}
@@ -313,7 +313,7 @@
 
 <!-- 一企查-弹出框 -->
 <template name="goldweapon">
-    <div class="row margin-top-fifth border-bottom" style="min-height: 54px;">
+    <div class="row margin-top-fifth border-bottom" style="height: 44px;">
         <div class="col-md-4">
             <i class="fa fa-times fa-2x center" id="close_goldweapon" aria-hidden="true"></i>
         </div>
@@ -323,9 +323,9 @@
     </div>
     <form class="center margin-top-fifth">
       <div class="form-group">
-          <input type="text" class="searchName" placeholder="请输入企业名称字号" >
+          <input type="text" class="center searchName form-control" placeholder="请输入企业名称字号" >
       </div>
-      <button type="submit" class="center btn btn-danger">查询</button>
+      <button type="submit" class="center btn btn-danger" style="width: 260px">查询</button>
     </form>
     <div class="row search-count margin-top-fifth">
         <p class="center ">已经查询到1家</p>
@@ -354,8 +354,16 @@
 
 <template name="reserveWord">
   <div class="margin-bottom">
-    <input type="text" class="form-contrl">
-    <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
-    <button class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></button>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-7">
+           <input type="text" class="form-control">
+        </div>
+        <div class="col-sm-5">
+           <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
+            <button class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </form>
   </div>
 </template>

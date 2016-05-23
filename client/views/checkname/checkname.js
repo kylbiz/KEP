@@ -9,6 +9,7 @@ Template.checkname.onRendered(function () {
       }
     });
   });
+   $('.task_ul li a').first().addClass('selected');
 });
 
 Template.application_form_edit.onRendered(function () {
@@ -24,7 +25,7 @@ Template.application_form_edit.events({
     event.preventDefault();
     // Get value from form element
     $('#goldweapon').css({"display":"block","margin-right":"0px","max-width":"327px"});
-    $('.searchName').css({"max-width":"150px"});
+    // $('.searchName').css({"max-width":"150px"});
     // $('#goldweapon').addClass('goldweapon-show');
   },
   'click #close_goldweapon'(event){
@@ -46,6 +47,9 @@ Template.checkname.events({
   'click .task_ul li a'(event){
     log('click task', $(event.currentTarget).attr("value")  );
     Session.set('stepTemplate', $(event.currentTarget).attr("value"));
+    $('.task_ul li a').removeClass('selected');
+    $(event.currentTarget).addClass("selected");
+    console.log($(event.currentTarget));
   },
   'click .applicationEdit a'(event){
     log('click task', $(event.currentTarget).attr("value")  );
