@@ -36,7 +36,7 @@ Service.attachSchema( new SimpleSchema ({
   },
   "host.id": {
     type: String,
-    label: "客户负责人",
+    label: "负责人",
     autoform: {
       type: 'select',
       firstOption: false,

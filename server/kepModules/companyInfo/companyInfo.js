@@ -21,13 +21,13 @@ KCompanyInfo.createCompanyInfo = function (customerId, companyInfo) {
   //   contractor: {}
   // };
 
-  log('KCompanyInfo.createCompanyInfo', companyInfo);
   // checkCompanyInfo(companyInfo);
   check(customerId, String);
 
   KUtil.dataIsInColl({coll: Customers, dataId: customerId});
 
   companyInfo.customerId = customerId;
+  log('KCompanyInfo.createCompanyInfo', companyInfo);
   return CompanyInfo.insert(companyInfo);
 };
 

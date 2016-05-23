@@ -13,7 +13,7 @@ Customers.attachSchema( new SimpleSchema({
     type: String,
     label: "负责人名字",
     autoValue: function () { // 创建
-      log("host.name", this);
+      // log("host.name", this);
       var docId = this.docId;
       var hostId = this.field("host.id").value;
       if (hostId) {

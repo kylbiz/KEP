@@ -18,7 +18,24 @@ FlowRouter.route('/dragtest', {
   action: function() {
     BlazeLayout.render("dragtest");
   }
-})
+});
+
+
+// 业务子任务
+FlowRouter.route('/task/:taskType/:taskId', {
+  name: 'task',
+  action: function (params) {
+    var taskType = params.taskType;
+
+    // task对应的template
+    var contentTemplate = {
+      'companyCheckName': 'checkname',
+      'companyRegistInfo': 'register'
+    }[taskType] || '';
+
+    BlazeLayout.render("mainLayout", {content: contentTemplate});
+  }
+});
 
 
 //公司核名

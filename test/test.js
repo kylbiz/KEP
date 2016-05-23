@@ -24,14 +24,14 @@ Test.testData = function () {
   var userId = createUser(teamId);
 
   // 测试用客户
-  var customerId = createCustomer(managerUserId);
+  // var customerId = createCustomer(managerUserId);
 
   // 测试用公司注册业务
 
   // 测试用子任务
 
   // 其他
-  var retOther = other(managerUserId, customerId);
+  // var retOther = other(managerUserId, customerId);
 }
 
 // 测试用超级管理员
@@ -431,6 +431,79 @@ Test.getColl = function () {
   log("Register", Register);
   log("TempStruct", TempStruct);
 }
+
+// 初始化一个新的客户
+Test.newCustomer = function () {
+  Meteor.call('initCustomer', {
+      name: "测试客户",
+      hostId: Meteor.userId(),
+      from: "测试来源",
+      createdBy: Meteor.userId(),
+      remark: "备注信息",
+      contactInfo: {
+        name: "联系人信息",
+        address: "上海",
+        phone: "1234567",
+        email: "cc@cc.com"
+      }
+  }, [
+    {serType: 'companyRegist', payed: false}
+  ], function (error, result) {
+    if (error) {
+      console.log("创建新客户失败! ", error);
+    } else {
+      console.log("创建新客户成功! ", result);
+    }
+  });
+};
+
+
+Test.updateTaskSteps = function () {
+ [
+    {
+      "name": "资料填写",
+      "startTime": new Date(1462846210000),
+      "updateTime": new Date(1462939810000),
+      "finished": true,
+      "dataStruct": "stepInfoCompanyRegistInfo",
+      "data": {
+
+      }
+    },
+    {
+      "name": "签字确认",
+      "startTime": new Date(1462939810000),
+      "updateTime": new Date(1463112610000),
+      "finished": true,
+      "dataStruct": "stepInfoCustomerConfirm",
+      "data": {
+
+      }
+    },
+    {
+      "name": "提交工商",
+      "startTime": new Date(1463112610000),
+      "updateTime": new Date(1463112610000),
+      "finished": true,
+      "dataStruct": "stepInfoGovSubmit",
+      "data": {
+
+      }
+    },
+    {
+      "name": "登记通过",
+      "startTime": "",
+      "updateTime": "",
+      "finished": false,
+      "dataStruct": "stepInfoCompanyRegistPass",
+      "data": {
+
+      }
+    }
+  ]
+
+}
+
 
 
 Meteor.methods({

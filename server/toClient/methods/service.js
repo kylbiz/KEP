@@ -118,8 +118,8 @@ function initTaskForService(serType, taskInfo) {
     // 任务步骤，可以是用户所在team的自定义步骤，也可以是系统默认添加的
     var taskSteps = TaskSteps.findOne({
       $or: [
-        { type: taskType, teamId: teamId, createBy: 'customer' },
-        { type: taskType, createBy: 'default' }
+        { type: taskType, teamId: teamId, createdBy: 'customer' },
+        { type: taskType, createdBy: 'default' }
     ]}) || {};
     var taskStepId = taskSteps._id;
     if (!taskStepId) {

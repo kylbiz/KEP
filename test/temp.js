@@ -84,7 +84,6 @@ function testMatch (test) {
 // testMatch({list: [{a: '123'}, {}]});
 
 
-
 // log("test/temp.js end");
 
 

@@ -1,7 +1,7 @@
 // 公司信息
 CompanyInfo = new Mongo.Collection('CompanyInfo');
 CompanyInfo.attachSchema(new SimpleSchema({
-  "coustomerId": {
+  "customerId": {
     type: String,
     label: "所属客户的ID"
   },
@@ -13,6 +13,7 @@ CompanyInfo.attachSchema(new SimpleSchema({
   "company.name": {
     type: String,
     label: "公司名称",
+    optional: true,
   },
   "company.moneyAmount": {
     type: Number,

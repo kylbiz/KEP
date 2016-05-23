@@ -22,6 +22,23 @@ Meteor.publish('getService', function (customerId) {
   return KService.getService(customerId);
 });
 
+
+// 获取子任务数据
+Meteor.publish('getTasks', function () {
+  var userId = KUtil.isLogin(this);   // 登录状态
+  KUtil.havePermission(userId, 'task.view');   // 权限
+
+  var tasksCursor = KTask.getTasks(userId);
+
+  var customerList = [];
+  tasksCursor.forEach(function (task) {
+    customerList.push(task.customerId);
+  });
+  var customersCursor = KCustomer.getCustomersByIdList(customerList);
+
+  return [tasksCursor, customersCursor];
+});
+
 // 获得某一类型任务数据
 Meteor.publish('getTasksByType', function (taskType) {
   log('getTasksByType', taskType);
@@ -56,6 +73,13 @@ Meteor.publish('getSupportInfo', function (opt) {
 // var info = SupportInfo.findOne({type: 'task', service: 'companyRegist'});
 // log("getSupportInfo-info", info.items);
   return SupportInfo.find(opt);
+});
+
+// 获取某个team的任务的steps信息
+Meteor.publish('getStepsDes', function (taskTypeList) {
+  var userId = KUtil.isLogin(this); // 登录状态
+
+  return KTaskSteps.getStepsDes(userId, taskTypeList);
 });
 
 // 获得相关的用户信息

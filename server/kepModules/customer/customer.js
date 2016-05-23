@@ -198,6 +198,13 @@ KCustomer.getCustomers = function (userId) {
     return Customers.find({_id: customerId});
  }
 
+ /*
+  * 批量获取客户信息
+  **/
+KCustomer.getCustomersByIdList = function (customerList) {
+  check(customerList, [String]);
+  return Customers.find({_id: {$in: customerList}});
+}
 
 
 

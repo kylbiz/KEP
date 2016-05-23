@@ -90,6 +90,21 @@ KTeam.roleOfUser = function (userId) {
 }
 
 /*
+ * 获取用户的teamId
+ **/
+KTeam.getTeamId = function (userId) {
+  check(userId, String);
+
+  var userInfo = Meteor.users.findOne({_id: userId}) || {team: {teamId: ""}};
+  if (!userInfo.team.teamId) {
+    throw new Meteor.Error('查找的信息不存在');
+  }
+
+  return userInfo.team.teamId || "";
+}
+
+
+/*
  * 具体的操作权限判断
  *
  * 用户角色
@@ -123,6 +138,7 @@ KTeam.havePermission = function (userId, opt, infoId) {
     // 'companyRegist.view', 'companyRegist.create', 'companyRegist.update', 'companyRegist.delete', // 公司注册的权限
     'task.view', 'task.create', 'task.update', 'task.delete', // 任务管理的权限
     'companyInfo.view', 'companyInfo.create', 'companyInfo.update', 'companyInfo.delete', // 客户公司资料的权限 （目前无对应的权限）
+    'taskSteps.view', 'taskSteps.create', 'taskSteps.update', 'taskSteps.delete', // 团队对应的taskSteps的权限 （目前无对应的权限）
   ];
 
   if (optList.indexOf(opt) < 0) {

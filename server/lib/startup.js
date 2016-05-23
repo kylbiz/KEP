@@ -5,7 +5,7 @@
 Meteor.startup(function () {
   //initAccount();   // 初始化管理员
   initSupportInfo();  // 初始化相关的辅助信息
-  Test.testData();    // 测试数据 
+  Test.testData();    // 测试数据
 });
 
 
@@ -36,12 +36,12 @@ function initSupportInfo() {
   var retInfo = getSupportInfo();
 
   // 具体步骤信息的schema
-  StepInfosSchema.remove({createBy: 'default'});
+  StepInfosSchema.remove({createdBy: 'default'});
   var stepInfosSchema = retInfo.stepInfosSchema || [];
   KUtil.insertListToColl(stepInfosSchema, StepInfosSchema);
 
   // 不同任务的步骤
-  TaskSteps.remove({createBy: 'default'});
+  TaskSteps.remove({createdBy: 'default'});
   var taskSteps = retInfo.taskSteps || [];
   KUtil.insertListToColl(taskSteps, TaskSteps, function (taskStep) {
     taskStep.startTime = new Date();
@@ -62,10 +62,11 @@ function getSupportInfo() {
     'taskSteps': [
       { // 核名预设步骤
         type: 'companyCheckName',
-        createBy: 'default',
+        createdBy: 'default',
+        stepsDes: ['资料填写', '签字确认', '提交工商', '核名通过', '申请地址', '准备公章'],
         steps: [
           {
-            name: '填写资料',
+            name: '资料填写',
             startTime: '',
             updateTime: '',
             finished: false,  // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
@@ -116,7 +117,8 @@ function getSupportInfo() {
       },
       { // 工商登记预设步骤
         type: 'companyRegistInfo',
-        createBy: 'default',
+        createdBy: 'default',
+        stepsDes: ['资料填写', '签字确认', '提交工商', '登记通过'],
         steps: [
           {
             name: '资料填写',
@@ -156,7 +158,7 @@ function getSupportInfo() {
     'stepInfosSchema': [
       {    // 公司核名申请书资料
         _id: 'stepInfoCompanyCheckName',
-        createBy: 'default', // 系统定义 用户自定义的用 'customer'
+        createdBy: 'default', // 系统定义 用户自定义的用 'customer'
         schema: {
           'company': {
             type: "Object",
@@ -277,7 +279,7 @@ function getSupportInfo() {
       },
       {    // 工商登记资料
         _id: 'stepInfoCompanyRegistInfo',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
           "company": {
             type: "Object",
@@ -680,7 +682,7 @@ function getSupportInfo() {
       },
       {   // 公司核名 - 客户确认
         _id: 'stepInfoCustomerConfirm',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
           name: {
             type: "String",
@@ -694,7 +696,7 @@ function getSupportInfo() {
       },
       { // 公司核名 - 提交工商
         _id: 'stepInfoGovSubmit',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
           time: {
             type: "Date",
@@ -704,7 +706,7 @@ function getSupportInfo() {
       },
       {   // 公司核名 - 核名通过
         _id: 'stepInfoCheckNamePass',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
           companyName: {
             type: "String",
@@ -714,7 +716,7 @@ function getSupportInfo() {
       },
       {  // 公司核名 - 申请地址
         _id: 'stepInfoCompanyAddress',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
           companyAddress: {
             type: "String",
@@ -724,14 +726,14 @@ function getSupportInfo() {
       },
       { //  公司核名 - 公章准备
         _id: 'stepInfoOfficialSeal',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
 
         }
       },
       { // 工商登记 - 登记通过
         _id: 'stepInfoCompanyRegistPass',
-        createBy: 'default',
+        createdBy: 'default',
         schema: {
           registPass: {
             type: "Boolean",
@@ -762,6 +764,15 @@ function getSupportInfo() {
         items: [
           {name: 'companyCheckName', label: '核名'},
           {name: 'companyRegistInfo', label: '工商登记'},
+        ]
+      },
+      {
+        type: 'stepBackReason',
+        items: [
+          {name: '客户更改需求', label: '客户更改需求'},
+          {name: '工商提交失败', label: '工商提交失败'},
+          {name: '我方操作失误', label: '我方操作失误'},
+          {name: '其他', label: '其他'}
         ]
       }
     ],
