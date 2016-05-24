@@ -37,22 +37,6 @@ FlowRouter.route('/task/:taskType/:taskId', {
   }
 });
 
-
-//公司核名
-FlowRouter.route('/checkname', {
-  name: 'checkname',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "checkname"});
-  }
-});
-//工商登记
-FlowRouter.route('/register', {
-  name: 'register',
-  action: function() {
-    BlazeLayout.render("mainLayout", {content: "register"});
-  }
-});
-
 // FlowRouter.route('/workbench/:tableId', {
 //   name: 'workbenchTable',
 //   action: function() {

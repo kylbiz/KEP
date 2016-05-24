@@ -57,6 +57,13 @@ Meteor.publish("getTasksBySerId", function (serviceId) {
   return KTask.getTasksBySerId(serviceId);
 });
 
+Meteor.publish('getTaskInfo', function (taskId) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  KUtil.havePermission(userId, 'task.view', taskId);   // 权限
+
+  return KTask.getTaskInfo(taskId);
+});
+
 
 // 通过客户获取其相对的公司信息
 Meteor.publish("getCompanyInfoByCustomer", function (customerId) {

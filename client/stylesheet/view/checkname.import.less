@@ -24,8 +24,39 @@
 	button{
 		min-width: 40px
 	}
-	input{
-		min-width: 270px;
-		min-height: 30px;
+}
+.margin-top-bottom{
+	.col-md-4{
+		button{
+			min-width: 175px;			
+		}
+	}
+	.col-md-6{
+		button{
+			min-width: 175px;
+		}
+	}
+}
+
+.row{
+	.kepCheckbox{
+		label{
+			color: @word_color;	
+		}
+		.af-checkbox-group{
+			width: 80%;
+			height: 120px;
+			padding-top: 46px;
+			.center;
+			background-color: #f8f8f8 !important;
+			border-radius: 6px;
+			.checkbox{
+				display: inline !important;
+				padding: 18px !important;
+				label{
+					font-size: 16px !important;
+				}
+			}
+		}
 	}
 }

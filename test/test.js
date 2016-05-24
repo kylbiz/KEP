@@ -197,8 +197,8 @@ function other(hostId, customerId) {
     payed: true, // 是否付费 有/无
     // companyInfo: '',  // 公司信息
     tasks: [
-      {type: 'companyCheckName', taskId: 'testCompanyCheckName'},
-      {type: 'companyRegistInfo', taskId: 'testCompanyRegist'},
+      {type: 'companyCheckName', id: 'testCompanyCheckName'},
+      {type: 'companyRegistInfo', id: 'testCompanyRegist'},
     ], // 子任务id 列表
   });
 

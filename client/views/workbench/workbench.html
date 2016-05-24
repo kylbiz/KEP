@@ -26,13 +26,15 @@
             </div>
             <div class="col-md-4 workbench_change_btn">
                 {{#each tasks}}
-                <button type="button" class="btn btn-info" style="width: 90px"><a value="{{name}}" href="#">{{label}}</a></button>
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-info btn-sm" value="{{name}}">{{label}}</button>
+                </div>
                 {{/each}}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 workbench_search">
                 <div class="form-inline pull-right">
                     <input type="text" class="form-control" placeholder="">
-                    <button class="btn btn-default" type="submit">搜索</button>
+                    <button class="btn btn-success" type="submit">搜索</button>
                 </div>
             </div>
         </div>
@@ -53,18 +55,18 @@
 </template>
 <!-- 核名表 -->
 <template name="workbench_checkname">
-    <table id="workbench_checkname_table" class="table table-hover table-bordered">
+    <table id="workbench_checkname_table" class="table table-bordered">
         <thead>
             <tr>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">客户名称</th>
-                <th colspan="6" style="text-align: center;background-color: beige;">办理进度</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">耗时/天</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">业务员</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">操作</th>
+                <th rowspan="2" class="thgrey">客户名称</th>
+                <th colspan="6" class="thdeepgrey">办理进度</th>
+                <th rowspan="2" class="thgrey">耗时/天</th>
+                <th rowspan="2" class="thgrey">业务员</th>
+                <th rowspan="2" class="thgrey">操作</th>
             </tr>
             <tr>
                 {{#each this.stepsDes}}
-                <th>{{this}}</th>
+                    <th>{{this}}</th>
                 {{/each}}
             </tr>
         </thead>
@@ -84,10 +86,11 @@
         <td style="line-height:83px;font-size: 15px;">{{host.name}}</td>
         <td>
             <div style="margin-bottom: 9px">
-                <button class="btn btn-info btn-sm" data-toggle="modal" data-taskid="{{_id}}" data-serviceid="{{serviceId}}" data-customerid="{{customerId}}"  data-target="#progress_control">办理进度控制</button>
+                <button class="btn btn-info btn-sm" data-toggle="modal" data-taskid="{{_id}}" data-serviceid="{{serviceId}}" data-customerid="{{customerId}}" data-target="#progress_control">办理进度控制</button>
             </div>
             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config" data-taskid="{{_id}}">设置</button>
-            <button class="btn btn-info btn-sm"><a href="{{goToTask name _id}}">查看</a></button>
+            <!-- <button class="btn btn-info btn-sm"><a href="{{goToTask name _id}}">查看</a></button> -->
+            <a class="btn btn-info btn-sm" href="{{goToTask name _id}}">查看</a>
         </td>
     </tr>
 </template>
@@ -96,16 +99,16 @@
     <table id="workbench_ICBCregister_table" class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">客户名称</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">公司名称</th>
-                <th colspan="4" style="text-align: center;background-color: beige;">办理进度</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">耗时/天</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">业务员</th>
-                <th rowspan="2" style="line-height: 50px;font-size: 16px">操作</th>
+                <th rowspan="2" class="thgrey">客户名称</th>
+                <th rowspan="2" class="thgrey">公司名称</th>
+                <th colspan="4" class="thdeepgrey">办理进度</th>
+                <th rowspan="2" class="thgrey">耗时/天</th>
+                <th rowspan="2" class="thgrey">业务员</th>
+                <th rowspan="2" class="thgrey">操作</th>
             </tr>
             <tr>
                 {{#each this.stepsDes}}
-                  <th>{{this}}</th>
+                <th>{{this}}</th>
                 {{/each}}
             </tr>
         </thead>
@@ -129,7 +132,7 @@
                 <button class="btn btn-info btn-sm" data-toggle="modal" data-taskid="{{_id}}" data-target="#progress_control">办理进度控制</button>
             </div>
             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config" data-taskid="{{_id}}">设置</button>
-            <button class="btn btn-info btn-sm"><a href="/console/register">查看</a></button>
+            <a class="btn btn-info btn-sm" href="{{goToTask name _id}}">查看</a>
         </td>
     </tr>
 </template>
@@ -149,7 +152,7 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="progress_reset">
                                 {{#each stepsBack}}
-                                    <option value="{{this}}">{{this}}</option>
+                                <option value="{{this}}">{{this}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -158,9 +161,9 @@
                         <label for="progress_reason" class="col-sm-2 control-label">原因:</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="progress_reason">
-                            {{#each stepBackReason}}
+                                {{#each stepBackReason}}
                                 <option value="{{name}}">{{label}}</option>
-                            {{/each}}
+                                {{/each}}
                             </select>
                         </div>
                     </div>
@@ -201,9 +204,9 @@
                         <label for="principal" class="col-sm-2 control-label">负责人</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="hostId">
-                            {{#each hosts}}
+                                {{#each hosts}}
                                 <option value="{{_id}}">{{username}}</option>
-                            {{/each}}
+                                {{/each}}
                             </select>
                         </div>
                     </div>
@@ -216,10 +219,8 @@
                     <h3 class="pull-left"><span class="label label-info label-lg" style="line-height: 45px;">邮箱通知</span></h3>
                     <button id="add_email_btn" class="btn btn-default btn-sm pull-right" style="margin-top: 33px"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
                 </div>
-                <form class="form-inline" style="margin-top: 80px" id="add_email_form" >
-                    {{#each taskInfo.remind.email}}
-                        {{> add_email}}
-                    {{/each}}
+                <form class="form-inline" style="margin-top: 80px" id="add_email_form">
+                    {{#each taskInfo.remind.email}} {{> add_email}} {{/each}}
                 </form>
             </div>
             <!-- 短信通知 -->
@@ -229,11 +230,7 @@
                     <button id="add_tel_btn" class="btn btn-default btn-sm pull-right" style="margin-top: 33px"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
                 </div>
                 <form class="form-inline" id="add_tel_form" style="margin-top: 80px">
-                    {{#each taskInfo.remind.sms}}
-                        {{> add_tel}}
-                    {{/each}}
-
-
+                    {{#each taskInfo.remind.sms}} {{> add_tel}} {{/each}}
                 </form>
             </div>
             <div class="modal-footer">
@@ -266,7 +263,7 @@
         </div>
         <div class="form-group">
             <label for="remarks">备注：</label>
-            <input type="email" class="form-control remindRemark" value="{{remark}}"  placeholder="(选填)">
+            <input type="email" class="form-control remindRemark" value="{{remark}}" placeholder="(选填)">
         </div>
         <button type="submit" class="btn btn-default delRemind">删除</button>
     </div>

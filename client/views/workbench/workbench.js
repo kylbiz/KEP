@@ -25,9 +25,7 @@ Template.breadcrumb_workbench.helpers({
 });
 
 Template.breadcrumb_workbench.events({
-  'click .workbench_change_btn a': function (event) {
-    // event.preventDefault();
-    // log("workbench_change_btn", $(event.currentTarget).attr("value"));
+  'click .workbench_change_btn button': function (event) {
     Session.set('taskType', $(event.currentTarget).attr("value")); // 切换子任务
   }
 });
@@ -160,8 +158,10 @@ Template.workbench_config.onRendered(function () {
     Session.set('selectTaskId', taskId);
   });
 
-  $('#config').on('hidden.bs.modal', function (event) {
+  $('#config').on('hidden.bs.modal', '.modal', function (event) {
+    // log("config hidden.bs.modal", $(this));
     delete Session.keys['selectTaskId'];
+    $(this).removeData('bs.modal');
     $(this).removeAttr('bs.modal');
   });
 

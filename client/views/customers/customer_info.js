@@ -37,10 +37,21 @@ Template.customerService.helpers({
 
 // 业务流程
 Template.serviceInfo.onRendered(function () {
+  if ($('.table1').height()<347) {
+      var ChildLength = $('.table1').height()-110;
+      console.log(ChildLength);
+      $('.serviceInfoTable_Button').height(ChildLength);
+  }
+  else{
+      $('.serviceInfoTable_Button').height(260);
+  }
+
   var serviceId = this.data.serviceId || "";
   this.autorun(function () {
     Meteor.subscribe("getTasksBySerId", serviceId);
   });
+
+
 });
 
 

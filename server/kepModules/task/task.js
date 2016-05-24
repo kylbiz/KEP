@@ -237,6 +237,16 @@ KTask.getTasksBySerId = function (serviceId) {
 }
 
 
+/*
+ * 通过taskId获取某一task的信息
+ **/
+KTask.getTaskInfo = function (taskId) {
+  check(taskId, String);
+
+  return Tasks.find({_id: taskId});
+}
+
+
 
 /*
  * 初始化子任务下的步骤
