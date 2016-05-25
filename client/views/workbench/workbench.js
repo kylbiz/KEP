@@ -187,10 +187,10 @@ Template.workbench_config.helpers({
 
 Template.workbench_config.events({
   'click #add_email_btn': function (event, template) {
-    var template = Blaze.render(Template.add_email, template.$('#add_email_form').get(0));
+    Blaze.render(Template.add_email, template.$('#add_email_form').get(0));
   },
   'click #add_tel_btn': function (event, template) {
-    var template = Blaze.render(Template.add_tel, template.$('#add_tel_form').get(0));
+    Blaze.render(Template.add_tel, template.$('#add_tel_form').get(0));
   },
   'click .delRemind': function (event) {
     $(event.currentTarget).closest(".module").remove();

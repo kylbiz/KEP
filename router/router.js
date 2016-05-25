@@ -33,7 +33,7 @@ FlowRouter.route('/task/:taskType/:taskId', {
       'companyRegistInfo': 'register'
     }[taskType] || '';
 
-    BlazeLayout.render("mainLayout", {content: contentTemplate});
+    BlazeLayout.render("mainLayout", {content: "checkname"});
   }
 });
 

@@ -43,4 +43,65 @@ AutoForm.hooks({
       });
     }
   },
+  'insertCompanyInfo': {
+    endSubmit: function () {
+      var taskId = FlowRouter.getParam('taskId');
+      var stepName = Session.get('stepName');
+      log('insertCompanyInfo endSubmit', taskId, stepName, this.insertDoc);
+
+      if (this.insertDoc) {
+        Meteor.call('updateTaskStepData', taskId, stepName, this.insertDoc, function (error, result) {
+          if (error) {
+            log("insertCompanyInfo error", error);
+            alert("更新数据失败！" + error);
+          } else {
+            log("更新数据成功! ");
+          }
+        });
+      }
+
+      $("#insertCompanyInfo [type=submit]").removeAttr("disabled");
+      Session.set('showEdit', false);
+    }
+  },
+  'insertRegisterInfo': {
+    endSubmit: function () {
+      var taskId = FlowRouter.getParam('taskId');
+      var stepName = Session.get('stepName');
+      log('insertRegisterInfo endSubmit', taskId, stepName, this.insertDoc);
+
+      if (this.insertDoc) {
+        Meteor.call('updateTaskStepData', taskId, stepName, this.insertDoc, function (error, result) {
+          if (error) {
+            log("insertRegisterInfo error", error);
+            alert("更新数据失败！" + error);
+          } else {
+            log("更新数据成功! ");
+          }
+        });
+      }
+
+      $("#insertRegisterInfo [type=submit]").removeAttr("disabled");
+      Session.set('showEdit', false);
+    }
+  },
+  'insertCommonStepInfo': {
+    endSubmit: function () {
+      var taskId = FlowRouter.getParam('taskId');
+      var stepName = Session.get('stepName');
+      log('insertCommonStepInfo endSubmit', taskId, stepName, this.insertDoc);
+
+      if (this.insertDoc) {
+        Meteor.call('updateTaskStepCommonData', taskId, stepName, this.insertDoc, function (error, result) {
+          if (error) {
+            log("insertCompanyInfo error", error);
+            alert("更新数据失败！" + error);
+          } else {
+            log("更新数据成功! ");
+          }
+          $("#insertCommonStepInfo [type=submit]").removeAttr("disabled");
+        });
+      }
+    }
+  }
 });

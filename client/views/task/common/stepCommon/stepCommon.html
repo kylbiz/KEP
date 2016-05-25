@@ -1,0 +1,24 @@
+<template name="stepCommonTempalte">
+  {{#if schemaReady}}
+    {{#autoForm schema=schema id="insertCommonStepInfo" doc=this.data}}
+        <fieldset>
+          {{#each schema._schemaKeys}}
+            <!-- <div class="row border-bottom paddingEight {{#if $first}}margin-top{{/if}}"> -->
+            <div class="row border-bottom paddingEight">
+               <div class="col-md-8">
+                 {{> afQuickField name=this template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+               </div>
+             </div>
+          {{/each}}
+        </fieldset>
+        <div class="row margin-top-bottom">
+          <div class="col-md-6">
+              <button type="submit" class="btn btn-success pull-right">保存</button>
+          </div>
+          <div class="col-md-6">
+              <a class="btn btn-default pull-left">取消</a>
+          </div>
+        </div>
+    {{/autoForm}}
+  {{/if}}
+</template>

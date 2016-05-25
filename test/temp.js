@@ -84,6 +84,20 @@ function testMatch (test) {
 // testMatch({list: [{a: '123'}, {}]});
 
 
+function testSplit () {
+  var arr = 'name-area-industry-type'.split('-');
+  console.log(arr);
+}
+// testSplit();
+
+
+function testReplace () {
+  str = 'aa.$.bb';
+  console.log(str.replace('$', 0), str );
+}
+// testReplace();
+
+
 // log("test/temp.js end");
 
 

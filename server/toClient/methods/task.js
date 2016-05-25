@@ -15,9 +15,33 @@ Meteor.methods({
     // args 正确性
     var userId = KUtil.isLogin();
     // 账号权限
-    KUtil.havePermission(userId, 'task.update');
+    KUtil.havePermission(userId, 'task.update', taskId);
     // 更新
     return KTask.updateTaskBasic(taskId, taskInfo);
+  },
+  'updateTaskStepData': function (taskId, stepName, stepData) {
+    // args 正确性
+    var userId = KUtil.isLogin();
+    // 账号权限
+    KUtil.havePermission(userId, 'task.update', taskId);
+    // 更新
+    return KTask.updateTaskStepData(taskId, stepName, stepData);
+  },
+  'sureStepFinish': function (taskId, stepName) {
+    // args 正确性
+    var userId = KUtil.isLogin();
+    // 账号权限
+    KUtil.havePermission(userId, 'task.update', taskId);
+    // 更新
+    return KTask.sureStepFinish(taskId, stepName);
+  },
+  'updateTaskStepCommonData': function (taskId, stepName, stepData) {
+    // args 正确性
+    var userId = KUtil.isLogin();
+    // 账号权限
+    KUtil.havePermission(userId, 'task.update', taskId);
+    KTask.updateTaskStepData(taskId, stepName, stepData);
+    return KTask.sureStepFinish(taskId, stepName);
   },
   'updateProgress': function (taskId, progressInfo) {
     // 进度控制

@@ -41,8 +41,8 @@ KTask.createTask = function (taskInfo) {
   var serviceInfo = retList[1];
   var taskStepInfo = retList[2];
 
-  var steps = [];
-
+  var steps = taskStepInfo.steps || [];
+  steps[0].startTime = timeNow;  // 初始化任务的第一步
 
   var remind = {};
   if (taskInfo.email) {
@@ -86,7 +86,7 @@ KTask.createTask = function (taskInfo) {
     status: 0,    // "0 - 处理中, 1 - 已完成， -1 - 废弃"
     remind: remind,   // 通知
     taskStepId: taskStepInfo._id,  // 实际使用的taskstep数据结构
-    steps: taskStepInfo.steps,
+    steps: steps,
     progressChange: []
   });
 }
@@ -122,10 +122,74 @@ KTask.updateTaskBasic = function (taskId, taskInfo) {
     'remind.email': taskInfo.email || [],
     'remind.sms': taskInfo.sms || [],
   }});
-
-
-
 }
+
+
+/*
+ * 通过autoform更新任务步骤中数据
+ **/
+KTask.updateTaskStepData = function (taskId, stepName, stepData) {
+  check(taskId, String);
+  check(stepName, String);
+
+  var taskInfo = KUtil.dataIsInColl({coll: Tasks, dataId: taskId});
+  log('KTask.updateTaskStepData', taskId, stepName, stepData || {});
+
+  var timeNow = new Date();
+  return Tasks.update({"_id": taskId, "steps.name": stepName}, {
+    $set: {
+      // "steps.$.startTime": timeNow, // 开始时间设计上有问题
+      "steps.$.updateTime": timeNow,
+      "steps.$.data": stepData || {},
+      "updateTime": timeNow
+    }
+  });
+}
+
+
+/*
+ * 确定某一步已完成
+ */
+KTask.sureStepFinish = function (taskId, stepName) {
+  check(taskId, String);
+  check(stepName, String);
+  var taskInfo = KUtil.dataIsInColl({coll: Tasks, dataId: taskId});
+  log('sureStepFinish', taskId, stepName);
+
+  var timeNow = new Date();
+
+  // 更新状态
+  var ret = Tasks.update({_id: taskId, "steps.name": stepName}, {
+    $set: {
+      "steps.$.updateTime": timeNow,
+      "steps.$.finished": true,
+      "updateTime": timeNow
+    }
+  });
+
+  // 更新下一步startTime
+  var nextStepName = findNextStep(taskInfo.steps, stepName);
+  if (nextStepName) {
+    Tasks.update({_id: taskId, "steps.name": nextStepName}, {
+      $set: {
+        "steps.$.startTime": timeNow,
+      }
+    });
+  }
+
+  return ret;
+}
+
+// 获取下一步的step name
+function findNextStep (steps, stepName) {
+  for (var key in steps) {
+    if (steps[key].name == stepName) {
+      return (steps[key + 1] || {}).name || "";
+    }
+  }
+}
+
+
 
 /*
  * 更新任务进度

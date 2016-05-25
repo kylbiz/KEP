@@ -1,3 +1,141 @@
+<!-- 工商登记申请书 -->
+<template name="register_form">
+	{{#if showEdit}}
+      {{#with this}}
+        {{> register_form_edit}}
+      {{/with}}
+  {{else}}
+      {{#with this}}
+        {{> register_form_preview}}
+      {{/with}}
+  {{/if}}
+</template>
+
+
+
+<!-- 工商登记申请书预览 -->
+<template name="register_form_preview">
+    <!-- 公司章程下载 -->
+    <div class="row border-bottom">
+            <div class="col-md-10 margin-top-bottom">
+                <form class="form-inline center">
+                    <input type="text" class="form-control input-text-min" placeholder="公司章程">
+                    <button class="btn btn-success btn-sm">下载</button>
+                </form>
+            </div>
+    </div>
+    <!-- 股东会议决议书下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="股东会议决议书">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 股东确定书下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="股东确定书">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 租房合同产权说明下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="租房合同产权说明">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 公司登记申请书下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="公司登记申请书">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <!-- 公司登记审核表下载 -->
+    <div class="row border-bottom">
+        <div class="col-md-10 margin-top-bottom">
+            <form class="form-inline center">
+                <input type="text" class="form-control input-text-min" placeholder="公司登记审核表">
+                <button class="btn btn-success btn-sm">下载</button>
+            </form>
+        </div>
+    </div>
+    <div class="row margin-top-bottom">
+        <div class="col-md-4">
+            <button class="btn btn-success pull-right stepFinished">确认完成</button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-info registerEdit center"><a class="dataEdit">查看/编辑</a></button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default pull-left">全部下载</button>
+        </div>
+    </div>
+</template>
+
+
+<!--  工商登记申请书编辑-表单  -->
+<template name="register_form_edit">
+	{{#if schemaReady}}
+    {{#autoForm schema=schema id="insertRegisterInfo" doc=stepInfo}}
+      <fieldset>
+         <!-- 公司名等 -->
+         <!-- 经营期限等 -->
+         <!-- 经营范围 -->
+          {{> registercompanyinfo }}
+          <!-- 股东信息等 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">股东信息</p>
+          </div>
+          {{> registerholders }}
+          <!-- 法人信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">法人信息</p>
+          </div>
+          {{> registerlegalPerson}}
+          <!-- 监事信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">监事信息</p>
+          </div>
+          {{> registersupervisor }}
+          <!-- 经理信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">经理信息</p>
+          </div>
+          {{> registermanager }}
+          <!-- 财务负责人信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">财务负责人信息</p>
+          </div>
+          {{> registerfinancialStaff }}
+          <!-- 企业联络员信息 -->
+          <div class="row margin-top">
+            <p class="holders-info-full">企业联络员信息</p>
+          </div>
+          {{> registercontractor }}
+      </fieldset>
+	    <div class="row margin-top-bottom">
+	        <div class="col-md-6">
+	            <button type="submit" class="btn btn-success pull-right">保存</button>
+	        </div>
+	        <div class="col-md-6">
+	            <a class="btn btn-default pull-left">取消</a>
+	        </div>
+	    </div>
+    {{/autoForm}}
+ {{/if}}
+</template>
+
+
 <!-- 公司名等表单 -->
 <template name="registercompanyinfo">
 	<div class="row border-bottom margin-top">
