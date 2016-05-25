@@ -25,10 +25,3 @@ Template.register.events({
     Session.set('stepTemplate', $(event.currentTarget).attr("value"));
   },
 });
-
-Template.register_form_edit.helpers({
-  collectionName: function () {
-    // return KTask.initTaskStep("stepInfoCompanyRegistInfo");
-    return "TempStruct";
-  }
-});

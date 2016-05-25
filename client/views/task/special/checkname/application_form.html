@@ -1,0 +1,179 @@
+<!-- 公司核名填写资料 -->
+<template name="application_form">
+    {{#if showEdit}}
+        {{#with this}}
+          {{> application_form_edit}}
+        {{/with}}
+    {{else}}
+        {{#with this}}
+          {{> application_form_preview}}
+        {{/with}}
+    {{/if}}
+</template>
+
+
+<!-- 申请书预览 -->
+<template name="application_form_preview">
+    <h3 class="border-bottom">申请书 - 预览</h3>
+    <div class="row margin-top-bottom">
+        <div class="col-md-4">
+            <button class="btn btn-success pull-right stepFinished">确认完成</button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-info center dataEdit">编辑</button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default pull-left">下载</button>
+        </div>
+    </div>
+</template>
+
+
+<!--  公司核名申请书编辑-表单  -->
+<template name="application_form_edit">
+    <div class="row grey-container border-bottom">
+        <button class="btn btn-danger pull-right goldweapon-btn">一企查-企业核名神器</button>
+    </div>
+    {{#if schemaReady}}
+      {{#autoForm schema=schema id="insertCompanyInfo" doc=stepInfo}}
+          <fieldset>
+              <!-- 企业字号 -->
+             <div class="row border-bottom margin-top paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.nativeName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+
+            <div class="row border-bottom paddingEight">
+                 <div class="col-md-8" id="drag-area">
+                  {{#each $mapped stepInfo.company.alternativeName}}
+                    <div class="module col-md-12" >
+                      {{#with alternativeName this.name $index}}
+                        {{> afQuickField name=dataName value=name data-schema-key=dataName template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
+                      {{/with}}
+                        <div class="col-sm-4">
+                            <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                  {{/each}}
+                 </div>
+             </div>
+
+              <!-- 备选名 -->
+              <div class="module col-md-12" id="backupName" style="display: none;">
+                  {{> afQuickField name='company.alternativeName.$.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
+                  <div class="col-sm-4">
+                      <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      <a class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></a>
+                  </div>
+              </div>
+
+<!--               <div class="row border-bottom paddingEight">
+                 <div class="col-md-8" id="drag-area">
+                    {{> afQuickField name='company.alternativeName' value=name template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
+                 </div>
+             </div> -->
+
+
+             <!-- 备选字号 -->
+<!--              <div class="row border-bottom paddingEight">
+                <div class="col-md-8">
+                  <div class="col-sm-4 line-height">
+                     <label for="col-sm-4 line-height">备选字号</label>
+                  </div>
+                  <div class="col-sm-8" id="drag-area">
+                    {{#each stepInfo.company.alternativeName}}
+                      {{> reserveWord }}
+                    {{/each}}
+                  </div>
+                </div>
+             </div> -->
+
+             <!-- 添加按钮 -->
+             <div class="row border-bottom paddingEight">
+               <a class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></a>
+             </div>
+             <!-- 企业类型 注册区域 行业类型 -->
+             <div class="row paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.type' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+              <div class="row paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.zone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+              <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.industryType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+             <!-- 名称结构 -->
+              <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.nameStruct' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   <textarea style="margin-right: 13px;width: 63%;" class="form-control pull-right" rows="3" readonly="readonly" id="showCompanyNames" value="{{showCompanyNames}}"></textarea>
+                 </div>
+             </div>
+             <!-- 经营范围 -->
+             <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.businessScope' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+             <!-- 公司地址 -->
+             <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.address' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+             <!-- 公司股东 -->
+              <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='holders' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+             <!-- 添加按钮 -->
+  <!--            <div class="row border-bottom paddingEight">
+                 <button class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></button>
+             </div> -->
+          </fieldset>
+
+          <div class="row margin-top-bottom">
+              <div class="col-md-6">
+                  <!-- <button type="submit" class="btn btn-success pull-right">保存</button> -->
+                  <button type="submit" class="btn btn-primary">保存</button>
+              </div>
+              <!-- <div class="col-md-6">
+                  <button class="btn btn-default pull-left">取消</button>
+              </div> -->
+          </div>
+      {{/autoForm}}
+    {{/if}}
+    <!-- 一企查神器 -->
+    <div class="container border-all-grey goldweapon pull-right" id="goldweapon">
+        {{> goldweapon }}
+    </div>
+</template>
+
+<!-- 备选字号 -->
+<template name="reserveWord">
+    <div class="module margin-bottom">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" value={{this.name}}>
+                </div>
+                <div class="col-sm-5">
+                    <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    <a class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</template>
+
+
+

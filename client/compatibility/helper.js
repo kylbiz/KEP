@@ -40,7 +40,6 @@ if (typeof UI !== 'undefined') {
     return FlowRouter.path('task', {taskType: taskType, taskId: taskId});
   });
 
-
   UI.registerHelper("$mapped", function(arr) {
     if (!Array.isArray(arr)) {
       try {
@@ -69,5 +68,4 @@ if (typeof UI !== 'undefined') {
 
     return mappedArray || [];
   });
-
 }

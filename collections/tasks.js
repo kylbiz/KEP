@@ -182,7 +182,8 @@ Tasks.attachSchema( new SimpleSchema ({
   'steps.$.data': {
     type: Object,
     label: '',
-    optional: true
+    optional: true,
+    blackbox: true
   },
   'progressChange': {
     type: Array,

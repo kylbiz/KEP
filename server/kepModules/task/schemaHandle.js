@@ -11,6 +11,9 @@ SchemaHandle = {};
 SchemaHandle.getSchema = function (schemaId) {
   check(schemaId, String);
   var schemaInfo = KUtil.dataIsInColl({coll: StepInfosSchema, dataId: schemaId});
+
+  // log("SchemaHandle.getSchema", schemaId, schemaInfo);
+
   return schemaInfo.schema;
   // var schemaOrigin = convToSchemaOrigin(schemaInfo.schema);
   // return schemaOrigin;

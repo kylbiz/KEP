@@ -55,14 +55,8 @@
 <template name="checkname_content_ul">
     <ul id="task" class="task_ul">
       {{#each this}}
-        <li><a value="{{this}}" href="#">{{this}}</a></li>
+        <li><a value="{{this}}" class="{{#if isSelect this}}selected{{/if}}">{{this}}</a></li>
       {{/each}}
-      <!-- <li><a value="application_form" href="#">资料填写</a></li>
-      <li><a value="application_form_confirm" href="#">签字确认</a></li>
-      <li><a value="application_form_submitICBC" href="#">提交工商</a></li>
-      <li><a value="application_form_checkSucess" href="#">核名通过</a></li>
-      <li><a value="application_form_applicationAddress" href="#">申请地址</a></li>
-      <li><a value="application_form_prepareSeal" href="#">准备公章</a></li> -->
     </ul>
 </template>
 
@@ -70,7 +64,7 @@
 <template name="task_title">
     <div class="row writedata-title">
         <div class="col-md-6">
-            <p>企业名称预先核准申请书</p>
+            <p>企业名称预先核准</p>
         </div>
         <div class="col-md-6">
             <button class="pull-right btn btn-default" data-toggle="modal" data-target="#remark_modal">备注信息</button>
@@ -238,22 +232,4 @@
     <div class="container">
         <button class="center btn btn-default">加载更多</button>
     </div>
-</template>
-
-
-
-<template name="reserveWord">
-  <div class="margin-bottom">
-    <form class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-7">
-           <input type="text" class="form-control">
-        </div>
-        <div class="col-sm-5">
-           <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
-            <button class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></button>
-        </div>
-      </div>
-    </form>
-  </div>
 </template>

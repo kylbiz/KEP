@@ -209,6 +209,8 @@ function getSupportInfo() {
           "company-alternativeName-$-name": {
             type: "String",
             label: "备选字号",
+            minCount: 0,
+            maxCount: 10,
             optional: true
           },
           'company-moneyAmount': {
@@ -728,7 +730,30 @@ function getSupportInfo() {
         _id: 'stepInfoOfficialSeal',
         createdBy: 'default',
         schema: {
-
+          financial: {
+            type: Boolean,
+            defaultValue: false,
+            label: "财务章",
+            autoform: {
+              type: 'boolean-checkbox'
+            }
+          },
+          corporate: {
+            type: Boolean,
+            defaultValue: false,
+            label: "法人章",
+            autoform: {
+              type: 'boolean-checkbox'
+            }
+          },
+          company: {
+            type: Boolean,
+            defaultValue: false,
+            label: "公司章",
+            autoform: {
+              type: 'boolean-checkbox'
+            }
+          }
         }
       },
       { // 工商登记 - 登记通过
