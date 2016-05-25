@@ -1,20 +1,21 @@
-.tem_change_btn{
+.notice_change_btn{
 	.col-sm-6{
 		background-color: #FFFFFF;
 		border-radius: 5px 0 0 5px;
 		border: 1px solid @border_grey;
 		padding: 5px 20px;
+		text-align: center;
 		&:last-child{
 			border-radius: 0px 5px 5px 0;
 		}
-	}
-	button{
-		.center;
-		min-width: 150px;
-	}
-	@media screen and (max-width:1337px) {
 		button{
-			min-width: 100px;
+			border-width: 0px;
+			outline:none;
+			padding: 3px 35px;
+			text-align: center;
+			&:active{
+				background-color: #22D77D !important;
+			}
 		}
 	}
 }

@@ -34,18 +34,28 @@
 		border-radius: 5px 0 0 5px;
 		border: 1px solid @border_grey;
 		padding: 5px 20px;
+		text-align: center;
 		&:last-child{
 			border-radius: 0px 5px 5px 0;
 		}
-	}
-	button{
-		.center;
-		min-width: 150px;
-	}
-	@media screen and (max-width:1337px) {
 		button{
-			min-width: 100px;
+			border-width: 0px;
+			outline:none;
+			padding: 3px 35px;
+			text-align: center;
+			background-color: #47c1ea;
+			&:active{
+				background-color: #22D77D;
+			}
 		}
+	}
+}
+.letter-spacing{
+	background-color: #fcb34a !important;
+	letter-spacing: 8px !important;
+	text-indent: 8px;
+	&:active{
+		background-color: #22D77D !important;
 	}
 }
 .workbench_search{
@@ -60,4 +70,9 @@
 		}
 	}
 	margin-top: -5px;
+}
+
+.checknameTableCellTd{
+	line-height:83px;
+	font-size: 15px;
 }

@@ -25,14 +25,12 @@ kadira:flow-router
 kadira:blaze-layout
 meteorhacks:npm
 npm-container
-
 email
 accounts-password
 momentjs:moment
 check
 
 less
-mfactory:admin-lte
 twbs:bootstrap
 fortawesome:fontawesome
 ephemer:reactive-datatables
@@ -40,4 +38,4 @@ aldeed:simple-schema
 aldeed:collection2
 aldeed:autoform
 dburles:collection-helpers
-
+kep:admin-lte

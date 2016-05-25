@@ -5,7 +5,7 @@ Template.notice.helpers({
 });
 
 Template.notice.events({
-  'click .notice_change_btn button a'(event){
+  'click .notice_change_btn button'(event){
   	event.preventDefault();
     log('click task', $(event.currentTarget).attr("value")  );
     Session.set('noticeTemplate', $(event.currentTarget).attr("value"));
