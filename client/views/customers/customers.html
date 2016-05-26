@@ -26,13 +26,24 @@
             <div class="col-md-4 content-title">
                 <p>客户管理-公司注册</p>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4 customers_change_btn">
+                <div class="col-sm-6 pull-right">
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#customers_add"><i class="fa fa-plus" aria-hidden="true"></i>添加客户</button>
+                </div>
+            </div>
+            <div class="col-md-4 workbench_search">
+                <div class="form-inline pull-right">
+                    <input type="text" class="form-control" placeholder="">
+                    <button class="btn btn-success" type="submit">搜索</button>
+                </div>
+            </div>
+           <!--  <div class="col-md-8">
                 <div class="form-inline pull-right">
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#customers_add" style="margin-right:25px;width: 120px"><i class="fa fa-plus" aria-hidden="true"></i>添加客户</button>
                     <input type="text" class="form-control" placeholder="">
                     <button class="btn btn-default" type="submit">搜索</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- 添加客户模态框 -->
@@ -76,8 +87,8 @@
         <td>{{host.name}}</td>
         <td>{{createdTime}}</td>
         <td>
-            <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#progress_control"><a href="{{managePath}}">客户管理</a></button>
-            <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#config"><a href="{{companyInfoPath}}">公司资料</a></button>
+            <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#progress_control"><a href="{{managePath}}">客户管理</a></button>
+            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config"><a href="{{companyInfoPath}}">公司资料</a></button>
         </td>
         <td>
             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customers_delete" data-customerid="{{_id}}" data-customername="{{name}}">删除</button>
