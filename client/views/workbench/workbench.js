@@ -17,7 +17,7 @@ Template.breadcrumb_workbench.helpers({
     if (items.length && !Session.get('taskType')) {
       var item = items[0] || {};
       Session.set('taskType', item.name || "companyRegistInfo");
-      log('init session', item);
+      // log('init session', item);
     }
 
     return items;

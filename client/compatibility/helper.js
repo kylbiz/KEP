@@ -69,4 +69,8 @@ if (typeof UI !== 'undefined') {
     return mappedArray || [];
   });
 
+  UI.registerHelper('session',function(input){
+    return Session.get(input);
+  });
+
 }

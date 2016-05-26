@@ -36,6 +36,7 @@ Yiqicha.search = function (opt, callback) {
   var keywords = opt.keywords;
   var allpageNo = opt.allpageNo;
   var pageNo = opt.pageNo;
+  var callback = callback || function () {};
 
   if ( !opt.keywords ) {
     callback("关键字不能为空", null);
@@ -43,11 +44,13 @@ Yiqicha.search = function (opt, callback) {
   }
 
   if (allpageNo && pageNo) {
+    log('getMoreRegistrations', keywords, allpageNo, pageNo);
     crawler.getMoreRegistrations(Yiqicha.config.registrationOptions, keywords, allpageNo, pageNo, callback);
     return;
   }
 
-  crawler.searchCompanyInformation(Yiqicha.config.registrationOptions, keywords, callback || function (err, result) {});
+  log('searchCompanyInformation', keywords);
+  crawler.searchCompanyInformation(Yiqicha.config.registrationOptions, keywords, callback);
 }
 
 

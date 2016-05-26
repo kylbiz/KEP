@@ -40,7 +40,7 @@
               <!-- 企业字号 -->
              <div class="row border-bottom margin-top paddingEight">
                  <div class="col-md-8">
-                   {{> afQuickField name='company.nativeName' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   {{> afQuickField name='company.nativeName' id='companyNavName' class='changeCompany' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
 
@@ -49,7 +49,7 @@
                   {{#each $mapped stepInfo.company.alternativeName}}
                     <div class="module col-md-12" >
                       {{#with alternativeName this.name $index}}
-                        {{> afQuickField name=dataName value=name data-schema-key=dataName template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
+                        {{> afQuickField name=dataName value=name class='changeCompany'  data-schema-key=dataName template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
                       {{/with}}
                         <div class="col-sm-4">
                             <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -62,7 +62,7 @@
 
               <!-- 备选名 -->
               <div class="module col-md-12" id="backupName" style="display: none;">
-                  {{> afQuickField name='company.alternativeName.$.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
+                  {{> afQuickField name='company.alternativeName.$.name' class='changeCompany' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
                   <div class="col-sm-4">
                       <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
                       <a class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></a>
@@ -97,7 +97,7 @@
              <!-- 企业类型 注册区域 行业类型 -->
              <div class="row paddingEight">
                  <div class="col-md-8">
-                   {{> afQuickField name='company.type' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   {{> afQuickField name='company.type' class='changeCompany' id='companyType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
               <div class="row paddingEight">
@@ -107,20 +107,20 @@
              </div>
               <div class="row border-bottom paddingEight">
                  <div class="col-md-8">
-                   {{> afQuickField name='company.industryType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   {{> afQuickField name='company.industryType' class='changeCompany' id="industryType" template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
              <!-- 名称结构 -->
               <div class="row border-bottom paddingEight">
                  <div class="col-md-8">
-                   {{> afQuickField name='company.nameStruct' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   {{> afQuickField name='company.nameStruct' class='changeCompany' id="nameStruct" template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                    <textarea style="margin-right: 13px;width: 63%;" class="form-control pull-right" rows="3" readonly="readonly" id="showCompanyNames" value="{{showCompanyNames}}"></textarea>
                  </div>
              </div>
              <!-- 经营范围 -->
              <div class="row border-bottom paddingEight">
                  <div class="col-md-8">
-                   {{> afQuickField name='company.businessScope' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                   {{> afQuickField name='company.businessScope' id='businessScope' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
              <!-- 公司地址 -->
@@ -154,7 +154,7 @@
     {{/if}}
     <!-- 一企查神器 -->
     <div class="container border-all-grey goldweapon pull-right" id="goldweapon">
-        {{> goldweapon }}
+        {{> yiqichaWin }}
     </div>
 </template>
 

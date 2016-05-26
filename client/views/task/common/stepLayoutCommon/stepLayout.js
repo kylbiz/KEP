@@ -9,12 +9,20 @@ Template.checkname.onRendered(function () {
  // $('.task_ul li a').first().addClass('selected');
 });
 
+
+Template.checkname.onDestroyed(function () {
+  delete Session.keys['stepName'];
+  log('checkname onDestroyed');
+});
+
 Template.checkname_content.helpers({
   templateInfo: function () {
-    var taskInfo = Tasks.findOne();
+    var taskId = FlowRouter.getParam('taskId');
+    var taskInfo = Tasks.findOne({_id: taskId});
     if (taskInfo) {
       if (!Session.get('stepName')) {
         var workingStep = KEPUtil.taskStepWorking(taskInfo.steps);
+        // log('workingStep', workingStep);
         Session.set('stepName', workingStep.name);
       }
 
@@ -61,6 +69,9 @@ Template.checkname.events({
         alert("操作失败");
       } else {
         alert("操作成功");
+
+        // 更新stepName
+        setWorkingStep();
       }
     });
   }
@@ -85,6 +96,7 @@ function getTemplateName (stepName) {
 }
 
 
+// 根据stepName获得其对应的info
 function getStepInfo (steps, stepName) {
   for (var key in steps) {
     var stepInfo = steps[key];
@@ -93,6 +105,15 @@ function getStepInfo (steps, stepName) {
     }
   }
   return {};
+}
+
+
+// 获取最新的workingstep并设置到stepName
+function setWorkingStep() {
+  var taskId = FlowRouter.getParam('taskId');
+  var taskInfo = Tasks.findOne({_id: taskId}) || {};
+  var workingStep = KEPUtil.taskStepWorking(taskInfo.steps || []);
+  Session.set('stepName', workingStep.name);
 }
 
 
