@@ -69,8 +69,13 @@ if (typeof UI !== 'undefined') {
     return mappedArray || [];
   });
 
+  // 在template中获取session的值
   UI.registerHelper('session',function(input){
     return Session.get(input);
+  });
+
+  UI.registerHelper('showTime', function (time) {
+    return moment(time).format('YYYY-MM-DD HH:mm:ss');
   });
 
 }

@@ -7,6 +7,8 @@ Template.company_info_form.onRendered(function () {
 
 Template.company_info_form.helpers({
   companyDoc: function () {
-    return CompanyInfo.findOne({}) || {};
+    var customerId = FlowRouter.getParam('customerId');
+    log("companyDoc", CompanyInfo.findOne({customerId: customerId}));
+    return CompanyInfo.findOne({customerId: customerId}) || {};
   }
 });

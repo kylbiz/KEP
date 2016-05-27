@@ -3,18 +3,10 @@
  * 包括： 客户管理通知，系统通知
  **/
 
-NoticeSys = {}
+NoticeSys = {};
 
 // 添加状态
 NoticeSys.addNotice = function (msg) {
-  // {
-  //   from: '',
-  //   to: userId,
-  //   type: 'customer', // 客户管理
-  //   title: title,
-  //   content: content,
-  // }
-
   check(msg, {
     from: Match.Maybe(String),
     to: String,
@@ -38,9 +30,40 @@ NoticeSys.addNotice = function (msg) {
   NoticeInfo.insert(msgInsert);
 }
 
-// 更新notice的状态
-NoticeSys.updateStatus = function (noticeId, status) {
 
+// 根据noticeType获取notice
+NoticeSys.getNoticeByType = function (userId, noticeType, filterOpt) {
+  check(userId, String);
+  check(noticeType, String);
+  filterOpt = filterOpt || {}
+
+  status = filterOpt.status;
+
+  return NoticeInfo.find({to: userId, type: noticeType, status: status }, {sort: {createdAt: -1}});
+}
+
+//
+NoticeSys.getNotice = function (userId, noticeId) {
+  check(userId, String);
+  check(noticeId, String);
+
+  return NoticeInfo.find({ _id: noticeId, to: userId, status: {$gte: 0} });
+}
+
+
+
+// 更新notice的状态
+NoticeSys.updateStatus = function (userId, noticeId, status) {
+  check(userId, String);
+  check(noticeId, String);
+  check(status, Match.OneOf(0, -1, 1));
+
+  KUtil.dataIsInColl([
+    {coll: Meteor.users, dataId: userId},
+    {coll: NoticeInfo, dataId: noticeId}
+  ]);
+
+  return NoticeInfo.update({_id: noticeId, to: userId}, {$set: {status: status}});
 }
 
 // 推送公司状态更新的通知
@@ -64,7 +87,7 @@ NoticeSys.companyStatusChange = function (taskId, statusInfo) {
   var status = statusInfo.status;
 
   var title = customerName + '的' + taskLabel + '的状态更新到' + status;
-  var content = userName + ', 您好！您的客户:' + customerName + '（公司名:' + companyName + '）的' +  taskLabel + '状态更新到' + status;
+  var content = '您好！您的客户: ' + customerName + '（公司名:' + companyName + '）的' +  taskLabel + '状态更新到' + status;
 
   log('NoticeSys.addNotice', userId, title, content);
   NoticeSys.addNotice({

@@ -100,3 +100,16 @@ Meteor.publish('getHostUser', function (roles) {
   }
   return [];
 });
+
+
+// 根据通知的类型获取通知信息
+Meteor.publish('getNoticeByType', function (noticeType, filterOpt) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  return NoticeSys.getNoticeByType(userId, noticeType, filterOpt);
+});
+
+// 根据通知的类型获取通知信息
+Meteor.publish('getNotice', function (noticeId) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  return NoticeSys.getNotice(userId, noticeId);
+});

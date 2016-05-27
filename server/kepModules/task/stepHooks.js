@@ -87,6 +87,8 @@ KStepHooks.copyCheckNameInfoToCompany = function (taskId) {
   }
 
   var customerId = taskInfo.customerId || "";
+
+  log("CompanyInfo customerId", customerId, " companyInfo", companyInfo);
   return CompanyInfo.update({customerId: customerId}, {$set: companyInfo});
 }
 
