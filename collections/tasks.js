@@ -1,4 +1,5 @@
 // 子任务信息
+
 Tasks = new Mongo.Collection('Tasks');
 Tasks.attachSchema( new SimpleSchema ({
   'name': {

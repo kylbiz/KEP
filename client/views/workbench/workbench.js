@@ -17,7 +17,7 @@ Template.breadcrumb_workbench.helpers({
     if (items.length && !Session.get('taskType')) {
       var item = items[0] || {};
       Session.set('taskType', item.name || "companyRegistInfo");
-      log('init session', item);
+      // log('init session', item);
     }
 
     return items;
@@ -152,15 +152,26 @@ Template.workbench_progress_control.events({
 
 // 子任务设置
 Template.workbench_config.onRendered(function () {
+  // $('#config').modal("hide",{
+  //   keyborad:true
+  // })
+
+  $('#config').onkydown(function (event) {
+    if(event.keyCode == 13&&window.event.srcElement.tagName!="TEXTAREA")
+      {     
+        event.returnValue=false;
+      }
+  });
   $('#config').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var taskId = button.data("taskid");
     Session.set('selectTaskId', taskId);
   });
 
-  $('#config').on('hidden.bs.modal', '.modal', function (event) {
-    // log("config hidden.bs.modal", $(this));
+  $('#config').on('hidden.bs.modal', function (event) {
+    log("config hidden.bs.modal", $(this)); 
     delete Session.keys['selectTaskId'];
+    log('bs.modal',bs.modal);
     $(this).removeData('bs.modal');
     $(this).removeAttr('bs.modal');
   });

@@ -1,4 +1,3 @@
-
 // 公司注册业务
 // CompanyRegist = new Mongo.Collection('CompanyRegist');
 Service = new Mongo.Collection('Service');

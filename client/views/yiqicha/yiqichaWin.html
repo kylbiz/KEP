@@ -1,0 +1,60 @@
+<!-- 一企查-弹出框 -->
+<template name="yiqichaWin">
+    <div class="row margin-top-fifth border-bottom" style="height: 44px;">
+        <div class="col-md-4">
+            <i class="fa fa-times fa-2x center" id="close_goldweapon" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-4">
+            <p class="center weight-p">一企查</p>
+        </div>
+    </div>
+    <form class="center margin-top-fifth">
+      <div class="form-group">
+          <input type="text" class="center searchName form-control" id="searchName" placeholder="请输入企业名称字号" >
+      </div>
+      <a class="center btn btn-danger" {{disabledBtn}} id="searchCompanyName" style="width: 260px">查询</a>
+    </form>
+    {{#if searchStatus "init"}}
+        <div>
+            <p class="center">检查期望的公司名是否已被注册</p>
+        </div>
+    {{else}}
+        {{#if count}}
+            <div class="row search-count margin-top-fifth">
+                <p class="center ">已经查询到{{count}}家</p>
+            </div>
+            <div class="container margin-top-fifth yiqichaWin-table">
+                {{#each companyList}}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2">{{company.companyName}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>企业状态</td>
+                                <td style="color:#f75a47;">{{company.companyStatus}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {{/each}}
+            </div>
+            {{#if searchStatus "searched"}}
+                {{#if hasNext}}
+                    <div class="container" style="padding-bottom: 30px;">
+                        <a class="center btn btn-default" id="loadMore">加载更多</a>
+                    </div>
+                {{/if}}
+            {{/if}}
+        {{else}}
+            {{#if searchStatus "searched"}}
+                <div class="container"><p class="center">未查询到相关公司信息，该字号可能尚未审核注册</p></div>
+            {{/if}}
+        {{/if}}
+
+        {{#if searchStatus "searching"}}
+            <div class="container"><p class="center">查询中...</p></div>
+        {{/if}}
+    {{/if}}
+</template>

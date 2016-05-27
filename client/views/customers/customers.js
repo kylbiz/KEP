@@ -3,6 +3,7 @@ Template.customers_register.onRendered(function () {
   self.autorun(function() {
     self.subscribe('getCustomers');
   });
+
 });
 
 

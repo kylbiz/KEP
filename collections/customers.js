@@ -1,3 +1,4 @@
+// 客户信息
 Customers = new Mongo.Collection('Customers');
 // Customer 结构:
 Customers.attachSchema( new SimpleSchema({

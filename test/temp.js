@@ -95,7 +95,14 @@ function testReplace () {
   str = 'aa.$.bb';
   console.log(str.replace('$', 0), str );
 }
+
 // testReplace();
+function testExtend () {
+  var a = [{a:1}, {b:1}];
+  var b = [{c: 1}];
+  console.log(a.concat(b), a , b );
+}
+// testExtend();
 
 
 // log("test/temp.js end");
