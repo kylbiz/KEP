@@ -64,6 +64,14 @@ Template.serviceInfo.helpers({
   }
 });
 
+Template.serviceInfoChildTable.helpers({
+  showTaskDetail: function () {
+    log("showTaskDetail", this);
+    // task, /:taskType/:taskId
+    // return ;
+  }
+});
+
 
 // 设置业务
 Template.service_setting.onRendered(function () {

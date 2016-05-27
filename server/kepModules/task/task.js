@@ -43,6 +43,8 @@ KTask.createTask = function (taskInfo) {
 
   var steps = taskStepInfo.steps || [];
   steps[0].startTime = timeNow;  // 初始化任务的第一步
+  steps[0].updateTime = timeNow;  // 初始化任务的第一步
+  log('KTask.createTask steps', steps);
 
   var remind = {};
   if (taskInfo.email) {
@@ -167,6 +169,17 @@ KTask.sureStepFinish = function (taskId, stepName) {
     }
   });
 
+  // hook
+  var stepInfo = KUtil.getStepInfoByStepName(taskInfo.steps, stepName) || {};
+  var hooks = stepInfo.hooks || [];
+  hooks.forEach(function (hookFunc) {
+    log("hook func", hookFunc, taskId);
+    if ( KStepHooks[hookFunc] ) {
+      KStepHooks[hookFunc](taskId);
+    }
+  });
+
+
   // 更新下一步startTime
   var nextStepName = findNextStep(taskInfo.steps, stepName);
   if (nextStepName) {
@@ -187,6 +200,7 @@ function findNextStep (steps, stepName) {
       return (steps[key + 1] || {}).name || "";
     }
   }
+  return null;
 }
 
 

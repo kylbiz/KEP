@@ -63,7 +63,7 @@ Yiqicha.detail = function () {
 Yiqicha.checkName = function (companyName, callback) {
   crawler.searchCompanyNameStatus(Yiqicha.config.nameStatusOptions, companyName, function (err, statusInfo) {
     if (err || statusInfo.statuscode < 1) {
-      log("checkName search fail! companyName: " + companyName  + " error: ", err);
+      log("checkName search fail! companyName: " + companyName  + " error: ", err, " statusCode: ", statusInfo.statuscode);
       return callback("信息未找到", null);
     }
 
@@ -150,26 +150,26 @@ Yiqicha.regist = function (companyName, callback) {
 
 
 // test
-Meteor.methods({
-  search: function (key, allpageNo, pageNo) {
-    if (key == 'hey-jude') {
-      Yiqicha.search({keywords: '开业啦'}, function (err, result) {
-        console.log('search', err, result.numberOfResults, result.detailResultsOutputs[0].company, result.detailResultsOutputs[0].basicDetail);
-      });
-    }
-  },
-  checkName: function (key) {
-    if (key == 'hey-jude') {
-        Yiqicha.checkName('上海睿颉生物科技有限公司', function (err, result) {
-          console.log('checkName', err, result);
-        });
-    }
-  },
-  regist: function (key) {
-    if (key == 'hey-jude') {
-      Yiqicha.regist('上海卓图房地产', function (err, result) {
-        console.log('regist', err, result);
-      });
-    }
-  }
-});
+// Meteor.methods({
+//   search: function (key, allpageNo, pageNo) {
+//     if (key == 'hey-jude') {
+//       Yiqicha.search({keywords: '开业啦'}, function (err, result) {
+//         console.log('search', err, result.numberOfResults, result.detailResultsOutputs[0].company, result.detailResultsOutputs[0].basicDetail);
+//       });
+//     }
+//   },
+//   checkName: function (key) {
+//     if (key == 'hey-jude') {
+//         Yiqicha.checkName('上海睿颉生物科技有限公司', function (err, result) {
+//           console.log('checkName', err, result);
+//         });
+//     }
+//   },
+//   regist: function (key) {
+//     if (key == 'hey-jude') {
+//       Yiqicha.regist('上海卓图房地产', function (err, result) {
+//         console.log('regist', err, result);
+//       });
+//     }
+//   }
+// });

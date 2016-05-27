@@ -6,11 +6,14 @@ var Fiber = Npm.require('fibers');
 
 // 添加一企查服务订阅
 Yiqicha.subscribe = function (info, callback) {
-  // check params
-  // info = {
-  //   type: 'checkName', // or 'regist'
-  //   companyName: '开业啦',
-  // };
+  log("Yiqicha.subscribe", info);
+
+  check(info, {
+    type: String,
+    companyName: String,
+    other: Match.Any,
+  });
+
 
   var subId = YiqichaSub.insert({
     type: info.type,
@@ -32,6 +35,8 @@ Yiqicha.subscribe = function (info, callback) {
 
 // 更新公司状态
 Yiqicha.updateCompanyStatus = function (subId, callback) {
+  log("Yiqicha.updateCompanyStatus", subId);
+
   callback = callback || function () {}
 
   var info = YiqichaSub.findOne({_id: subId}) || false;
@@ -43,7 +48,7 @@ Yiqicha.updateCompanyStatus = function (subId, callback) {
   var handleMap = {
     'checkName': Yiqicha.checkName,
     'regist': Yiqicha.regist,
-  }
+  };
   if ( !handleMap.hasOwnProperty(info.type) ) {
     callback("传入数据有误", null);
     return;
@@ -112,6 +117,8 @@ function updateAll() {
 
 // 获取到公司最新状态后的处理
 function changeStatus(subId, statusInfo) {
+  log("changeStatus", subId, statusInfo);
+
   Fiber(function () {
     YiqichaSub.update({_id: subId}, {
       $set: {
@@ -128,10 +135,11 @@ function changeStatus(subId, statusInfo) {
 // 状态有更新，推送更新
 function pushUpdate (err, info) {
   log("pushUpdate", err, info);
+
   if (!err && info.changed) {
     // 想用户推送消息
     Fiber(function () {
-      Meteor.call(info.other['call'], info);
+      Meteor.call(info.other['call'] || 'companyStatusChange', info);
     }).run();
   }
 }

@@ -1,4 +1,6 @@
 EmailSend.companyStatusChange = function (taskId,  statusInfo) {
+  log("EmailSend.companyStatusChange", taskId,  statusInfo);
+
     var taskInfo = Tasks.findOne({_id: taskId}, {fields: {host: 1, customerId: 1, serviceId: 1, remind: 1}});
     if (!taskInfo) {
       log("companyStatusChange fail", taskId);
@@ -18,6 +20,7 @@ EmailSend.companyStatusChange = function (taskId,  statusInfo) {
     var subject = companyName + '的' + taskLabel + '的状态更新到' + status;
     var content = '<h2>您好:</h2><p>【KEP提醒】公司名为:<i>' + companyName + '</i>的<i>' +  taskLabel + '</i>状态更新到<i>' + status + '</i></p>';
 
+    log("emailSend ", emailInfoList, subject, content);
     emailInfoList.forEach(function (emailInfo) {
       EmailSend.send({
         to: emailInfo.to,
