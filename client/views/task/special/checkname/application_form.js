@@ -11,7 +11,6 @@ Template.application_form.onRendered(function () {
       }
     });
   });
-
   Session.set('chaCompanyFullName', !Session.get('chaCompanyFullName') );
 });
 
@@ -118,6 +117,7 @@ Template.application_form_edit.events({
     if (inputNum < 5) {
       // Blaze.render(Template.reserveWord, template.$('#drag-area').get(0));
       $("#backupName").clone().attr('style', '').appendTo('#drag-area');
+      $("#drag-area .module input").first().val("");
       indexAlternativeName('#drag-area .module input', "company.alternativeName.$.name");
     } else {
       alert('最多添加5个备选名');

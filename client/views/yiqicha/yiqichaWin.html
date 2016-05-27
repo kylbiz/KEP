@@ -23,7 +23,7 @@
             <div class="row search-count margin-top-fifth">
                 <p class="center ">已经查询到{{count}}家</p>
             </div>
-            <div class="container margin-top-fifth">
+            <div class="container margin-top-fifth yiqichaWin-table">
                 {{#each companyList}}
                     <table class="table table-bordered">
                         <thead>
@@ -42,7 +42,7 @@
             </div>
             {{#if searchStatus "searched"}}
                 {{#if hasNext}}
-                    <div class="container">
+                    <div class="container" style="padding-bottom: 30px;">
                         <a class="center btn btn-default" id="loadMore">加载更多</a>
                     </div>
                 {{/if}}

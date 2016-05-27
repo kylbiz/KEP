@@ -77,5 +77,4 @@ if (typeof UI !== 'undefined') {
   UI.registerHelper('showTime', function (time) {
     return moment(time).format('YYYY-MM-DD HH:mm:ss');
   });
-
 }

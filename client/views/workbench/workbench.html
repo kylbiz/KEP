@@ -25,9 +25,9 @@
                 <p>工作台</p>
             </div>
             <div class="col-md-4 workbench_change_btn">
-                {{#each tasks}}
+                {{#each $mapped tasks}}
                 <div class="col-sm-6">
-                    <button type="button" class="btn btn-info btn-sm" value="{{name}}">{{label}}</button>
+                    <button type="button" class="btn btn-info btn-sm {{#if $first}}letter-spacing{{/if}}" value="{{name}}">{{label}}</button>
                 </div>
                 {{/each}}
             </div>
@@ -77,16 +77,16 @@
 </template>
 <template name="checknameTableCell">
     <tr>
-        <td style="line-height:83px;font-size: 15px;">{{customerName}}</td>
+        <td class="checknameTableCellTd">{{customerName}}</td>
         {{#each steps}}
         <td>
             <div class="circle {{stepStatusShow this}}"></div>{{stepTimeUsed this}}</td>
         {{/each}}
-        <td style="line-height:83px;font-size: 15px;">{{totalTimeUsed this}}</td>
-        <td style="line-height:83px;font-size: 15px;">{{host.name}}</td>
+        <td class="checknameTableCellTd">{{totalTimeUsed this}}</td>
+        <td class="checknameTableCellTd">{{host.name}}</td>
         <td>
             <div style="margin-bottom: 9px">
-                <button class="btn btn-info btn-sm" data-toggle="modal" data-taskid="{{_id}}" data-serviceid="{{serviceId}}" data-customerid="{{customerId}}" data-target="#progress_control">办理进度控制</button>
+                <button class="btn btn-default btn-sm" data-toggle="modal" data-taskid="{{_id}}" data-serviceid="{{serviceId}}" data-customerid="{{customerId}}" data-target="#progress_control">办理进度控制</button>
             </div>
             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#config" data-taskid="{{_id}}">设置</button>
             <!-- <button class="btn btn-info btn-sm"><a href="{{goToTask name _id}}">查看</a></button> -->
@@ -119,14 +119,14 @@
 </template>
 <template name="registerTableCell">
     <tr>
-        <td style="line-height:83px;font-size: 15px;">{{customerName}}</td>
-        <td style="line-height:83px;font-size: 15px;">{{companyName}}</td>
+        <td class="checknameTableCellTd">{{customerName}}</td>
+        <td class="checknameTableCellTd">{{companyName}}</td>
         {{#each steps}}
         <td>
             <div class="circle {{stepStatusShow this}}"></div>{{stepTimeUsed this}}</td>
         {{/each}}
-        <td style="line-height:83px;font-size: 15px;">{{totalTimeUsed this}}</td>
-        <td style="line-height:83px;font-size: 15px;">{{host.name}}</td>
+        <td class="checknameTableCellTd">{{totalTimeUsed this}}</td>
+        <td class="checknameTableCellTd">{{host.name}}</td>
         <td>
             <div style="margin-bottom: 9px">
                 <button class="btn btn-info btn-sm" data-toggle="modal" data-taskid="{{_id}}" data-target="#progress_control">办理进度控制</button>
@@ -214,10 +214,10 @@
                 <h4 class="pull-left">通知提醒</h4>
             </div>
             <!-- 邮箱通知 -->
-            <div class="modal-body">
-                <div class="">
-                    <h3 class="pull-left"><span class="label label-info label-lg" style="line-height: 45px;">邮箱通知</span></h3>
-                    <button id="add_email_btn" class="btn btn-default btn-sm pull-right" style="margin-top: 33px"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+            <div class="modal-body" style="border-bottom: 1px solid #cccccc;">
+                <div class="modal-body-head">
+                    <span class="pull-left label label-default label-lg">邮箱通知</span>
+                    <button id="add_email_btn" class="btn btn-default btn-sm pull-right"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
                 </div>
                 <form class="form-inline" style="margin-top: 80px" id="add_email_form">
                     {{#each taskInfo.remind.email}} {{> add_email}} {{/each}}
@@ -225,9 +225,9 @@
             </div>
             <!-- 短信通知 -->
             <div class="modal-body">
-                <div class="">
-                    <h3 class="pull-left"><span class="label label-info label-lg" style="line-height: 45px;">短信通知</span></h3>
-                    <button id="add_tel_btn" class="btn btn-default btn-sm pull-right" style="margin-top: 33px"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+                <div class="modal-body-head">
+                    <span class="pull-left label label-default label-lg">短信通知</span>
+                    <button id="add_tel_btn" class="btn btn-default btn-sm pull-right"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
                 </div>
                 <form class="form-inline" id="add_tel_form" style="margin-top: 80px">
                     {{#each taskInfo.remind.sms}} {{> add_tel}} {{/each}}
@@ -251,7 +251,7 @@
             <label for="remarks">备注：</label>
             <input type="email" class="form-control remindRemark" value="{{remark}}" placeholder="(选填)">
         </div>
-        <button type="submit" class="btn btn-default delRemind">删除</button>
+        <button type="submit" class="btn btn-default delRemind"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
 </template>
 <!-- 短信添加模版 -->
@@ -265,7 +265,7 @@
             <label for="remarks">备注：</label>
             <input type="email" class="form-control remindRemark" value="{{remark}}" placeholder="(选填)">
         </div>
-        <button type="submit" class="btn btn-default delRemind">删除</button>
+        <button type="submit" class="btn btn-default delRemind"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
 </template>
 <!-- autoform -->

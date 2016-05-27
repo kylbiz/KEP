@@ -109,9 +109,12 @@
 
 .contact-customer{
 	width: 600px;
-	margin-left: -40px;
+	margin-left: 130px;
 	border-radius:5px;
 	background-color: #f8f8f8;
+	label{
+		padding-left: 30px;
+	}
 }
 
 .customers_add_autoform{
@@ -137,6 +140,26 @@
 			padding: 18px !important;
 			label{
 				font-size: 16px !important;
+			}
+		}
+	}
+}
+
+.customers_change_btn{
+	.col-sm-6{
+		background-color: #FFFFFF;
+		border-radius: 5px;
+		border: 1px solid @border_grey;
+		padding: 5px 5px;
+		text-align: center;
+		button{
+			border-width: 0px;
+			outline:none;
+			padding: 3px 40px;
+			text-align: center;
+			background-color: #47c1ea;
+			&:active{
+				background-color: #22D77D;
 			}
 		}
 	}
