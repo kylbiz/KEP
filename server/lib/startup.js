@@ -67,6 +67,7 @@ function getSupportInfo() {
                 name: '资料填写',
                 startTime: '',
                 updateTime: '',
+                mark: 'inputData', // 标记必要的操作
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoCompanyCheckName', // 待录入数据的结构
                 data: {},
@@ -81,6 +82,8 @@ function getSupportInfo() {
                 name: '提交工商',
                 startTime: '',
                 updateTime: '',
+                mark: 'submitFiles',
+                hooks: ['subCompanyName'],  // 确认完成的时候需要进行的操作
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoGovSubmit', // 待录入数据的结构
                 data: {},
@@ -88,6 +91,7 @@ function getSupportInfo() {
                 name: '核名通过',
                 startTime: '',
                 updateTime: '',
+                mark: 'pass',
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoCheckNamePass', // 待录入数据的结构
                 data: {},
@@ -95,6 +99,7 @@ function getSupportInfo() {
                 name: '申请地址',
                 startTime: '',
                 updateTime: '',
+                mark: 'companyAddress',
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoCompanyAddress', // 待录入数据的结构
                 data: {},
@@ -102,6 +107,7 @@ function getSupportInfo() {
                 name: '准备公章',
                 startTime: '',
                 updateTime: '',
+                hooks: ['copyCheckNameInfoToCompany'], // 确认完成的时候需要进行的操作
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoOfficialSeal', // 待录入数据的结构
                 data: {},
@@ -114,6 +120,7 @@ function getSupportInfo() {
                 name: '资料填写',
                 startTime: '',
                 updateTime: '',
+                mark: 'inputData',
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoCompanyRegistInfo', // 待录入数据的结构
                 data: {},
@@ -128,6 +135,8 @@ function getSupportInfo() {
                 name: '提交工商',
                 startTime: '',
                 updateTime: '',
+                mark: 'submitFiles',
+                hooks: ['subCompanyName'],  // 确认完成的时候需要进行的操作
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoGovSubmit', // 待录入数据的结构
                 data: {},
@@ -135,6 +144,8 @@ function getSupportInfo() {
                 name: '登记通过',
                 startTime: '',
                 updateTime: '',
+                mark: 'pass',
+                hooks: ['copyRegisterInfoToCompany'],  // 确认完成的时候需要进行的操作
                 finished: false, // 该步骤是否完成，可以是用户手动点击完成，也可以是系统检测确认完成
                 dataStruct: 'stepInfoCompanyRegistPass', // 待录入数据的结构
                 data: {},
@@ -209,7 +220,7 @@ function getSupportInfo() {
                         type: 'select',
                         firstOption: false,
                         options: [
-                            { label: '网络技术', value: '网络技术' },
+                            { label: '网络科技', value: '网络科技' },
                             { label: '生物技术', value: '生物技术' },
                         ]
                     }
@@ -693,6 +704,10 @@ function getSupportInfo() {
                 companyName: {
                     type: "String",
                     label: '申请通过的企业名称'
+                },
+                companyId: {
+                    type: "String",
+                    label: "名称预先核准文号"
                 }
             }
         }, { // 公司核名 - 申请地址
@@ -755,7 +770,7 @@ function getSupportInfo() {
             type: 'service',
             items: [
                 { name: 'companyRegist', label: '公司注册' },
-                { name: 'financeAgent', label: '财务代理' },
+                // { name: 'financeAgent', label: '财务代理' },
             ]
         }, {
             type: 'task',

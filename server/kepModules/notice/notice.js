@@ -7,7 +7,23 @@ NoticeSys = {}
 
 // 添加状态
 NoticeSys.addNotice = function (msg) {
-  var msg = {
+  // {
+  //   from: '',
+  //   to: userId,
+  //   type: 'customer', // 客户管理
+  //   title: title,
+  //   content: content,
+  // }
+
+  check(msg, {
+    from: Match.Maybe(String),
+    to: String,
+    type: String,
+    title: String,
+    content: String,
+  });
+
+  var msgInsert = {
     from: msg.from || '',
     to: msg.to,
     type: msg.type,  // system - 系统通知 / customer - 客户管理通知
@@ -18,7 +34,8 @@ NoticeSys.addNotice = function (msg) {
     content: msg.content,
   }
 
-  NoticeInfo.insert(msg);
+  log("NoticeInfo.insert", msgInsert);
+  NoticeInfo.insert(msgInsert);
 }
 
 // 更新notice的状态
@@ -49,6 +66,7 @@ NoticeSys.companyStatusChange = function (taskId, statusInfo) {
   var title = customerName + '的' + taskLabel + '的状态更新到' + status;
   var content = userName + ', 您好！您的客户:' + customerName + '（公司名:' + companyName + '）的' +  taskLabel + '状态更新到' + status;
 
+  log('NoticeSys.addNotice', userId, title, content);
   NoticeSys.addNotice({
     from: '',
     to: userId,

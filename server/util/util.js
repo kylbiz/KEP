@@ -94,3 +94,27 @@ KUtil.dataIsInColl = function (infoList) {
 }
 
 
+// 获取stepName对应的信息
+KUtil.getStepInfoByStepName = function (steps, stepName) {
+  for (var key in steps) {
+    if (steps[key].name == stepName) {
+      return steps[key];
+    }
+  }
+
+  return null;
+}
+
+// 获取mark信息对应的信息
+KUtil.getStepInfoByMark = function (steps, mark) {
+  for (var key in steps) {
+    var stepInfo = steps[key];
+    if ( stepInfo.mark && stepInfo.mark == mark ) {
+      return stepInfo;
+    }
+  }
+
+  return null;
+}
+
+

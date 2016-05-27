@@ -161,6 +161,16 @@ Tasks.attachSchema( new SimpleSchema ({
     type: String,
     label: '',
   },
+  'steps.$.mark': {
+    type: String,
+    label: '',
+    optional: true
+  },
+  'steps.$.hooks': {
+    type: [String],
+    label: '',
+    optional: true
+  },
   'steps.$.startTime': {
     type: Date,
     label: '',

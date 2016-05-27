@@ -83,7 +83,7 @@ CompanyInfo.attachSchema(new SimpleSchema({
   },
   "company.companyId": {
     type: String,
-    label: "",
+    label: "名称预先核准文号/注册号/统一社会信用代码",
     optional: true,
   },
   "holders": {  // 股东
@@ -133,7 +133,8 @@ CompanyInfo.attachSchema(new SimpleSchema({
   "holders.$.investShare": {
     type: Number,
     label: "占股比例(%)",
-    decimal: true
+    decimal: true,
+    optional: true,
   },
   "legalPerson": {  // 法人
     type: Object,

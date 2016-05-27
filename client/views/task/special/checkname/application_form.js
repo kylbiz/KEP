@@ -79,8 +79,25 @@ Template.application_form_edit.helpers({
   },
   showCompanyNames: function () {
     Session.get('chaCompanyFullName');
-    log("showCompanyNames");
-    return getCompanyNames() || '.....';
+    // log("showCompanyNames");
+
+    var companyName = []; // 公司名list
+    var companyNavName = $("#companyNavName").val() || "";
+    if (companyNavName) {
+      companyName.push( companyNavName );
+    }
+    $('#drag-area .module input').each(function(index, el) {
+      var companyAltName = $(el).val() || "";
+      if (companyAltName) {
+        companyName.push( companyAltName );
+      }
+    });
+    var industryType = $("#industryType").val() || ""; // 所属行业
+    var companyType = $("#companyType").val() || ""; // 公司类型
+    var nameStruct = $("#nameStruct").val() || "";
+
+    return KEPUtil.getCompanyFullName(companyName, nameStruct, industryType, companyType, '上海') || '.....';
+
   }
 });
 
