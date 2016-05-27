@@ -52,8 +52,9 @@ Template.application_form.helpers({
 // 编辑
 Template.application_form_edit.onRendered(function () {
   $('#drag-area').dad({
-    draggable: 'button'
+    draggable: 'a'
   });
+  console.log("这就是iain唉唉唉iainiainai");
 });
 
 Template.application_form_edit.helpers({

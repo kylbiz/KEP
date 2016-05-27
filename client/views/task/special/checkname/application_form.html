@@ -44,26 +44,28 @@
                  </div>
              </div>
 
-            <div class="row border-bottom paddingEight">
+            <div class="row paddingEight reserveWord">
+                <p>添加备选名</p>
                  <div class="col-md-8" id="drag-area">
+                     
                   {{#each $mapped stepInfo.company.alternativeName}}
-                    <div class="module col-md-12" >
+                    <div class="module col-md-12">
                       {{#with alternativeName this.name $index}}
                         {{> afQuickField name=dataName value=name class='changeCompany'  data-schema-key=dataName template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
                       {{/with}}
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
                             <a class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></a>
                         </div>
                     </div>
                   {{/each}}
-                 </div>
-             </div>
+                  </div>
+            </div>
 
               <!-- 备选名 -->
               <div class="module col-md-12" id="backupName" style="display: none;">
                     {{> afQuickField name='company.alternativeName.$.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                       <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
                       <a class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></a>
                   </div>

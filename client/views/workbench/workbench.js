@@ -2,6 +2,7 @@ Template.workbench.onRendered(function() {
   this.autorun(function () {
     Meteor.subscribe("getSupportInfo", {type: 'task', service: 'companyRegist'});   // 获取公司注册业务的子任务描述信息
   });
+
 });
 
 Template.workbench.onDestroyed(function () {
@@ -27,6 +28,11 @@ Template.breadcrumb_workbench.helpers({
 Template.breadcrumb_workbench.events({
   'click .workbench_change_btn button': function (event) {
     Session.set('taskType', $(event.currentTarget).attr("value")); // 切换子任务
+    console.log($(".workbench_change_btn button").parent());
+    // $(".workbench_change_btn button").parent().toggleClass('border-red');
+    $('.workbench_change_btn button').parent().removeClass('border-red');
+    $(event.currentTarget).parent().addClass('border-red');
+    // $(event.currentTarget).addClass("selected");
   }
 });
 
@@ -156,12 +162,13 @@ Template.workbench_config.onRendered(function () {
   //   keyborad:true
   // })
 
-  $('#config').onkydown(function (event) {
+  $('#config').onkeydown(function (event) {
     if(event.keyCode == 13&&window.event.srcElement.tagName!="TEXTAREA")
       {     
         event.returnValue=false;
       }
   });
+
   $('#config').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var taskId = button.data("taskid");
