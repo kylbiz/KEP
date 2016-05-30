@@ -70,25 +70,18 @@
 <template name="notice_list_content">
     <div class="container">
         <div class="row notice_row" value="notice_content">
-            <div class="col-md-8">
-                <p>
+            <div class="col-md-6">
+                <span>
                   <a href="{{goToNoticeDetail _id}}" class="{{#if status}}haveRead{{/if}}">{{title}}</a>
-                </p>
+                </span>
             </div>
-            <div class="col-md-2">
-                <div class="send_time pull-right">
-                    <p>发送时间：</p>
-                    <p>{{showTime createdAt}}</p>
-                </div>
+            <div class="col-md-3">
+                <span>发送时间：</span>
+                <span class="send_time">{{showTime createdAt}}</span>
             </div>
-            <div class="col-md-2">
-                <div class="border-bottom">
-                    <!-- <button class="btn btn-danger center deleNotice" value="{{_id}}">删除</button> -->
-                    <button class="btn btn-danger center" data-toggle="modal" data-target="#notice_delete" data-noticeid="{{_id}}">删除</button>
-                </div>
-                <div class="">
-                    <button class="btn btn-info center markRead" {{haveRead status}} value="{{_id}}">标为已读</button>
-                </div>
+            <div class="col-md-3">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#notice_delete" data-noticeid="{{_id}}">删除</button>
+                <button class="btn btn-info markRead" {{haveRead status}} value="{{_id}}">标为已读</button>
             </div>
         </div>
     </div>
@@ -100,6 +93,7 @@
         </div>
     </div>
 </template>
+
 
 <template name="notice_delete">
   <div class="modal-content">
