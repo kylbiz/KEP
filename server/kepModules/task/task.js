@@ -169,6 +169,18 @@ KTask.sureStepFinish = function (taskId, stepName) {
     }
   });
 
+
+  // 更新下一步startTime
+  var nextStepName = findNextStep(taskInfo.steps, stepName);
+  if (nextStepName) {
+    Tasks.update({_id: taskId, "steps.name": nextStepName, "steps.finished": false}, {
+      $set: {
+        "steps.$.startTime": timeNow,
+        "steps.$.updateTime": timeNow,
+      }
+    });
+  }
+
   // hook
   var stepInfo = KUtil.getStepInfoByStepName(taskInfo.steps, stepName) || {};
   var hooks = stepInfo.hooks || [];
@@ -179,17 +191,6 @@ KTask.sureStepFinish = function (taskId, stepName) {
     }
   });
 
-
-  // 更新下一步startTime
-  var nextStepName = findNextStep(taskInfo.steps, stepName);
-  if (nextStepName) {
-    Tasks.update({_id: taskId, "steps.name": nextStepName}, {
-      $set: {
-        "steps.$.startTime": timeNow,
-      }
-    });
-  }
-
   return ret;
 }
 
@@ -197,7 +198,7 @@ KTask.sureStepFinish = function (taskId, stepName) {
 function findNextStep (steps, stepName) {
   for (var key in steps) {
     if (steps[key].name == stepName) {
-      return (steps[key + 1] || {}).name || "";
+      return (steps[ Number(key) + 1 ] || {}).name || "";
     }
   }
   return null;
@@ -370,6 +371,10 @@ function updateProgressInfo(taskId, steps, returnTo, reset) {
       steps[key].finished = false;
       steps[key].startTime = "";
       steps[key].updateTime = "";
+      if ( Number(key) == 0 ) {
+        steps[key].startTime = timeNow;
+        steps[key].updateTime = timeNow;
+      }
       if (reset) {
         steps[key].data = {};
       }
@@ -377,6 +382,5 @@ function updateProgressInfo(taskId, steps, returnTo, reset) {
   }
 
     // log('updateProgressInfo', taskId, steps);
-
   return Tasks.update({_id: taskId}, {$set: {steps: steps, updateTime: timeNow}});
 }

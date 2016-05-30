@@ -1,0 +1,113 @@
+<template name="notice">
+    <!-- 主要内容 -->
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-lg-12">
+                <!-- 内部导航栏 -->
+                {{> breadcrumb_notice }}
+                <!-- ORDERS -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- 核名主页内容 -->
+                        {{> Template.dynamic template=mainContent}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+<!-- 内部导航栏 -->
+<template name="breadcrumb_notice">
+    <div class="container">
+        <div class="row" style="margin-bottom: 30px;">
+            <div class="col-md-4 content-title">
+                <p>通知中心</p>
+            </div>
+            <div class="col-md-4 tem_change_btn">
+                <div class="col-sm-6">
+                    <button type="button" value="customer" class="btn btn-info btn-sm chaNoticeType" style="background-color: #13d8c6;">客户管理通知</button>
+                </div>
+                <div class="col-sm-6">
+                    <button type="button" value="system" class="btn btn-info btn-sm chaNoticeType" style="background-color: #b64bf9;">系统通知</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{filterStr}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a class="NoticeFilter" value="">全部</a></li>
+                        <li><a class="NoticeFilter" value="0">未读</a></li>
+                        <li><a class="NoticeFilter" value="1">已读</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<!-- 通知列表 -->
+<template name="notice_list">
+    <div class="container notice_container">
+      {{#if noticeList}}
+        {{#each noticeList}}
+          {{> notice_list_content }}
+        {{/each}}
+      {{else}}
+        <p class="center">无通知记录</p>
+      {{/if}}
+    </div>
+</template>
+
+
+<!-- 一条通知 -->
+<template name="notice_list_content">
+    <div class="container">
+        <div class="row notice_row" value="notice_content">
+            <div class="col-md-6">
+                <span>
+                  <a href="{{goToNoticeDetail _id}}" class="{{#if status}}haveRead{{/if}}">{{title}}</a>
+                </span>
+            </div>
+            <div class="col-md-3">
+                <span>发送时间：</span>
+                <span class="send_time">{{showTime createdAt}}</span>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#notice_delete" data-noticeid="{{_id}}">删除</button>
+                <button class="btn btn-info markRead" {{haveRead status}} value="{{_id}}">标为已读</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除按钮模态框 -->
+    <div class="modal fade" id="notice_delete" tabindex="-1" role="dialog" aria-labelledby="notice_delete_title">
+        <div class="modal-dialog modal-lg" role="document">
+            {{> notice_delete}}
+        </div>
+    </div>
+</template>
+
+
+<template name="notice_delete">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="notice_delete_title">警告</h4>
+      </div>
+      <div class="modal-body">
+          <h3>确认删除该通知</h3>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="deleteNoticeBtn">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+  </div>
+</template>
+

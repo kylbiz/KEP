@@ -50,8 +50,8 @@
 					</li> -->
 				</ul>
 			</li>
-	
-	</ul>		
+
+	</ul>
 </template>
 
 <template name="dropdownMenu">
@@ -59,17 +59,17 @@
   <li class="user-header">
     <img src="/img/person/man90.png" class="img-circle" alt="User Image">
     <p>
-      {{currentUser.username}}  
+      {{currentUser.username}}
     </p>
-    <small>2016-05-18</small>
+    <small>{{timeNow}}</small>
   </li>
   <!-- Menu Footer-->
   <li class="user-footer">
     <div class="pull-left">
-      <a href="#" class="btn btn-default btn-flat">登出</a>
+      <a href="#" class="btn btn-default btn-flat" id='a-logout'>登出</a>
     </div>
     <div class="pull-right">
-      <a href="/account" class="btn btn-default btn-flat">个人中心</a>
+      <a href="{{goToAccount}}" class="btn btn-default btn-flat">个人中心</a>
     </div>
   </li>
 </template>

@@ -162,8 +162,8 @@ Template.workbench_config.onRendered(function () {
   // })
 
   $('#config').onkeydown(function (event) {
-    if(event.keyCode == 13&&window.event.srcElement.tagName!="TEXTAREA")
-      {     
+    if(event.keyCode == 13 && window.event.srcElement.tagName!="TEXTAREA")
+      {
         event.returnValue=false;
       }
   });
@@ -175,7 +175,7 @@ Template.workbench_config.onRendered(function () {
   });
 
   $('#config').on('hidden.bs.modal', function (event) {
-    log("config hidden.bs.modal", $(this)); 
+    log("config hidden.bs.modal", $(this));
     delete Session.keys['selectTaskId'];
     log('bs.modal',bs.modal);
     $(this).removeData('bs.modal');
@@ -255,7 +255,6 @@ Template.workbench_config.events({
     }
 
     log(hostId, emailList, smsList);
-
 
     Meteor.call('updateTaskBasic',
       taskId, {hostId: hostId, email: emailList || [], sms: smsList || []},

@@ -91,7 +91,6 @@ var taskSection = FlowRouter.group({
 customerSection.route('/:taskType/:taskId');
 
 
-
 // 通知中心
 var noticeSection = FlowRouter.group({
   prefix: "/notice",
@@ -101,10 +100,15 @@ var noticeSection = FlowRouter.group({
 noticeSection.route('/',{
   name: "notice",
   action: function() {
-    BlazeLayout.render("mainLayout", {content: "notice"});
+    BlazeLayout.render("mainLayout", {content: "notice", mainContent: 'notice_list'});
   }
 });
-noticeSection.route('/:noticeId');
+noticeSection.route('/:noticeId', {
+  name: 'noticeDetail',
+  action: function () {
+    BlazeLayout.render("mainLayout", {content: "notice_content"});
+  }
+});
 
 
 

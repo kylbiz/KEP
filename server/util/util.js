@@ -24,7 +24,7 @@ KUtil.isLogin = function (self) {
     userId = Meteor.userId();
   }
 
-  log('isLogin', userId);
+  // log('isLogin', userId);
   if (userId) {
     return userId;
   }

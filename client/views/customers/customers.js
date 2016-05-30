@@ -51,12 +51,15 @@ Template.customers_add.events({
 
     if (!name) {
       alert("客户名称必须填写");
-    }``
+      return;
+    }
     if (!containerName) {
       alert("客户联系人姓名必须填写");
+      return;
     }
     if (!containerPhone) {
       alert("客户联系人电话必须填写");
+      return;
     }
 
     var basicInfo = {
