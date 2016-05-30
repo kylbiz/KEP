@@ -5,6 +5,15 @@ CompanyInfo.attachSchema(new SimpleSchema({
     type: String,
     label: "所属客户的ID"
   },
+  "status": {
+    type: Number, // 0 - 正常状态  -1 -  废弃状态
+    label: "当前状态",
+  },
+  "createdAt": {
+    type: Date,
+    label: "创建时间",
+    optional: true,
+  },
   "company": {  // 公司基本信息
     type: Object,
     label: "公司基本信息",
@@ -103,6 +112,7 @@ CompanyInfo.attachSchema(new SimpleSchema({
   "holders.$.IDType": {
     type: String,
     label: "证件类型",
+    optional: true,
     autoform: {
       type: 'select',
       firstOption: false,
@@ -120,6 +130,7 @@ CompanyInfo.attachSchema(new SimpleSchema({
   "holders.$.investType": {
     type: String,
     label: "出资方式",
+    optional: true,
     autoform: {
       type: 'select',
       firstOption: false,

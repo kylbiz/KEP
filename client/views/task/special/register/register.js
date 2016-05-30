@@ -1,3 +1,5 @@
+// ！！！废弃
+
 Template.register.onRendered(function () {
   Meteor.call('getSchema', 'stepInfoCompanyRegistInfo', function (err, schemaOrigin) {
     if (!err) {

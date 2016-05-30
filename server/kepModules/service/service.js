@@ -100,16 +100,22 @@ KService.updateServiceTasks = function (serviceId, tasksInfo) {
  **/
 KService.deleteService = function (serId) {
   check(serId, String);
-  KUtil.dataIsInColl({coll: Service, dataId: serId});
+  var serInfo = KUtil.dataIsInColl({coll: Service, dataId: serId});
+  var customerId = serInfo.customerId;
 
   // 标记废弃的业务
   Service.update({_id: serId}, {$set: {
     status: -1,
   }});
+  log("deleteService serId:", serId);
 
   // 标记废弃相关的子任务
   KTask.delTaskBySer(serId);
-  log('delTaskBySer', serId);
+  log('delTaskBySer serId:', serId);
+
+  // 标记废弃的公司信息
+  KCompanyInfo.deleteCompanyInfo({customerId: customerId});
+  log("deleteCompanyInfo customerId:", customerId);
 
   return serId;
 }

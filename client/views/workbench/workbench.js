@@ -18,7 +18,6 @@ Template.breadcrumb_workbench.helpers({
     if (items.length && !Session.get('taskType')) {
       var item = items[0] || {};
       Session.set('taskType', item.name || "companyRegistInfo");
-      // log('init session', item);
     }
 
     return items;
@@ -28,7 +27,7 @@ Template.breadcrumb_workbench.helpers({
 Template.breadcrumb_workbench.events({
   'click .workbench_change_btn button': function (event) {
     Session.set('taskType', $(event.currentTarget).attr("value")); // 切换子任务
-    console.log($(".workbench_change_btn button").parent());
+    // console.log($(".workbench_change_btn button").parent());
     // $(".workbench_change_btn button").parent().toggleClass('border-red');
     $('.workbench_change_btn button').parent().removeClass('border-red');
     $(event.currentTarget).parent().addClass('border-red');
@@ -161,12 +160,12 @@ Template.workbench_config.onRendered(function () {
   //   keyborad:true
   // })
 
-  $('#config').onkeydown(function (event) {
-    if(event.keyCode == 13 && window.event.srcElement.tagName!="TEXTAREA")
-      {
-        event.returnValue=false;
-      }
-  });
+  // $('#config').onkeydown(function (event) {
+  //   if(event.keyCode == 13 && window.event.srcElement.tagName!="TEXTAREA")
+  //     {
+  //       event.returnValue=false;
+  //     }
+  // });
 
   $('#config').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
@@ -177,7 +176,7 @@ Template.workbench_config.onRendered(function () {
   $('#config').on('hidden.bs.modal', function (event) {
     log("config hidden.bs.modal", $(this));
     delete Session.keys['selectTaskId'];
-    log('bs.modal',bs.modal);
+    // log('bs.modal',bs.modal);
     $(this).removeData('bs.modal');
     $(this).removeAttr('bs.modal');
   });
@@ -254,7 +253,7 @@ Template.workbench_config.events({
       return;
     }
 
-    log(hostId, emailList, smsList);
+    log(taskId, hostId, emailList, smsList);
 
     Meteor.call('updateTaskBasic',
       taskId, {hostId: hostId, email: emailList || [], sms: smsList || []},

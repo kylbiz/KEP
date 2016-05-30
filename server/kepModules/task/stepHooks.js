@@ -67,7 +67,7 @@ KStepHooks.copyCheckNameInfoToCompany = function (taskId) {
     companyInfo["company.type"] = stepData.company.type;
     companyInfo["company.zone"] = stepData.company.zone;
     companyInfo["company.businessScope"] = stepData.company.businessScope;
-    companyInfo["company.holders"] = stepData.holders;
+    companyInfo["holders"] = stepData.holders;
   }
   // 公司名 核名号 // mark: pass
   stepInfo = KUtil.getStepInfoByMark(steps, 'pass') || {};
@@ -102,11 +102,12 @@ KStepHooks.copyCheckNameInfoToCompany = function (taskId) {
  * 将公司信息导入到工商登记中 目前是直接在核名结束后直接导入 无stepHook
  **/
 KStepHooks.copyCompanyToRegisterInfo = function (customerId) {
-  var companyInfo = CompanyInfo.findOne({customerId: customerId});
-  log( "copyCompanyToRegisterInfo", Tasks.find({customerId: customerId}).fetch() );
+  log( "copyCompanyToRegisterInfo", customerId );
 
-  var taskInfo = Tasks.findOne({customerId: customerId, name: '"companyRegistInfo"'});
-  if (!taskInfo || !taskInfo._id){
+  var companyInfo = CompanyInfo.findOne({customerId: customerId});
+
+  var taskInfo = Tasks.findOne({customerId: customerId, name: "companyRegistInfo", status: {$gte: 0} });
+  if (!taskInfo || !taskInfo._id) {
     log("copyCompanyToRegisterInfo task id not found");
     return;
   }
@@ -114,7 +115,7 @@ KStepHooks.copyCompanyToRegisterInfo = function (customerId) {
 
   delete companyInfo._id;
 
-  log("copyCompanyToRegisterInfo", customerId, companyInfo);
+  // log("copyCompanyToRegisterInfo", taskId, customerId, companyInfo, taskId);
   return Tasks.update({_id: taskId, 'steps.mark': "inputData"}, {$set: {
     "steps.$.data": companyInfo
   }});

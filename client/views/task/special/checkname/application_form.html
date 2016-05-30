@@ -23,7 +23,7 @@
             <button class="btn btn-info center dataEdit">编辑</button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-default pull-left">下载</button>
+            <button class="btn btn-default pull-left docDown" value="{{_id}}">下载</button>
         </div>
     </div>
 </template>
@@ -47,7 +47,7 @@
             <div class="row reserveWord">
                 <p>添加备选名</p>
                  <div class="col-md-8 dragArea dad-active dad-container" id="drag-area">
-                     
+
                   {{#each $mapped stepInfo.company.alternativeName}}
                     <div class="module col-md-12 dads-children" data-dad-id="1" data-dad-position="1">
                       {{#with alternativeName this.name $index}}

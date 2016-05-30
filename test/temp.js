@@ -98,9 +98,11 @@ function testReplace () {
 
 // testReplace();
 function testExtend () {
-  var a = [{a:1}, {b:1}];
-  var b = [{c: 1}];
-  console.log(a.concat(b), a , b );
+  // var a = [{a:1}, {b:1}];
+  // var b = [{c: 1}];
+  // console.log(a.concat(b), a , b );
+
+  console.log( "testExtend", _.extend( {a: 3, c: 4}, {a:1, b:2}) );
 }
 // testExtend();
 

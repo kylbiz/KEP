@@ -3,31 +3,22 @@
  **/
 
 Meteor.startup(function() {
-    //initAccount();   // 初始化管理员
+    accountConfig()   // Accounts相关配置
     initSupportInfo(); // 初始化相关的辅助信息
     Test.testData(); // 测试数据
 });
 
 
-// 初始化
-function initAccount() {
-    if (Meteor.users.findOne() || UsersTeam.findOne()) {
-        return;
-    }
+//
+function accountConfig() {
+  Accounts.config({
+    //The number of days from when a user logs in until their token expires
+    //and they are logged out. Defaults to 90. Set to null to disable login expiration
+    loginExpirationInDays: 7,
 
-    var user = {
-        name: 'kyl',
-        password: 'kyl123',
-        phone: '18521595051',
-        email: 'air.cui@kyl.biz',
-    };
-
-    var team = {
-        name: 'default', // 群组名
-        remark: '测试用群组', // 备注
-    }
-
-    KAccount.createTotalNewUser(team, user);
+    // Calls to createUser from the client will be rejected.
+    forbidClientAccountCreation: true,
+  });
 }
 
 
@@ -234,7 +225,8 @@ function getSupportInfo() {
                         firstOption: false,
                         options: [
                             { label: '<公司名>(<地区>)<行业类型><公司性质>', value: 'name-area-industry-type' },
-                            { label: '<地区><公司名><行业类型><公司性质>>', value: 'area-name-industry-type' },
+                            { label: '<地区><公司名><行业类型><公司性质>', value: 'area-name-industry-type' },
+                            { label: '<公司名><行业类型><地区><公司性质>', value: 'name-industry-area-type' },
                         ]
                     }
                 },

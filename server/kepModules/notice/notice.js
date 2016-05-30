@@ -36,10 +36,9 @@ NoticeSys.getNoticeByType = function (userId, noticeType, filterOpt) {
   check(userId, String);
   check(noticeType, String);
   filterOpt = filterOpt || {}
+  var findOpt = _.extend( {to: userId, type: noticeType, status: {$gte: 0} }, filterOpt);
 
-  status = filterOpt.status;
-
-  return NoticeInfo.find({to: userId, type: noticeType, status: status }, {sort: {createdAt: -1}});
+  return NoticeInfo.find(findOpt, {sort: {createdAt: -1}});
 }
 
 //
@@ -68,10 +67,10 @@ NoticeSys.updateStatus = function (userId, noticeId, status) {
 
 
 // 获取当前处于未读取状态的notice数目
-// NoticeSys.getUnreadNoticeCount = function (userId) {
-//   check(userId, String);
-//   return NoticeInfo.find({to: userId, status: 0}).count();
-// }
+NoticeSys.getUnreadNoticeCount = function (userId) {
+  check(userId, String);
+  return NoticeInfo.find({to: userId, status: 0}).count();
+}
 
 
 NoticeSys.getUnReadNotice = function (userId, filterOpt) {

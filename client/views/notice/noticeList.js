@@ -1,17 +1,7 @@
 Template.notice.onRendered(function () {
   Session.setDefault('noticeTypeSel', 'customer');
-
   this.autorun(function () {
-    var filter = Session.get('filterVal') || "";
-    var filterOpt = {status: {$gte: 0}};
-    if (filter.length > 0) {
-      var status = Number(filter);
-      filterOpt.status = status;
-    }
-
-    // log("getNoticeByType", Session.get('noticeTypeSel'), filterOpt);
-
-    Meteor.subscribe('getNoticeByType', Session.get('noticeTypeSel'), filterOpt);
+    Meteor.subscribe('getNoticeByType', Session.get('noticeTypeSel'));
   });
 });
 
@@ -40,7 +30,14 @@ Template.breadcrumb_notice.events({
 
 Template.notice_list.helpers({
   noticeList: function () {
-    return NoticeInfo.find({}, {sort: {createdAt: -1}}).fetch() || [];
+    var filter = Session.get('filterVal') || "";
+    var filterOpt = {status: {$gte: 0}};
+    if (filter.length > 0) {
+      var status = Number(filter);
+      filterOpt.status = status;
+    }
+
+    return NoticeInfo.find(filterOpt, {sort: {createdAt: -1}}).fetch() || false;
   }
 });
 

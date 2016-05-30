@@ -27,10 +27,21 @@ KCompanyInfo.createCompanyInfo = function (customerId, companyInfo) {
   KUtil.dataIsInColl({coll: Customers, dataId: customerId});
 
   companyInfo.customerId = customerId;
+  companyInfo.createdAt = new Date();
+  companyInfo.status = 0;
   log('KCompanyInfo.createCompanyInfo', companyInfo);
   return CompanyInfo.insert(companyInfo);
 };
 
+
+/*
+ * 标记该公司信息被废弃
+ **/
+KCompanyInfo.deleteCompanyInfo = function (findOpt) {
+  return Service.update(findOpt, {$set: {
+    status: -1,
+  }});
+}
 
 /*
  * 更新公司信息
@@ -48,7 +59,7 @@ KCompanyInfo.updateCompanyInfo = function (companyId, companyInfo) {
  **/
 KCompanyInfo.getCompanyInfoByCustomer = function (customerId) {
   check(customerId, String);
-  return CompanyInfo.find({customerId: customerId});
+  return CompanyInfo.find({customerId: customerId, status: {$gte: 0}});
 }
 
 

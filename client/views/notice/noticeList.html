@@ -57,7 +57,11 @@
     <div class="container notice_container">
       {{#if noticeList}}
         {{#each noticeList}}
-          {{> notice_list_content }}
+            {{#if this.title}}
+              {{> notice_list_content }}
+            {{else}}
+              <p class="center">无通知记录</p>
+            {{/if}}
         {{/each}}
       {{else}}
         <p class="center">无通知记录</p>
@@ -81,7 +85,7 @@
             </div>
             <div class="col-md-3">
                 <button class="btn btn-danger" data-toggle="modal" data-target="#notice_delete" data-noticeid="{{_id}}">删除</button>
-                <button class="btn btn-info markRead" {{haveRead status}} value="{{_id}}">标为已读</button>
+                <button class="btn btn-info markRead {{#if status}}haveRead{{/if}}" {{haveRead status}} value="{{_id}}">标为已读</button>
             </div>
         </div>
     </div>

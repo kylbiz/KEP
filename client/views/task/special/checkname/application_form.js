@@ -30,23 +30,11 @@ Template.application_form.helpers({
 
 
 // 预览
-// Template.application_form_preview.events({
-//   'click .dataEdit': function (event) {
-//     Session.set('showEdit', true);
-//   },
-//   'click .stepFinished': function () {
-//     var taskId = FlowRouter.getParam('taskId');
-//     var stepName = Session.get('stepName');
-//     Meteor.call('sureStepFinish', taskId, stepName, function (err, ret) {
-//       if (err) {
-//         log('sureStepFinish', err);
-//         alert("操作失败");
-//       } else {
-//         alert("操作成功");
-//       }
-//     });
-//   }
-// });
+Template.application_form_preview.events({
+  // 'click .dataEdit': function (event) {
+  //   Session.set('showEdit', true);
+  // }
+});
 
 
 // 编辑

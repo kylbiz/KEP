@@ -125,8 +125,8 @@
         <p>负责人:{{serInfo.host.name}}</p>
       </div>
       <div >
-          <button class="btn btn-default" data-toggle="modal" data-target="#service_setting">设置</button>
-          <button class="btn btn-danger" data-toggle="modal" data-target="#service_delete">删除</button>
+          <button class="btn btn-default" data-toggle="modal" data-serviceid="{{serInfo._id}}" data-target="#service_setting">设置</button>
+          <button class="btn btn-danger" data-toggle="modal" data-serviceid="{{serInfo._id}}" data-servicename="{{serInfo.label}}" data-target="#service_delete">删除</button>
       </div>
     </div>
     <div class="col-md-9 tableOverflow">

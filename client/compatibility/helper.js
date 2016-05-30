@@ -36,6 +36,10 @@ if (typeof UI !== 'undefined') {
     return '--';
   });
 
+  UI.registerHelper('goToCompanyInfo', function (customerId) {
+    return FlowRouter.path('companyInfo', {customerId: customerId});
+  });
+
   UI.registerHelper('goToTask', function (taskType, taskId) {
     return FlowRouter.path('task', {taskType: taskType, taskId: taskId});
   });

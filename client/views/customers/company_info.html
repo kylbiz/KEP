@@ -40,7 +40,9 @@
           <div class="row margin-top">
               <p class="holders-info-full">股东信息</p>
           </div>
-          {{> holders }}
+          {{#each companyDoc.holders}}
+            {{> holders }}
+          {{/each}}
           <!-- 法人信息 -->
           <div class="row margin-top">
               <p class="holders-info-full">法人信息</p>

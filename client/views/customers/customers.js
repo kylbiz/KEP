@@ -19,11 +19,11 @@ Template.customers_register.helpers({
 Template.customerTableCell.helpers({
   managePath: function () {
     var path = FlowRouter.path("customerInfo", {customerId: this._id});
-    return path || "/";
+    return path || "#";
   },
   companyInfoPath: function () {
     var path = FlowRouter.path("companyInfo", {customerId: this._id});
-    return path || "/";
+    return path || "#";
   }
 });
 

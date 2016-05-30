@@ -42,7 +42,7 @@ KTask.createTask = function (taskInfo) {
   var taskStepInfo = retList[2];
 
   var steps = taskStepInfo.steps || [];
-  steps[0].startTime = timeNow;  // 初始化任务的第一步
+  steps[0].startTime = timeNow;   // 初始化任务的第一步
   steps[0].updateTime = timeNow;  // 初始化任务的第一步
   log('KTask.createTask steps', steps);
 
@@ -262,7 +262,7 @@ KTask.delTaskBySer = function (serviceId) {
   //   KTask.deleteTask(task._id);
   // });
 
-  return  Tasks.update({serviceId: serviceId}, {$set: {status: -1}}, {multi: true});
+  return Tasks.update({serviceId: serviceId}, {$set: {status: -1}}, {multi: true});
 }
 
 /*
