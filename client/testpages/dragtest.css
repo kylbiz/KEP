@@ -33,6 +33,7 @@
     pointer-events: none;
 }
 .dads-children-placeholder{
+    display: none;
     padding: 2px;
     overflow: hidden;
     position: absolute !important;
