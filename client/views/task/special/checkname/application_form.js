@@ -119,6 +119,9 @@ Template.application_form_edit.events({
       $("#backupName").clone().attr('style', '').appendTo('#drag-area');
       // $("#drag-area .module input").first().val("");
       indexAlternativeName('#drag-area .module input', "company.alternativeName.$.name");
+      $('.dragArea').dad({
+        draggable: 'button'
+      });
     } else {
       alert('最多添加5个备选名');
     }

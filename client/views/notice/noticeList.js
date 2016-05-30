@@ -30,6 +30,8 @@ Template.breadcrumb_notice.events({
   'click .chaNoticeType': function (event) {
     var noticeType = $(event.currentTarget).attr('value');
     Session.set('noticeTypeSel', noticeType);
+    $('.chaNoticeType').parent().removeClass('border-red');
+    $(event.currentTarget).parent().addClass('border-red');
   },
   'click .NoticeFilter':function (event) {
     var filterVal = $(event.currentTarget).attr('value') || "";
@@ -71,7 +73,10 @@ Template.notice_list_content.events({
     Meteor.call('markReadNotice', noticeId, function (err, ret) {
       if (err) {
         log('delNotice fail', err);
-        alert("标记通知已读失败！");
+        return KEPUtil.alertMsg('标记通知已读失败！');
+        // alert("标记通知已读失败！");
+      }else{
+
       }
     });
   }

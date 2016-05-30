@@ -26,7 +26,7 @@
             <div class="col-md-4 content-title">
                 <p>通知中心</p>
             </div>
-            <div class="col-md-4 tem_change_btn">
+            <div class="col-md-4 notice_change_btn">
                 <div class="col-sm-6">
                     <button type="button" value="customer" class="btn btn-info btn-sm chaNoticeType" style="background-color: #13d8c6;">客户管理通知</button>
                 </div>
@@ -55,13 +55,13 @@
 <!-- 通知列表 -->
 <template name="notice_list">
     <div class="container notice_container">
-      {{#if noticeList}}
-        {{#each noticeList}}
+<!--       {{#if noticeList}}
+        {{#each noticeList}} -->
           {{> notice_list_content }}
-        {{/each}}
+ <!--        {{/each}}
       {{else}}
         <p class="center">无通知记录</p>
-      {{/if}}
+      {{/if}} -->
     </div>
 </template>
 
@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-3">
                 <button class="btn btn-danger" data-toggle="modal" data-target="#notice_delete" data-noticeid="{{_id}}">删除</button>
-                <button class="btn btn-info markRead" {{haveRead status}} value="{{_id}}">标为已读</button>
+                <button class="btn btn-info markRead {{#if haveRead}}haveRead{{/if}}" {{haveRead status}} value="{{_id}}">标为已读</button>
             </div>
         </div>
     </div>

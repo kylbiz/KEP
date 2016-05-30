@@ -105,6 +105,5 @@ Template.mainLayout.onRendered(function () {
 	            alertBox.appendChild(btn2);
 	        }
 	        document.body.appendChild(alertBox);
-
 	    }
 })

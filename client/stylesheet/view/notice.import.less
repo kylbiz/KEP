@@ -42,11 +42,16 @@
 		}
 		.col-md-3{
 			text-align: center;
-			line-height: 70px;
 			.border-bottom{
 				margin: 0 -10px;
 			}
+			padding-top: 27px;
+			&:first-child{
+				line-height: 16px;
+			}
 			&:last-child{
+				padding-top: 5px !important;
+				line-height: 70px;
 				border-left:1px solid @border_grey;
 			}
 			button{
@@ -55,7 +60,10 @@
 					text-indent: 6px;
 				}
 			}
-			
+		}
+		.haveRead{
+			color: #666666 !important;
+			background-color: #eeeeee !important;
 		}
 	}
 	.time_row{
