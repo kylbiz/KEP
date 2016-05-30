@@ -57,7 +57,6 @@ KStepHooks.copyCheckNameInfoToCompany = function (taskId) {
   }
   var steps = taskInfo.steps;
 
-
   var companyInfo = {};
   var stepInfo = {};
 
@@ -88,10 +87,38 @@ KStepHooks.copyCheckNameInfoToCompany = function (taskId) {
 
   var customerId = taskInfo.customerId || "";
 
+  // 更新客户对应的公司的信息
   log("CompanyInfo customerId", customerId, " companyInfo", companyInfo);
-  return CompanyInfo.update({customerId: customerId}, {$set: companyInfo});
+  CompanyInfo.update({customerId: customerId}, {$set: companyInfo});
+
+  // 更新工商登记的信息
+  KStepHooks.copyCompanyToRegisterInfo(customerId);
+
+  return true;
 }
 
+
+/*
+ * 将公司信息导入到工商登记中 目前是直接在核名结束后直接导入 无stepHook
+ **/
+KStepHooks.copyCompanyToRegisterInfo = function (customerId) {
+  var companyInfo = CompanyInfo.findOne({customerId: customerId});
+  log( "copyCompanyToRegisterInfo", Tasks.find({customerId: customerId}).fetch() );
+
+  var taskInfo = Tasks.findOne({customerId: customerId, name: '"companyRegistInfo"'});
+  if (!taskInfo || !taskInfo._id){
+    log("copyCompanyToRegisterInfo task id not found");
+    return;
+  }
+  var taskId = taskInfo._id;
+
+  delete companyInfo._id;
+
+  log("copyCompanyToRegisterInfo", customerId, companyInfo);
+  return Tasks.update({_id: taskId, 'steps.mark': "inputData"}, {$set: {
+    "steps.$.data": companyInfo
+  }});
+}
 
 /*
  * 将工商登记阶段的数据导入到companyInfo中
@@ -125,7 +152,6 @@ KStepHooks.copyRegisterInfoToCompany = function (taskId) {
     // companyInfo["company.companyId"] = stepData.company.companyId;
     // companyInfo["company.holders"] = stepData.holders;
     // companyInfo["company.legalPerson"] = stepData.legalPerson;
-
     delete stepData.company.tel;
     companyInfo = stepData;
   }

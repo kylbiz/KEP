@@ -1,8 +1,0 @@
-{
-  "ENV": {
-    "MONGO_URL": "mongodb://kyl3:mongodb_kyl_biz_kyl3@218.244.136.228:27017/kyl3"
-  },
-  "public": {
-    "hello": "world"
-  }
-}

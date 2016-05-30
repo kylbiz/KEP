@@ -43,11 +43,11 @@ NoticeSys.getNoticeByType = function (userId, noticeType, filterOpt) {
 }
 
 //
-NoticeSys.getNotice = function (userId, noticeId) {
+NoticeSys.getNotice = function (userId, noticeId, filterOpt) {
   check(userId, String);
   check(noticeId, String);
 
-  return NoticeInfo.find({ _id: noticeId, to: userId, status: {$gte: 0} });
+  return NoticeInfo.find({ _id: noticeId, to: userId, status: {$gte: 0} }, filterOpt || {});
 }
 
 
@@ -64,6 +64,19 @@ NoticeSys.updateStatus = function (userId, noticeId, status) {
   ]);
 
   return NoticeInfo.update({_id: noticeId, to: userId}, {$set: {status: status}});
+}
+
+
+// 获取当前处于未读取状态的notice数目
+// NoticeSys.getUnreadNoticeCount = function (userId) {
+//   check(userId, String);
+//   return NoticeInfo.find({to: userId, status: 0}).count();
+// }
+
+
+NoticeSys.getUnReadNotice = function (userId, filterOpt) {
+  check(userId, String);
+  return NoticeInfo.find({to: userId, status: 0}, filterOpt);
 }
 
 // 推送公司状态更新的通知

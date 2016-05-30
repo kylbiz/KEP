@@ -38,7 +38,6 @@ Template.register_form.helpers({
 // });
 
 
-
 Template.register_form_edit.helpers({
   schemaReady: function () {
     return Session.get('schemaOrigin') || false; // 用于tempStruct的schema是否attach

@@ -113,3 +113,8 @@ Meteor.publish('getNotice', function (noticeId) {
   var userId = KUtil.isLogin(this); // 登录状态
   return NoticeSys.getNotice(userId, noticeId);
 });
+
+Meteor.publish('getUnReadNotice', function (filterOpt) {
+  var userId = KUtil.isLogin(this); // 登录状态
+  return NoticeSys.getUnReadNotice(userId, filterOpt || {});
+});

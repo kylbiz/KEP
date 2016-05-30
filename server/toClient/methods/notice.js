@@ -12,9 +12,15 @@ Meteor.methods({
   },
   markReadNotice: function (noticeId) {
     var userId = KUtil.isLogin();
-    log("markReadNotice", userId, noticeId, NoticeInfo.findOne({_id: noticeId}) );
+    // log("markReadNotice", userId, noticeId, NoticeInfo.findOne({_id: noticeId}) );
     checkNoticePermission(userId, noticeId);
+
     return NoticeSys.updateStatus(userId, noticeId, 1);
+  },
+  getUnreadNoticeCount: function () {
+    var userId = KUtil.isLogin();
+
+    return NoticeSys.getUnreadNoticeCount(userId);
   }
 });
 

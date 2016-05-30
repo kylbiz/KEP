@@ -9,7 +9,7 @@ Template.notice.onRendered(function () {
       filterOpt.status = status;
     }
 
-    log("getNoticeByType", Session.get('noticeTypeSel'), filterOpt);
+    // log("getNoticeByType", Session.get('noticeTypeSel'), filterOpt);
 
     Meteor.subscribe('getNoticeByType', Session.get('noticeTypeSel'), filterOpt);
   });

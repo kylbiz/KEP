@@ -222,6 +222,7 @@ function getSupportInfo() {
                         options: [
                             { label: '网络科技', value: '网络科技' },
                             { label: '生物技术', value: '生物技术' },
+                            { label: '贸易', value: '贸易' }
                         ]
                     }
                 },
