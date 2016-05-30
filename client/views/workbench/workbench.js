@@ -32,7 +32,6 @@ Template.breadcrumb_workbench.events({
     // $(".workbench_change_btn button").parent().toggleClass('border-red');
     $('.workbench_change_btn button').parent().removeClass('border-red');
     $(event.currentTarget).parent().addClass('border-red');
-    // $(event.currentTarget).addClass("selected");
   }
 });
 

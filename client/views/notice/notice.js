@@ -9,6 +9,8 @@ Template.notice.events({
   	event.preventDefault();
     log('click task', $(event.currentTarget).attr("value")  );
     Session.set('noticeTemplate', $(event.currentTarget).attr("value"));
+    $('.notice_change_btn button').parent().removeClass('border-red');
+    $(event.currentTarget).parent().addClass('border-red');
   },
   'click .notice_row'(event){
   	event.preventDefault();
