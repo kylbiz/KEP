@@ -333,7 +333,8 @@ Tasks.helpers({
     return (Customers.findOne({_id: this.customerId}) || {}).name || "未知";
   },
   companyName: function () {
-    return (CompanyInfo.findOne({customerId: this.customerId}) || {}).name || "未知";
+    Meteor.subscribe("getCompanyInfoByCustomer", this.customerId);
+    return (CompanyInfo.findOne({customerId: this.customerId}) || {company: {}}).company.name || "未知";
   },
   stepStatus: function () {
     var stepStatus = "未知";

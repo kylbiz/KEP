@@ -28,14 +28,58 @@ Template.register_form.helpers({
 });
 
 
-// Template.register_form_preview.events({
-//   'click .dataEdit': function () {
-//     Session.set('showEdit', true);
-//   },
-//   'click .stepFinished': function () {
+Template.register_form_preview.events({
+  'click .dataEdit': function () {
+    Session.set('showEdit', true);
+  }
+});
 
-//   }
-// });
+
+
+Template.register_form_preview.onRendered(function () {
+  this.autorun(function () {
+    Meteor.subscribe( "getDocGenerated", Session.get('docUuid') || "" );
+  });
+});
+
+
+Template.register_form_preview.onDestroyed(function () {
+  delete Session.keys['docUuid'];
+  log("register_form_preview onDestroyed");
+});
+
+
+
+Template.register_form_preview.helpers({
+  docUuid: function () {
+    return Session.get('docUuid') || false;
+  },
+  docsCount: function () {
+    return DocGenerated.find({}).count() || 0;
+  },
+  docsData: function () {
+    return DocGenerated.find({}).fetch();
+  }
+});
+
+
+Template.register_form_preview.events({
+  'click .docDown': function (event) {
+    var uuid = Meteor.uuid();
+    Session.set('docUuid', uuid);
+    Meteor.call('registerGenDoc', this.data, uuid, function (error, result) {
+      if (error) {
+        log('checkNameGenDoc fail', error);
+        alert("生成文档失败");
+      } else {
+        log('checkNameGenDoc succeed');
+      }
+    });
+  }
+});
+
+
+
 
 
 Template.register_form_edit.helpers({

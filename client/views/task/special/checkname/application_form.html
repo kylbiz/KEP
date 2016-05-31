@@ -23,7 +23,27 @@
             <button class="btn btn-info center dataEdit">编辑</button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-default pull-left docDown" value="{{_id}}">下载</button>
+            {{#if docUuid}}
+              {{#if docsCount}}
+                <div class="btn-group pull-left">
+                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    下载文档 <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {{#each docsData}}
+                      <li><a href="{{url}}">{{label}}</a></li>
+                    {{/each}}
+                  </ul>
+                </div>
+
+
+
+              {{else}}
+                <button class="btn btn-default pull-left" disabled>生成文档中...</button>
+              {{/if}}
+            {{else}}
+            <button class="btn btn-primary pull-left docDown">生成文档</button>
+            {{/if}}
         </div>
     </div>
 </template>
@@ -102,6 +122,12 @@
              <div class="row border-bottom paddingEight">
                  <div class="col-md-8">
                    {{> afQuickField name='company.businessScope' id='businessScope' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+             <!-- 注册资本 -->
+             <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                   {{> afQuickField name='company.moneyAmount' id='moneyAmount' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
              <!-- 公司地址 -->

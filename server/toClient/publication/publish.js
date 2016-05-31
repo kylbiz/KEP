@@ -118,3 +118,13 @@ Meteor.publish('getUnReadNotice', function (filterOpt) {
   var userId = KUtil.isLogin(this); // 登录状态
   return NoticeSys.getUnReadNotice(userId, filterOpt || {});
 });
+
+
+// 文档生成记录
+Meteor.publish('getDocGenerated', function (uuid) {
+   KUtil.isLogin(this);
+
+   log("getDocGenerated", DocGenerated.findOne({uuid: uuid}) );
+   return DocGenerated.find({uuid: uuid || ""});
+});
+

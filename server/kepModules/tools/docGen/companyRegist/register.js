@@ -10,11 +10,10 @@ var expectStruct = {
 
 
 DocGen.register.genDoc = function (doc) {
-  doc = expectStruct;
-
+  // doc = expectStruct;
   DocGen.genDocRemote(doc, function (err, result) {
     if (err || !result || !result.fileUrl) {
-      throw new Meteor("生成文档失败", err || "未知错误");
+      throw new Meteor.Error("生成文档失败", err || "未知错误");
     } else {
       var fileUrl = result.fileUrl;
       DocGenerated.insert({

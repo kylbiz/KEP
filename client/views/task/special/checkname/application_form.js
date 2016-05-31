@@ -30,10 +30,46 @@ Template.application_form.helpers({
 
 
 // 预览
+Template.application_form_preview.onRendered(function () {
+  this.autorun(function () {
+    Meteor.subscribe( "getDocGenerated", Session.get('docUuid') || "" );
+  });
+});
+
+
+Template.application_form_preview.onDestroyed(function () {
+  delete Session.keys['docUuid'];
+  log("application_form_preview onDestroyed");
+});
+
+
+
+Template.application_form_preview.helpers({
+  docUuid: function () {
+    return Session.get('docUuid') || false;
+  },
+  docsCount: function () {
+    return DocGenerated.find({}).count() || 0;
+  },
+  docsData: function () {
+    return DocGenerated.find({}).fetch();
+  }
+});
+
+
 Template.application_form_preview.events({
-  // 'click .dataEdit': function (event) {
-  //   Session.set('showEdit', true);
-  // }
+  'click .docDown': function (event) {
+    var uuid = Meteor.uuid();
+    Session.set('docUuid', uuid);
+    Meteor.call('checkNameGenDoc', this.data, uuid, function (error, result) {
+      if (error) {
+        log('checkNameGenDoc fail', error);
+        alert("生成文档失败");
+      } else {
+        log('checkNameGenDoc succeed');
+      }
+    });
+  }
 });
 
 
