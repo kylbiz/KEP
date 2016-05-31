@@ -74,6 +74,7 @@
             {{#each this.taskData }} {{> checknameTableCell }} {{/each}}
         </tbody>
     </table>
+    {{> paginator }}
 </template>
 <template name="checknameTableCell">
     <tr>
@@ -116,6 +117,7 @@
             {{#each this.taskData }} {{> registerTableCell }} {{/each}}
         </tbody>
     </table>
+    {{> paginator }}
 </template>
 <template name="registerTableCell">
     <tr>
@@ -269,6 +271,17 @@
     </div>
 </template>
 <!-- autoform -->
+
 <template name="insertBookForm">
+   
     {{#autoForm collection="Customers" type="insert" id="reactiveCurrentValueForm" template="bootstrap3-inline"}} {{> afQuickField name="principal" options="allowed"}} {{> afQuickField name="email"}} {{/autoForm}}
+</template>
+
+<!-- 分页模版 -->
+<template name="paginator">
+    <div class="pagination-div pull-right">
+        <p id="text"></p>
+        <ul id="paginator" class="pagination">
+        </ul>
+    </div>
 </template>
