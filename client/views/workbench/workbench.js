@@ -7,24 +7,6 @@ Template.workbench.onRendered(function() {
 Template.workbench.onDestroyed(function () {
   delete Session.keys['taskType'];
 });
-//分页
-
-Template.paginator.onRendered(function() {
-  $('#paginator').jqPaginator({
-      totalPages: 100,
-      visiblePages: 10,
-      currentPage: 1,
-      first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
-      prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
-      next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
-      last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
-      page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
-      onPageChange: function (num, type) {
-          var total = 100 ;
-          $('#text').html('当前第' + num +'/' + total + '页');
-      }
-  });
-})
 
 // 导航页（业务选项按钮）
 Template.breadcrumb_workbench.helpers({
@@ -47,7 +29,7 @@ Template.breadcrumb_workbench.events({
     // $(".workbench_change_btn button").parent().toggleClass('border-red');
     $('.workbench_change_btn button').parent().removeClass('border-red');
     $(event.currentTarget).parent().addClass('border-red');
-  }
+  },
 });
 
 
@@ -74,6 +56,32 @@ Template.reactiveDataTable.helpers({
       stepsDes: ((TaskSteps.findOne({type: taskType}) || {}).stepsDes) || [],
       taskData: Tasks.find({name: taskType}).fetch() || [],
     };
+  }
+});
+
+
+Template.reactiveDataTable.events({
+  'click .taskSetting': function (event, template) {
+    var taskId = $(event.currentTarget).attr("value");
+    // var template = Blaze.toHTMLWithData(Template.workbench_config, {});
+    // $("#taskConfig").html(template);
+
+    Blaze.render(Template.workbench_config, $('#taskConfig')[0] );
+    Session.set('selectTaskId', taskId);
+
+    // $('#config').on('show.bs.modal', function (event) {
+    //   var button = $(event.relatedTarget);
+    //   var taskId = button.data("taskid");
+    //   Session.set('selectTaskId', taskId);
+    // });
+
+    $('#config').on('hidden.bs.modal', function (event) {
+      // log("config hidden.bs.modal", $('#add_email_form')[0]);
+      delete Session.keys['selectTaskId'];
+      $(event.currentTarget).detach();
+    });
+
+    $('#config').modal('show');
   }
 });
 
@@ -183,19 +191,17 @@ Template.workbench_config.onRendered(function () {
   //     }
   // });
 
-  $('#config').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var taskId = button.data("taskid");
-    Session.set('selectTaskId', taskId);
-  });
+  // $('#config').on('show.bs.modal', function (event) {
+  //   var button = $(event.relatedTarget);
+  //   var taskId = button.data("taskid");
+  //   Session.set('selectTaskId', taskId);
+  // });
 
-  $('#config').on('hidden.bs.modal', function (event) {
-    log("config hidden.bs.modal", $(this));
-    delete Session.keys['selectTaskId'];
-    // log('bs.modal',bs.modal);
-    $(this).removeData('bs.modal');
-    $(this).removeAttr('bs.modal');
-  });
+  // $('#config').on('hidden.bs.modal', function (event) {
+  //   log("config hidden.bs.modal", $('#add_email_form')[0]);
+  //   delete Session.keys['selectTaskId'];
+  //   // $( ".hello" ).remove()
+  // });
 
   this.autorun(function () {
     Meteor.subscribe('getHostUser', ['admin', 'manager', 'advUser', 'user']);   // 当前团队可管理客户的用户
@@ -211,6 +217,11 @@ Template.workbench_config.helpers({
   hosts: function () {
     return Meteor.users.find({}).fetch();
   },
+  hostNow: function (hostId) {
+    var taskId = Session.get('selectTaskId');
+    var taskInfo = Tasks.findOne({_id: taskId}) || {host: {}};
+    return ( hostId == taskInfo.host.id ) ? "selected" : "";
+  },
   taskInfo: function () {
     var taskId = Session.get('selectTaskId');
     return Tasks.findOne({_id: taskId}) || {};
@@ -219,6 +230,7 @@ Template.workbench_config.helpers({
 
 Template.workbench_config.events({
   'click #add_email_btn': function (event, template) {
+    log("add_email_btn");
     Blaze.render(Template.add_email, template.$('#add_email_form').get(0));
   },
   'click #add_tel_btn': function (event, template) {
@@ -269,7 +281,7 @@ Template.workbench_config.events({
       return;
     }
 
-    log(taskId, hostId, emailList, smsList);
+    // log(taskId, hostId, emailList, smsList);
 
     Meteor.call('updateTaskBasic',
       taskId, {hostId: hostId, email: emailList || [], sms: smsList || []},
@@ -282,6 +294,25 @@ Template.workbench_config.events({
     });
 
   }
+});
+
+
+//分页
+Template.paginator.onRendered(function() {
+  $('#paginator').jqPaginator({
+      totalPages: 100,
+      visiblePages: 10,
+      currentPage: 1,
+      first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
+      prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
+      next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
+      last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
+      page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
+      onPageChange: function (num, type) {
+          var total = 100 ;
+          $('#text').html('当前第' + num +'/' + total + '页');
+      }
+  });
 });
 
 
@@ -348,168 +379,3 @@ function getInputDataList(findStr, childrenList) {
     //   });
     // });
 }
-
-
-
-
-// 核名列表
-// Template.checknameTableCell.onRendered(function () {
-
-// });
-
-// Template.checknameTableCell.helpers({
-//   stepStatusShow: function (stepInfo) {
-//     var stepStatus  = 'noStart';  // 未开始
-//     if (stepInfo.finished) {
-//       stepStatus = 'finished';  // 完成
-//     } else if (stepInfo.expectTime) {
-//       if ( (stepInfo.updateTime - stepInfo.startTime) >= stepInfo.expectTime ) {
-//         stepStatus = 'overtime'  // 超时
-//       }
-//     }
-
-//     return {
-//         'noStart': 'circle-gray',
-//         'finished': 'circle-gray',
-//         'overtime': 'circle-red'
-//     }[stepStatus] || '';
-//   },
-//   stepTimeUsed: function (stepInfo) {
-//     if (!stepInfo.startTime) {
-//       return '';
-//     } else {
-//       return KEPUtil.intervalDays(stepInfo.startTime, stepInfo.updateTime) + '天';
-//     }
-//   },
-//   totalTimeUsed: function (stepInfo) {
-//     if (stepInfo.updateTime && stepInfo.startTime) {
-//       return KEPUtil.intervalDays(stepInfo.updateTime, stepInfo.startTime) + '天';
-//     }
-//     return '--';
-//   }
-// });
-
-
-// // 核名列表
-// Template.workbench_checkname.onRendered(function () {
-//   // var self = this;
-//   // self.autorun(function () {
-//   //   var taskType = Session.get('taskType');
-//   //   log('workbench_checkname taskType', taskType);
-//   //   self.subscribe("getTasks", taskType);
-//   // });
-// });
-
-// Template.workbench_checkname.helpers({
-//   // checkNameInfos: function () {
-//   //   log("workbench_checkname this", this);
-//   //   return Tasks.find({}).fetch();
-//   // }
-// });
-
-
-// // 工商登记列表
-// Template.workbench_ICBCregister.helpers({
-//   foo: function () {
-//     // ...
-//   }
-// });
-
-// var orderlistsOptions = {
-//   columns: [
-//   {
-//     title: '客户名称',
-//     data: 'customername',
-//     className: 'customername'
-//   },
-//   {
-//     title: '文件名称',
-//     data: "filename"
-//   },
-//   {
-//     title: '客户确认',
-//     data: "customerconfirm"
-//   },
-//   {
-//     title: '提交工商',
-//     data: "submitICBC"
-//   },
-//   {
-//     title: '核名通过',
-//     data: 'checkName'
-//   },
-//   {
-//     title: '申请地址',
-//     className: 'applicationAddress',
-//     data: 'applicationAddress'
-//   },
-//   {
-//     title: '耗时/天',
-//     className: 'Timeconsuming',
-//     data: 'orderHost'
-//   },
-//   {
-//     title: '业务员',
-//     className: 'salesman',
-//     data: 'salesman'
-//   },
-//   {
-//     title: "操作",
-//     className: 'handle',
-//     render: function(cellData, renderType, currentRow) {
-//       if(currentRow.hasOwnProperty("payed") && (currentRow.payed === true || currentRow.payed === "true")) {
-//           var orderId = currentRow.orderId;
-//           var url='/'+currentRow.typeNameFlag+'/'+orderId;
-//           var html = "<a href="+url+">详细信息</a>";
-//           return html;
-//       } else {
-//         return "";
-//       }
-//     }
-//   }
-//   ],
-//    pageLength: 10,
-//    lengthMenu: [ 10, 15, 20, 25, 50 ]
-// }
-
-// Template.containsTheDataTable.helpers({
-//   orderlistData: function () {
-//     return function () {
-//       // return Orders.find({payed: true}, {sort: {orderId: -1}}).fetch();
-//       return Orders.find({}).fetch();
-//     };
-//   },
-//   optionsObject: orderlistsOptions,
-//   ordersLists: function() {
-//     return Orders.find({});
-//   }
-// });
-
-// Template.workbench.helpers({
-//   "listNum": function() {
-//     return Orders.find({}).count();
-//   }
-// })
-
-// Template.workbench.onRendered(function () {
-//   $.fn.dataTable.ext.search.push(
-//     function (settings, data, dataIndex) {
-//       var min = $('#start_date').val();
-//       var max = $('#last_date').val();
-//       var time = data[4];
-
-//       min = Date.parse(min);
-//       max = Date.parse(max);
-//       time = Date.parse(time);
-
-//       if ((isNaN(min) && isNaN(max)) ||
-//         (isNaN(min) && time < max) ||
-//         (min < time && isNaN(max)) ||
-//         (min < time && time < max)) {
-//         return true;
-//     }
-//     return false;
-//   }
-//   );
-
-// })

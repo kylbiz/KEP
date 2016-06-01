@@ -33,6 +33,10 @@ function pushNotice(info) {
 
 // 更新任务信息
 function updateTaskInfo(info) {
+  // 目前需要更新的信息
+  // 核名通过 -- 企业名确定
+  // 工商登记通过 -- 确认工商登记通过
+
   // var taskType = info.taskType;
 
   // if (taskType == 'companyCheckName') {

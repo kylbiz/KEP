@@ -3,9 +3,11 @@
  **/
 
 Meteor.startup(function() {
-    accountConfig()   // Accounts相关配置
-    initSupportInfo(); // 初始化相关的辅助信息
-    Test.testData(); // 测试数据
+    accountConfig();        // Accounts相关配置
+    initSupportInfo();      // 初始化相关的辅助信息
+    Yiqicha.updateAll();    // 订阅服务开启
+
+    Test.testData();        // 测试数据
 });
 
 

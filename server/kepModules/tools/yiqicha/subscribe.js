@@ -2,6 +2,7 @@
  * 一企查订阅服务
  **/
 
+
 var Fiber = Npm.require('fibers');
 
 // 添加一企查服务订阅
@@ -82,9 +83,9 @@ Yiqicha.updateCompanyStatus = function (subId, callback) {
 // 更新所有
 Yiqicha.updateAll = function () {
   Meteor.setInterval(function () {
+    log("Yiqicha subscribe update!!!!");
     updateAll();
-  }, 6 * 1000);
-  // 1 * 3600 * 1000
+  }, 1 * 3600 * 1000 );
 }
 
 // 更新所有需要更新的订阅
@@ -95,9 +96,9 @@ function updateAll() {
     "statusInfo.status": {
       $gte: 0,
     },
-    // "lastSearchTime": {
-    //   $lte: moment().subtract(Yiqicha.checkHoursPeriod || 3, 'hours').toDate(),
-    // },
+    "lastSearchTime": {
+      $lte: moment().subtract(Yiqicha.checkHoursPeriod || 3, 'hours').toDate(),
+    },
     "searchNum": {
       $lte:Yiqicha.maxSearchTimes || 100 // 最大查询次数
     }
@@ -156,10 +157,10 @@ function observeStatusChange() {
 }
 
 
-Meteor.startup(function () {
+// Meteor.startup(function () {
   // 监听一企查
   // Yiqicha.updateAll();
-});
+// });
 
 
 // test

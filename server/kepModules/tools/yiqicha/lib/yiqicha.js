@@ -20,11 +20,11 @@ Yiqicha = {
     registrationStatusOption: {
       targetUrl : 'http://www.sgs.gov.cn/shaic/workonline/appStat!toEtpsAppList.action'
     },
-    maxValidDate: 8, // 核名审核的最长天数，多于这个天数表示审核基本不通过 /天
-    maxSearchTimes: 80, // 核名最大查询次数 /次
-    checkHoursPeriod: 4, // 轮询间隔时间 /小时
-  }
-}
+  },
+  maxValidDate: 8, // 核名审核的最长天数，多于这个天数表示审核基本不通过 /天
+  maxSearchTimes: 80, // 核名最大查询次数 /次
+  checkHoursPeriod: 4, // 轮询间隔时间 /小时
+};
 
 var Crawler = Meteor.npmRequire('mycrawl').Crawler;
 var crawler = new Crawler();
