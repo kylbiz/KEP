@@ -205,6 +205,18 @@ function getSupportInfo() {
                     type: "Number",
                     label: '注册资本(单位：万元，必填)'
                 },
+                "company-industryTypeBig": {
+                    type: "String",
+                    label: "行业大类",
+                    optional: true,
+                    autoform: {
+                        type: 'select',
+                        firstOption: false,
+                        options: [
+                            { label: '网络科技', value: '网络科技' },
+                        ]
+                    }
+                },
                 "company-industryType": {
                     type: "String",
                     label: '行业类型',

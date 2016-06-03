@@ -5,7 +5,6 @@ Template.checkname.onRendered(function () {
     Meteor.subscribe('getTaskInfo', taskId);
     Meteor.subscribe('getStepsDes', [taskType]);
   });
-
  // $('.task_ul li a').first().addClass('selected');
 });
 
@@ -14,6 +13,20 @@ Template.checkname.onDestroyed(function () {
   delete Session.keys['stepName'];
   log('checkname onDestroyed');
 });
+
+
+// Template.task_title.onRendered(function () {
+  // log("Template.task_title.onRendered", this);
+// });
+
+
+Template.task_title.helpers({
+  taskTitle: function () {
+    // log("taskTitle", this);
+    return this.name || "未知";
+  }
+});
+
 
 Template.checkname_content.helpers({
   templateInfo: function () {
@@ -34,7 +47,7 @@ Template.checkname_content.helpers({
         Session.set('CommonTemplateDataStruct', stepInfo.dataStruct);
       }
 
-      log("templateInfo", templateName, stepName);
+      // log("templateInfo", templateName, stepName, stepInfo);
 
       return {
         name: templateName,

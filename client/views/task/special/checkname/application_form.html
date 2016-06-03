@@ -78,14 +78,12 @@
                         </div>
                     </div>
                   {{/each}}
-
-
                   </div>
             </div>
 
               <!-- 备选名 -->
               <div class="module col-md-12" id="backupName" style="display: none;">
-                    {{> afQuickField name='company.alternativeName.$.name' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
+                    {{> afQuickField name='company.alternativeName.$.name' class='changeCompany' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-4" }}
                   <div class="col-sm-3">
                       <a class="btn btn-danger btn-sm deleteItem"><i class="fa fa-times" aria-hidden="true"></i></a>
                       <button class="btn btn-danger btn-sm"><i class="fa fa-arrows-v" aria-hidden="true"></i></button>
@@ -95,20 +93,30 @@
              <div class="row border-bottom paddingEight">
                <a class="btn btn-success center plusbtn"><i class="fa fa-plus fa-lg"></i></a>
              </div>
-             <!-- 企业类型 注册区域 行业类型 -->
+             <!-- 企业类型 -->
              <div class="row paddingEight">
                  <div class="col-md-8">
                    {{> afQuickField name='company.type' class='changeCompany' id='companyType' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
+             <!-- 注册区域 -->
               <div class="row paddingEight">
                  <div class="col-md-8">
                    {{> afQuickField name='company.zone' template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
+
+              <!-- 行业大类 -->
               <div class="row border-bottom paddingEight">
                  <div class="col-md-8">
-                   {{> afQuickField name='company.industryType' class='changeCompany' id="industryType" template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                    {{> afQuickField name='company.industryTypeBig' options=industryBigOpts class='changeCompany' id="industryTypeBig" template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
+                 </div>
+             </div>
+
+             <!-- 行业类型 -->
+              <div class="row border-bottom paddingEight">
+                 <div class="col-md-8">
+                    {{> afQuickField name='company.industryType' options=industryOpts class='changeCompany' id="industryType" template="bootstrap3-horizontal" label-class="col-sm-4 line-height" input-col-class="col-sm-8" }}
                  </div>
              </div>
              <!-- 名称结构 -->

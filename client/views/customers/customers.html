@@ -72,6 +72,8 @@
             {{#each customers}} {{> customerTableCell}} {{/each}}
         </tbody>
     </table>
+    {{> paginator}}
+
     <!-- customers_delete 设置删除模态框 -->
     <div class="modal fade" id="customers_delete" tabindex="-1" role="dialog" aria-labelledby="customers_delete_title">
         {{> customers_delete }}

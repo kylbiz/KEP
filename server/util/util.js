@@ -118,3 +118,13 @@ KUtil.getStepInfoByMark = function (steps, mark) {
 }
 
 
+// 转换为collection的filter信息
+KUtil.getCollFilterInfo = function (num, page) {
+
+  return {
+    limit: num || 0,
+    skip: (page - 1 ) * num,
+  }
+}
+
+

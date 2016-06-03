@@ -27,6 +27,14 @@ Meteor.methods({
     // 更新
     return KTask.updateTaskStepData(taskId, stepName, stepData);
   },
+  'updateTaskStepRemark': function (taskId, stepName, stepRemark) {
+    // args 正确性
+    var userId = KUtil.isLogin();
+    // 账号权限
+    KUtil.havePermission(userId, 'task.update', taskId);
+    // 更新
+    return KTask.updateTaskStepRemark(taskId, stepName, stepRemark);
+  },
   'sureStepFinish': function (taskId, stepName) {
     // args 正确性
     var userId = KUtil.isLogin();

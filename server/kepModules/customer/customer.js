@@ -126,8 +126,14 @@ KCustomer.deleteCustomer = function (customerId) {
 /*
  * 各种用户能获取到的客户信息
  **/
-KCustomer.getCustomers = function (userId) {
+KCustomer.getCustomers = function (userId, dataLimit) {
   check(userId, String);
+  check(dataLimit, Match.OneOf(null, undefined, {
+    page: Number,
+    num: Number,
+  }));
+
+  var collLimit = dataLimit ? KUtil.getCollFilterInfo(dataLimit.num || 15, dataLimit.page || 1) : {};
 
   var userInfo = Meteor.users.findOne({_id: userId}) || false;
   if (!userInfo) {
@@ -141,7 +147,7 @@ KCustomer.getCustomers = function (userId) {
   }
 
   var dataFilter = {teamId: teamId, status: {$gte: 0}};
-  var dataOpt = {sort: {createdAt: -1}};
+  var dataOpt = _.extend({sort: {createdAt: -1}}, collLimit);
 
   // 具体角色的处理
   var handleMap = {
@@ -204,6 +210,16 @@ KCustomer.getCustomers = function (userId) {
 KCustomer.getCustomersByIdList = function (customerList) {
   check(customerList, [String]);
   return Customers.find({_id: {$in: customerList}});
+}
+
+
+
+/*
+ *
+ **/
+KCustomer.getCustomersCount = function (userId, dataFilter) {
+  var cursor = KCustomer.getCustomers(userId);
+  return cursor.count();
 }
 
 

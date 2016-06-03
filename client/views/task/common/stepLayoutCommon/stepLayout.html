@@ -32,7 +32,9 @@
               <!-- 任务栏对应表单内容 -->
               <div class="container container_radius">
                   <!-- 表单表头 -->
-                  {{> task_title }}
+                  {{#with templateInfo.data}}
+                    {{> task_title }}
+                  {{/with}}
                   <!-- 申请书预览 -->
                   {{>Template.dynamic template=templateInfo.name data=templateInfo.data}}
               </div>
@@ -64,7 +66,7 @@
 <template name="task_title">
     <div class="row writedata-title">
         <div class="col-md-6">
-            <p>企业名称预先核准</p>
+            <p>{{taskTitle}}</p>
         </div>
         <div class="col-md-6">
             <button class="pull-right btn btn-default" data-toggle="modal" data-target="#remark_modal">备注信息</button>
@@ -73,7 +75,9 @@
     <!-- 备注信息模态框 -->
     <div class="modal fade"  id="remark_modal" tabindex="-1" role="dialog" aria-labelledby="remark_modal_title">
      <div class="modal-dialog modal-lg" role="document">
-      {{> remark_modal }}
+     {{#with this}}
+        {{> remark_modal }}
+      {{/with}}
      </div>
     </div>
 </template>

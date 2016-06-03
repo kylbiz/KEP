@@ -8,7 +8,7 @@ FlowRouter.triggers.exit([setLastPath], {except: ['login', 'findPwd']});
 
 // 登录权限
 function loginPermission() {
-  log('loginPermission', Meteor.userId());
+  // log('loginPermission', Meteor.userId());
   if(!Meteor.userId()) {
     // 未登录
     FlowRouter.go("login");

@@ -1,0 +1,28 @@
+<!-- 备注信息模态框模版 -->
+<template name="remark_modal">
+  <div class="modal-content" id="remark_modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="remark_modal_title">备注</h4>
+    </div>
+    <div class="modal-body">
+      <form>
+          <fieldset>
+              <div class="container">
+                  <div class="form-group" data-required="true">
+                      <label class="col-sm-1 line-height control-label" for="remarkInfoInput"> </label>
+                      <div class="col-sm-11">
+                          <textarea rows="5" id="remarkInfoInput" class="form-control" value="{{remarkInfo}}"></textarea>
+                          <span class="help-block"></span>
+                      </div>
+                  </div>
+              </div>
+          </fieldset>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" id="saveRemarkBtn">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    </div>
+  </div>
+</template>

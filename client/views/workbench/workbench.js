@@ -30,13 +30,36 @@ Template.breadcrumb_workbench.events({
     $('.workbench_change_btn button').parent().removeClass('border-red');
     $(event.currentTarget).parent().addClass('border-red');
   },
+  'click #searchBtn': function () {
+    var filterStr = $("#searchInput").val() || "";
+    log('click #searchBtn', filterStr);
+
+    // var dataFilter = Session.get("dataFilter");
+    // if (filterStr) {
+    //   var extFilter = {$or : [
+    //     // {"name": filterStr},
+    //     {"host.name": filterStr},
+    //   ]};
+
+    //   Session.set('dataFilter', _.extend(dataFilter, extFilter));
+    // } else {
+    //   delete dataFilter['$or'];
+    //   Session.set('dataFilter',dataFilter);
+    // }
+  }
 });
 
 
 // 各业务的表单列表
 Template.reactiveDataTable.onRendered(function () {
   this.autorun(function () {
-    Meteor.subscribe('getTasks');
+    Session.set('tabelCollName', 'Tasks');
+    // 批量获取tasks数据
+    var dataFilter = {name: Session.get('taskType') || ""};
+    Session.set("dataFilter", dataFilter);
+
+    Meteor.subscribe('getTasks', Session.get('dataLimit'), dataFilter);
+
     Meteor.subscribe('getStepsDes', ['companyCheckName', 'companyRegistInfo']);
   });
 });
@@ -294,25 +317,6 @@ Template.workbench_config.events({
     });
 
   }
-});
-
-
-//分页
-Template.paginator.onRendered(function() {
-  $('#paginator').jqPaginator({
-      totalPages: 100,
-      visiblePages: 10,
-      currentPage: 1,
-      first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
-      prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
-      next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
-      last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
-      page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
-      onPageChange: function (num, type) {
-          var total = 100 ;
-          $('#text').html('当前第' + num +'/' + total + '页');
-      }
-  });
 });
 
 

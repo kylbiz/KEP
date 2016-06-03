@@ -3,10 +3,10 @@
  **/
 
 // 客户数据
-Meteor.publish('getCustomers', function () {
+Meteor.publish('getCustomers', function (dataLimit) {
   var userId = KUtil.isLogin(this); // 登录状态
   KUtil.havePermission(userId, 'customer.view'); // 权限
-  return KCustomer.getCustomers(userId);
+  return KCustomer.getCustomers(userId, dataLimit);
 });
 
 Meteor.publish('getCustomer', function (customerId) {
@@ -24,11 +24,11 @@ Meteor.publish('getService', function (customerId) {
 
 
 // 获取子任务数据
-Meteor.publish('getTasks', function () {
+Meteor.publish('getTasks', function (dataLimit, dataFilter) {
   var userId = KUtil.isLogin(this);   // 登录状态
   KUtil.havePermission(userId, 'task.view');   // 权限
 
-  var tasksCursor = KTask.getTasks(userId);
+  var tasksCursor = KTask.getTasks(userId, dataLimit, dataFilter);
 
   var customerList = [];
   tasksCursor.forEach(function (task) {

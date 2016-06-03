@@ -92,7 +92,7 @@ Template.register_form_edit.helpers({
     return new SimpleSchema(schemaO);
   },
   stepInfo: function () {
-    log("application_form_edit", this);
+    // log("application_form_edit", this);
     return this.data || {};
   },
 });

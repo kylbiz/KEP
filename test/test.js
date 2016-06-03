@@ -432,29 +432,37 @@ Test.getColl = function () {
 }
 
 // 初始化一个新的客户
-Test.newCustomer = function () {
-  Meteor.call('initCustomer', {
-      name: "测试客户",
-      hostId: Meteor.userId(),
-      from: "测试来源",
-      createdBy: Meteor.userId(),
-      remark: "备注信息",
-      contactInfo: {
-        name: "联系人信息",
-        address: "上海",
-        phone: "1234567",
-        email: "cc@cc.com"
+Test.newCustomer = function (name) {
+  if (Meteor.isServer) {
+    Meteor.call('initCustomer', {
+        name: name || "测试客户",
+        hostId: Meteor.userId(),
+        from: "测试来源",
+        createdBy: Meteor.userId(),
+        remark: "备注信息",
+        contactInfo: {
+          name: "联系人信息",
+          address: "上海",
+          phone: "1234567",
+          email: "cc@cc.com"
+        }
+    }, [
+      {serType: 'companyRegist', payed: false}
+    ], function (error, result) {
+      if (error) {
+        console.log("创建新客户失败! ", error);
+      } else {
+        console.log("创建新客户成功! ", result);
       }
-  }, [
-    {serType: 'companyRegist', payed: false}
-  ], function (error, result) {
-    if (error) {
-      console.log("创建新客户失败! ", error);
-    } else {
-      console.log("创建新客户成功! ", result);
-    }
-  });
+    });
+  }
 };
+
+Test.createManyCustomers = function () {
+  for (var key = 1; key <= 40; key++) {
+    Test.newCustomer("测试 - " + key);
+  }
+}
 
 
 Test.updateTaskSteps = function () {
@@ -500,18 +508,20 @@ Test.updateTaskSteps = function () {
       }
     }
   ]
-
 }
 
 
+//
 
-Meteor.methods({
-  'test': function (opt) {
-    if ( Test[opt] ) {
-      Test[opt]();
+if (Meteor.isServer) {
+  Meteor.methods({
+    'test': function (opt) {
+      if ( Test[opt] ) {
+        Test[opt]();
+      }
     }
-  }
-});
+  });
+}
 
 
 

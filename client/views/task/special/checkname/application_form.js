@@ -78,6 +78,8 @@ Template.application_form_edit.onRendered(function () {
   // $('.dragArea').dad({
   //   draggable: 'button'
   // });
+  // 获取行业大类，行业细分的信息
+  Meteor.subscribe("getSupportInfo", {type: {$in: ['industryBig', 'industryDetail']}});
 });
 
 Template.application_form_edit.helpers({
@@ -91,7 +93,7 @@ Template.application_form_edit.helpers({
     return new SimpleSchema(schemaO);
   },
   stepInfo: function () {
-    log("application_form_edit", this);
+    // log("application_form_edit", this);
     return this.data || {};
   },
   alternativeName: function (name, index) {
@@ -116,25 +118,52 @@ Template.application_form_edit.helpers({
         companyName.push( companyAltName );
       }
     });
-    var industryType = $("#industryType").val() || ""; // 所属行业
+    // var industryType = $("#industryType").val() || ""; // 所属行业
+    var industryType = Session.get('industrySmall') || "";
+
     var companyType = $("#companyType").val() || ""; // 公司类型
     var nameStruct = $("#nameStruct").val() || "";
 
-    return KEPUtil.getCompanyFullName(companyName, nameStruct, industryType, companyType, '上海') || '.....';
+    setBusinessScope(); // 公司经营范围设置
 
+    return KEPUtil.getCompanyFullName(companyName, nameStruct, industryType, companyType, '上海') || '.....';
+  },
+  industryBigOpts: function () {
+    var industryBigInfo = SupportInfo.findOne({type: 'industryBig'}) || {};
+    if (industryBigInfo && industryBigInfo.items && industryBigInfo.items[0] && !Session.get('industryBigSel') ) {
+      Session.set('industryBigSel', industryBigInfo.items[0]);
+    }
+
+    return getSelectOpts(industryBigInfo.items || []);
+  },
+  industryOpts: function () {
+    var industryDetailInfo = SupportInfo.findOne({type: 'industryDetail'}) || {};
+    var industryBig = Session.get('industryBigSel') || "";
+    if (industryBig) {
+      var opts = getIndustryOpts(industryBig, industryDetailInfo.items || []) || [{}];
+      if (opts[0]) {
+        var industrySmall = opts[0].value || "";
+        Session.set('industrySmall', industrySmall);
+      }
+      return opts;
+    }
+    return [];
   }
 });
 
 
 Template.application_form_edit.events({
-  'change #industryType': function (event) {
-    var industryType = $(event.currentTarget).val() || "";
-    var businessScope = KEPUtil.getBusinessScope(industryType) || "";
-    $("#businessScope").val(businessScope);
+  'change #industryTypeBig': function (event) {
+    var industryBig = $(event.currentTarget).val() || "";
+    Session.set('industryBigSel', industryBig);
+    // Session.set('chaCompanyFullName',  !Session.get('chaCompanyFullName') );
   },
   'change .changeCompany': function (event) {
     // log("", $(event.currentTarget) );
     Session.set('chaCompanyFullName',  !Session.get('chaCompanyFullName') );
+  },
+  'change #industryType': function (event) {
+    Session.set('industrySmall', $(event.currentTarget).val());
   },
   'click .plusbtn': function (event, template) {
     var inputNum = $("#drag-area .module").length;
@@ -153,7 +182,6 @@ Template.application_form_edit.events({
   'click .deleteItem': function (event) {
     $(event.currentTarget).closest(".module").remove();
     indexAlternativeName('#drag-area .module input', "company.alternativeName.$.name");
-
     Session.set('chaCompanyFullName',  !Session.get('chaCompanyFullName') );
   },
   'click .goldweapon-btn'(event) {
@@ -173,6 +201,13 @@ Template.application_form_edit.events({
   },
 });
 
+
+// 备选字号
+Template.reserveWord.events({
+  'click .deleteItem': function (event) {
+    $(event.currentTarget).closest(".module").remove();
+  }
+});
 
 // 公司名
 function getCompanyNames () {
@@ -226,9 +261,58 @@ function indexAlternativeName (findStr, name) {
   });
 }
 
-// 备选字号
-Template.reserveWord.events({
-  'click .deleteItem': function (event) {
-    $(event.currentTarget).closest(".module").remove();
+
+// 将string list 转成 select 需要的格式
+function getSelectOpts(items) {
+  var opts = [];
+  for (var key in items) {
+    var name = items[key];
+    opts.push({
+      label: name, value: name,
+    });
   }
-});
+
+  return opts;
+}
+
+
+// 获取公司的详细行业分类
+function getIndustryOpts(industryBig, items) {
+  var opts = [];
+
+  for (var key in items) {
+    var info = items[key];
+    if (info.industryBig == industryBig) {
+      opts.push({
+        label: info.industrySmall,
+        value: info.industrySmall
+      });
+    }
+  }
+  return opts;
+}
+
+// 设置公司经营范围
+function setBusinessScope() {
+  var industryBig = Session.get('industryBigSel');
+  var industrySmall = Session.get('industrySmall');
+
+  var businessScope = getBusinessScope(industryBig, industrySmall);
+ $("#businessScope").val(businessScope);
+}
+
+
+function getBusinessScope(industryBig, industrySmall) {
+  var supportInfo = SupportInfo.findOne({type: 'industryDetail'}) || {};
+  if (supportInfo && supportInfo.items) {
+    var items = supportInfo.items
+    for (var key in items) {
+      var info = items[key];
+      if (info.industryBig == industryBig && info.industrySmall == industrySmall) {
+        return info.content || [];
+      }
+    }
+  }
+
+  return [];
+}

@@ -166,6 +166,11 @@ Tasks.attachSchema( new SimpleSchema ({
     label: '',
     optional: true
   },
+  'steps.$.remarkInfo': {
+    type: String,
+    label: '',
+    optional: true,
+  },
   'steps.$.hooks': {
     type: [String],
     label: '',
@@ -334,7 +339,11 @@ Tasks.helpers({
   },
   companyName: function () {
     Meteor.subscribe("getCompanyInfoByCustomer", this.customerId);
-    return (CompanyInfo.findOne({customerId: this.customerId}) || {company: {}}).company.name || "未知";
+    var companyInfo = CompanyInfo.findOne({customerId: this.customerId}) || {};
+    if (companyInfo.company && companyInfo.company.name) {
+      return companyInfo.company.name;
+    }
+    return "未知";
   },
   stepStatus: function () {
     var stepStatus = "未知";

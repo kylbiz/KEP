@@ -1,9 +1,9 @@
 Template.customers_register.onRendered(function () {
   var self = this;
   self.autorun(function() {
-    self.subscribe('getCustomers');
+    Session.set('tabelCollName', "Customers");
+    self.subscribe('getCustomers', Session.get('dataLimit'));
   });
-
 });
 
 
@@ -76,7 +76,7 @@ Template.customers_add.events({
       }
     };
 
-    log(basicInfo);
+    log(basicInfo, service);
 
     Meteor.call('initCustomer', basicInfo, service, function (error, result) {
       if (error) {
@@ -133,4 +133,21 @@ Template.customers_delete.onRendered(function () {
 
 
 //客户基本信息
+
+
+// Meteor.call('initCustomer', {
+//   name: "name",
+//   hostId: "EkDdp7bn2B4xgbEBj",
+//   from: "",
+//   createdBy: "EkDdp7bn2B4xgbEBj",
+//   remark: "",
+//   contactInfo: {
+//     name: 'cc',
+//     address: '',
+//     phone: '12345',
+//     email: ''
+//   }
+// }, [{
+//   serType: "companyRegist", payed: false
+// }]);
 

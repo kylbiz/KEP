@@ -34,8 +34,8 @@
             </div>
             <div class="col-md-4 workbench_search">
                 <div class="form-inline pull-right">
-                    <input type="text" class="form-control" placeholder="">
-                    <button class="btn btn-success" type="submit">搜索</button>
+                    <input type="text" class="form-control" id="searchInput" placeholder="客户名称/业务员">
+                    <button class="btn btn-success" id="searchBtn">搜索</button>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
         </tbody>
     </table>
 
-    {{> paginator }}
+    {{> paginator}}
 </template>
 <template name="checknameTableCell">
     <tr>
@@ -280,13 +280,4 @@
 
 <template name="insertBookForm">
     {{#autoForm collection="Customers" type="insert" id="reactiveCurrentValueForm" template="bootstrap3-inline"}} {{> afQuickField name="principal" options="allowed"}} {{> afQuickField name="email"}} {{/autoForm}}
-</template>
-
-<!-- 分页模版 -->
-<template name="paginator">
-    <div class="pagination-div pull-right">
-        <p id="text"></p>
-        <ul id="paginator" class="pagination">
-        </ul>
-    </div>
 </template>

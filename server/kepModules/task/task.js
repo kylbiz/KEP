@@ -150,6 +150,28 @@ KTask.updateTaskStepData = function (taskId, stepName, stepData) {
 
 
 /*
+ * 更新一个步骤的备注信息
+ **/
+KTask.updateTaskStepRemark = function (taskId, stepName, stepRemark) {
+  check(taskId, String);
+  check(stepName, String);
+  check(stepRemark, String);
+
+  var taskInfo = KUtil.dataIsInColl({coll: Tasks, dataId: taskId});
+  log('KTask.updateTaskStepData', taskId, stepName, stepRemark);
+
+  var timeNow = new Date();
+  return Tasks.update({"_id": taskId, "steps.name": stepName}, {
+    $set: {
+      // "steps.$.startTime": timeNow, // 开始时间设计上有问题
+      "steps.$.updateTime": timeNow,
+      "steps.$.remarkInfo": stepRemark || "",
+      "updateTime": timeNow
+    }
+  });
+}
+
+/*
  * 确定某一步已完成
  */
 KTask.sureStepFinish = function (taskId, stepName) {
@@ -268,8 +290,19 @@ KTask.delTaskBySer = function (serviceId) {
 /*
  * 获取任务的信息
  **/
-KTask.getTasks = function (userId) {
+KTask.getTasks = function (userId, dataLimit, dataFilter) {
   check(userId, String);
+  check(dataLimit, {
+    page: Number,
+    num: Number,
+  });
+  // check(dataFilter, {
+  //   name: String
+  // });
+  var page = dataLimit.page || 1;
+  var num = dataLimit.num || 0;
+
+
   KUtil.dataIsInColl({coll: Meteor.users, dataId: userId});
   var teamId = KTeam.getTeamId(userId);
 
@@ -278,15 +311,47 @@ KTask.getTasks = function (userId) {
   if (!level) {
     return [];
   } else if (level >= 1) {
-    // log("KTask.getTasks data", Tasks.find({teamId: teamId, status: {$gte: 0}}).fetch());
-    return Tasks.find({teamId: teamId, status: {$gte: 0}});
+    dataFilter = _.extend(dataFilter, {teamId: teamId, status: {$gte: 0}});
   } else if (level == 1){
-    // log("KTask.getTasks data", Tasks.find({'host.id': userId, status:{$gte: 0}}).fetch());
-    return Tasks.find({'host.id': userId, status:{$gte: 0}});
+    dataFilter = _.extend(dataFilter, {'host.id': userId, status:{$gte: 0}});
   }
 
-  return [];
+  var collLimit = _.extend({
+      sort: {createdAt: -1}
+    }, KUtil.getCollFilterInfo(num || 15, page) || {}
+  );
+
+  return Tasks.find(dataFilter, collLimit);
 }
+
+/*
+ * 获取任务的信息
+ **/
+KTask.getTasksCount = function (userId, dataFilter) {
+  log("KTask.getTasksCount", userId, dataFilter);
+
+  check(userId, String);
+  // check(dataFilter, {
+  //   name: String
+  // });
+
+
+  KUtil.dataIsInColl({coll: Meteor.users, dataId: userId});
+  var teamId = KTeam.getTeamId(userId);
+
+  var level = KTeam.getPermissionLevel(userId, 'tasks.views');
+  if (!level) {
+    return [];
+  } else if (level >= 1) {
+    dataFilter = _.extend(dataFilter, {teamId: teamId, status: {$gte: 0}});
+  } else if (level == 1){
+    dataFilter = _.extend(dataFilter, {'host.id': userId, status:{$gte: 0}});
+  }
+
+  return Tasks.find(dataFilter).count();
+}
+
+
 
 
 /*
